@@ -1,0 +1,18 @@
+version: '3.8'
+
+# Local development only - MongoDB for offline testing
+# Production: use MongoDB Atlas Free Tier (configured via MONGODB_URI in .env)
+services:
+  mongodb:
+    image: mongodb/mongodb-community-server:7.0-ubuntu2204
+    container_name: chatbot-mongodb-dev
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    environment:
+      - MONGODB_INITDB_DATABASE=chatbot
+    restart: unless-stopped
+
+volumes:
+  mongodb_data:

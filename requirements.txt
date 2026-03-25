@@ -1,0 +1,44 @@
+# Web scraping
+requests==2.32.*
+beautifulsoup4==4.12.*
+urllib3==2.2.*
+
+# PDF processing
+PyMuPDF==1.24.*
+Pillow==10.*
+
+# Embeddings
+sentence-transformers==3.*
+transformers==4.*
+torch>=2.0.0
+
+# MongoDB
+pymongo==4.10.*
+motor==3.5.*  # async pymongo (optional)
+
+# RAG
+llama-index-core==0.12.*
+llama-index-vector-stores-mongodb==0.5.*
+llama-index-embeddings-huggingface==0.4.*
+
+# API
+fastapi==0.115.*
+uvicorn[standard]==0.34.*
+pydantic==2.*
+python-multipart==0.0.*
+
+# Word export
+python-docx==1.*
+
+# LLM (Gemini)
+google-generativeai==0.8.*
+
+# Frontend (Streamlit)
+streamlit==1.*
+
+# Data processing
+numpy==1.*
+
+# Utilities
+python-dotenv==1.*
+tqdm==4.*

@@ -1,0 +1,29 @@
+# Environment
+.env
+*.env
+
+# Python
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Data (generated)
+data/raw/
+data/processed/
+data/training/
+models/
+
+# Notebooks
+notebooks/.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
