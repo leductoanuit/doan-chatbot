@@ -41,5 +41,5 @@ class ExportRequest(BaseModel):
 
 class HealthResponse(BaseModel):
     status: str  # "ok" | "degraded"
-    mongodb: bool
+    qdrant: bool
     llm: bool

@@ -9,6 +9,8 @@ from typing import Literal
 
 import requests as req
 
+from src.scraper.image_preprocessor import preprocess_for_ocr
+
 
 # ---------------------------------------------------------------------------
 # PDF classification
@@ -67,12 +69,15 @@ def extract_text_ocr(pdf_path: str) -> list[dict]:
         # Render at 2x zoom for better OCR quality
         pix = page.get_pixmap(matrix=fitz.Matrix(2, 2))
         img_bytes = pix.tobytes("png")
+        # Deskew, denoise, and binarize before OCR to improve accuracy
+        img_bytes = preprocess_for_ocr(img_bytes)
         img_b64 = base64.b64encode(img_bytes).decode()
 
         try:
             resp = req.post(
                 ocr_url,
                 json={"image": img_b64},
+                headers={"ngrok-skip-browser-warning": "true"},
                 timeout=120,
             )
             resp.raise_for_status()

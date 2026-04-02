@@ -106,8 +106,8 @@ async def export_word(request: ExportRequest) -> FileResponse:
 
 @router.get("/health", response_model=HealthResponse)
 async def health() -> HealthResponse:
-    """Service health check — MongoDB and LLM availability."""
-    mongo_ok = _retriever.is_healthy()
+    """Service health check — Qdrant and LLM availability."""
+    qdrant_ok = _retriever.is_healthy()
     llm_ok = _llm_client.health_check()
-    status = "ok" if (mongo_ok and llm_ok) else "degraded"
-    return HealthResponse(status=status, mongodb=mongo_ok, llm=llm_ok)
+    status = "ok" if (qdrant_ok and llm_ok) else "degraded"
+    return HealthResponse(status=status, qdrant=qdrant_ok, llm=llm_ok)

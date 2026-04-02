@@ -1,85 +1,107 @@
-"""Hybrid retriever — MongoDB vector search + keyword fallback for Vietnamese queries."""
+"""Hybrid retriever — Qdrant vector search + keyword fallback for Vietnamese queries."""
 
+import logging
 import os
 import re
-from typing import List, Dict
+from typing import Dict, List, Optional
+
+logger = logging.getLogger(__name__)
 
 from dotenv import load_dotenv
-from pymongo import MongoClient
 from sentence_transformers import SentenceTransformer
+
+from src.storage.qdrant_vector_store import get_client, search_vectors
 
 load_dotenv()
 
 _EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "dangvantuan/vietnamese-embedding")
-_MONGO_URI = os.getenv("MONGODB_URI", "mongodb://localhost:27017")
-_DB_NAME = os.getenv("MONGODB_DB", "chatbot")
-_COLLECTION = os.getenv("MONGODB_COLLECTION", "documents")
-_VECTOR_INDEX = "vector_search_idx"
 
 
 class HybridRetriever:
-    """Combines MongoDB $vectorSearch with regex keyword fallback.
+    """Combines Qdrant vector search with keyword fallback.
 
     Vector search handles semantic similarity; keyword search catches
     exact-term queries that may score low in embedding space.
     """
 
-    def __init__(
-        self,
-        mongo_uri: str = _MONGO_URI,
-        db_name: str = _DB_NAME,
-        collection_name: str = _COLLECTION,
-        embedding_model: str = _EMBEDDING_MODEL,
-    ):
-        self.mongo_client = MongoClient(mongo_uri)
-        self.collection = self.mongo_client[db_name][collection_name]
+    def __init__(self, embedding_model: str = _EMBEDDING_MODEL):
+        self.qdrant_client = get_client()
         self.embedder = SentenceTransformer(embedding_model)
 
     # ------------------------------------------------------------------
     # Individual search strategies
     # ------------------------------------------------------------------
 
-    def vector_search(self, query: str, k: int = 10) -> List[Dict]:
-        """Semantic search via MongoDB Atlas $vectorSearch."""
+    def vector_search(
+        self,
+        query: str,
+        k: int = 10,
+        doc_type: Optional[str] = None,
+        system_type: Optional[str] = None,
+    ) -> List[Dict]:
+        """Semantic search via Qdrant."""
         query_embedding = self.embedder.encode(query).tolist()
-        pipeline = [
+        results = search_vectors(
+            self.qdrant_client, query_embedding, k=k,
+            doc_type=doc_type, system_type=system_type,
+        )
+        # Normalize to standard format expected by pipeline
+        return [
             {
-                "$vectorSearch": {
-                    "index": _VECTOR_INDEX,
-                    "path": "embedding",
-                    "queryVector": query_embedding,
-                    "k": k,
-                    "numCandidates": k * 10,
-                }
-            },
-            {
-                "$project": {
-                    "content": 1,
-                    "metadata": 1,
-                    "score": {"$meta": "vectorSearchScore"},
-                    "_id": 0,
-                }
-            },
+                "content": r.get("content", ""),
+                "metadata": {
+                    "source": r.get("source", ""),
+                    "page": r.get("page", 0),
+                    "document_type": r.get("document_type", ""),
+                    "system_type": r.get("system_type", ""),
+                },
+                "score": r.get("score", 0.0),
+                "search_type": "vector",
+            }
+            for r in results
         ]
-        return list(self.collection.aggregate(pipeline))
 
     def keyword_search(self, query: str, k: int = 10) -> List[Dict]:
-        """Regex keyword search — fallback for exact-term matching."""
+        """Keyword fallback — scroll Qdrant payload for content matches.
+
+        Uses Qdrant scroll with payload substring matching. Less powerful
+        than MongoDB regex but sufficient for exact-term fallback.
+        """
+        from qdrant_client.models import Filter, FieldCondition, MatchText
+
         keywords = [w for w in query.lower().split() if len(w) > 2]
         if not keywords:
             return []
 
-        pattern = "|".join(re.escape(kw) for kw in keywords)
-        results = list(
-            self.collection.find(
-                {"content": {"$regex": pattern, "$options": "i"}},
-                {"content": 1, "metadata": 1, "_id": 0},
-            ).limit(k)
-        )
-        for r in results:
-            r["score"] = 0.5  # Uniform score for keyword hits
-            r["search_type"] = "keyword"
-        return results
+        results: List[Dict] = []
+        for keyword in keywords[:3]:  # Limit to 3 keywords for performance
+            try:
+                hits, _ = self.qdrant_client.scroll(
+                    collection_name=os.getenv("QDRANT_COLLECTION", "documents"),
+                    scroll_filter=Filter(
+                        must=[FieldCondition(key="content", match=MatchText(text=keyword))]
+                    ),
+                    limit=k,
+                    with_payload=True,
+                )
+                for hit in hits:
+                    payload = hit.payload or {}
+                    results.append({
+                        "content": payload.get("content", ""),
+                        "metadata": {
+                            "source": payload.get("source", ""),
+                            "page": payload.get("page", 0),
+                            "document_type": payload.get("document_type", ""),
+                            "system_type": payload.get("system_type", ""),
+                        },
+                        "score": 0.5,
+                        "search_type": "keyword",
+                    })
+            except Exception as exc:
+                logger.warning("Keyword search error for '%s': %s", keyword, exc)
+                continue
+
+        return results[:k]
 
     # ------------------------------------------------------------------
     # Hybrid merge
@@ -91,9 +113,11 @@ class HybridRetriever:
         k: int = 5,
         vector_weight: float = 0.7,
         keyword_weight: float = 0.3,
+        doc_type: Optional[str] = None,
+        system_type: Optional[str] = None,
     ) -> List[Dict]:
         """Merge vector + keyword results, deduplicate, rank by weighted score."""
-        vector_results = self.vector_search(query, k=k * 2)
+        vector_results = self.vector_search(query, k=k * 2, doc_type=doc_type, system_type=system_type)
         keyword_results = self.keyword_search(query, k=k)
 
         seen: set[int] = set()
@@ -104,7 +128,6 @@ class HybridRetriever:
             if key not in seen:
                 seen.add(key)
                 r["final_score"] = r.get("score", 0.0) * vector_weight
-                r["search_type"] = "vector"
                 merged.append(r)
 
         for r in keyword_results:
@@ -142,9 +165,9 @@ class HybridRetriever:
     # ------------------------------------------------------------------
 
     def is_healthy(self) -> bool:
-        """Return True if MongoDB is reachable."""
+        """Return True if Qdrant is reachable."""
         try:
-            self.mongo_client.admin.command("ping")
+            self.qdrant_client.get_collections()
             return True
         except Exception:
             return False

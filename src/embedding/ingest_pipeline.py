@@ -1,4 +1,4 @@
-"""Full ingestion pipeline — chunk → embed → store in MongoDB Atlas.
+"""Full ingestion pipeline — chunk → embed → store in Qdrant vector store.
 
 Usage:
     python src/embedding/ingest-pipeline.py
@@ -11,22 +11,20 @@ import os
 import sys
 
 from dotenv import load_dotenv
-from pymongo import MongoClient
 
 # Allow running from project root
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", ".."))
 
 from src.embedding.chunker import chunk_documents
 from src.embedding.embedder import VietnameseEmbedder
-from src.embedding.mongo_setup import setup_database
+from src.storage.postgres_metadata import init_schema, insert_document, insert_chunks_batch
+from src.storage.qdrant_vector_store import init_collection, search_vectors, upsert_vectors
 
 load_dotenv()
 
-BATCH_INSERT_SIZE = 100
-
 
 def ingest(data_path: str = "data/processed/all_documents.json") -> None:
-    """Load documents, chunk, embed, and bulk-insert into MongoDB."""
+    """Load documents, chunk, embed, and upsert into Qdrant."""
 
     # ------------------------------------------------------------------
     # 1. Load processed documents
@@ -44,16 +42,42 @@ def ingest(data_path: str = "data/processed/all_documents.json") -> None:
     print(f"[ingest] {len(chunks)} chunks created")
 
     # ------------------------------------------------------------------
-    # 3. Initialise DB (creates collection + index if not present)
+    # 3. Initialise storage (Qdrant vectors + PostgreSQL metadata)
     # ------------------------------------------------------------------
-    print("[ingest] Setting up MongoDB …")
-    collection = setup_database()
+    print("[ingest] Setting up Qdrant …")
+    qdrant_client = init_collection()
 
-    # Skip already-ingested documents (idempotent re-run)
-    existing = collection.count_documents({})
-    if existing > 0:
-        print(f"[ingest] {existing} documents already in collection — clearing for fresh ingest")
-        collection.delete_many({})
+    print("[ingest] Setting up PostgreSQL schema …")
+    init_schema()
+
+    # Insert document-level metadata into PostgreSQL
+    # Group chunks by source to create one document record per source file
+    sources_seen: dict[str, str] = {}  # source_file -> document_id
+    for chunk in chunks:
+        src = chunk["metadata"].get("source", "unknown")
+        if src not in sources_seen:
+            doc_id = insert_document({
+                "source_file": src,
+                "document_type": chunk["metadata"].get("document_type", ""),
+                "system_type": chunk["metadata"].get("system_type", ""),
+            })
+            sources_seen[src] = doc_id
+        chunk["metadata"]["document_id"] = sources_seen[src]
+
+    # Insert chunk records into PostgreSQL
+    pg_chunks = [
+        {
+            "id": f"{c['metadata']['document_id']}_{c['metadata']['page']}_{c['metadata']['chunk_idx']}",
+            "document_id": c["metadata"]["document_id"],
+            "page_number": c["metadata"]["page"],
+            "chunk_index": c["metadata"]["chunk_idx"],
+            "content_preview": c["content"][:200],
+            "token_count": len(c["content"].split()),
+        }
+        for c in chunks
+    ]
+    insert_chunks_batch(pg_chunks)
+    print(f"[ingest] {len(pg_chunks)} chunk records stored in PostgreSQL")
 
     # ------------------------------------------------------------------
     # 4. Embed
@@ -64,73 +88,41 @@ def ingest(data_path: str = "data/processed/all_documents.json") -> None:
     embeddings = embedder.embed_texts(texts)
 
     # ------------------------------------------------------------------
-    # 5. Insert in batches
+    # 5. Upsert vectors in batches (idempotent — same IDs overwrite)
     # ------------------------------------------------------------------
-    print("[ingest] Inserting into MongoDB …")
-    docs_to_insert = [
-        {
-            "content": chunk["content"],
-            "embedding": embedding,
-            "metadata": chunk["metadata"],
-            "token_count": len(chunk["content"].split()),
-        }
-        for chunk, embedding in zip(chunks, embeddings)
-    ]
+    print("[ingest] Upserting into Qdrant …")
+    upsert_vectors(qdrant_client, chunks, embeddings)
 
-    for i in range(0, len(docs_to_insert), BATCH_INSERT_SIZE):
-        batch = docs_to_insert[i : i + BATCH_INSERT_SIZE]
-        collection.insert_many(batch)
-        print(f"[ingest] {i + len(batch)}/{len(docs_to_insert)} inserted")
-
-    print(f"\n[ingest] Complete — {len(docs_to_insert)} chunks stored")
+    print(f"\n[ingest] Complete — {len(chunks)} chunks stored")
 
     # ------------------------------------------------------------------
     # 6. Smoke-test vector search
     # ------------------------------------------------------------------
-    _smoke_test(collection, embedder)
+    _smoke_test(qdrant_client, embedder)
 
 
-def _smoke_test(collection, embedder: VietnameseEmbedder) -> None:
-    """Run a quick vector search to verify the index is working."""
+def _smoke_test(qdrant_client, embedder: VietnameseEmbedder) -> None:
+    """Run a quick vector search to verify Qdrant collection is working."""
     test_query = "Thông tin tuyển sinh đại học"
     print(f"\n[ingest] Smoke test: '{test_query}'")
 
     query_emb = embedder.embed_query(test_query)
     try:
-        results = list(collection.aggregate([
-            {
-                "$vectorSearch": {
-                    "index": "vector_search_idx",
-                    "path": "embedding",
-                    "queryVector": query_emb,
-                    "k": 3,
-                    "numCandidates": 50,
-                }
-            },
-            {
-                "$project": {
-                    "content": 1,
-                    "metadata": 1,
-                    "score": {"$meta": "vectorSearchScore"},
-                    "_id": 0,
-                }
-            },
-        ]))
+        results = search_vectors(qdrant_client, query_emb, k=3)
 
         if results:
             for r in results:
                 score = r.get("score", "N/A")
-                preview = r["content"][:100].replace("\n", " ")
+                preview = r.get("content", "")[:100].replace("\n", " ")
                 print(f"  score={score:.3f} | {preview}…")
         else:
-            print("  No results — vector index may still be building (wait ~1 min)")
+            print("  No results returned from Qdrant")
     except Exception as exc:
         print(f"  Search error: {exc}")
-        print("  Vector index may still be activating on Atlas")
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Ingest documents into MongoDB")
+    parser = argparse.ArgumentParser(description="Ingest documents into Qdrant")
     parser.add_argument(
         "--data",
         default="data/processed/all_documents.json",

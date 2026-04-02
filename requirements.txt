@@ -2,19 +2,27 @@
 requests==2.32.*
 beautifulsoup4==4.12.*
 urllib3==2.2.*
+playwright==1.49.*
 
 # PDF processing
 PyMuPDF==1.24.*
 Pillow==10.*
+opencv-python-headless==4.*
 
 # Embeddings
 sentence-transformers==3.*
 transformers==4.*
 torch>=2.0.0
 
+# PostgreSQL
+psycopg2-binary==2.*
+
 # MongoDB
 pymongo==4.10.*
 motor==3.5.*  # async pymongo (optional)
+
+# Qdrant
+qdrant-client==1.*
 
 # RAG
 llama-index-core==0.12.*
