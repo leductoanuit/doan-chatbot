@@ -1,23 +1,27 @@
-"""Gemini LLM client — wraps Google Generative AI SDK for RAG generation."""
+"""Gemini LLM client — wraps google-genai SDK for RAG generation."""
 
 import os
 from typing import Dict, List, Optional
 
 from dotenv import load_dotenv
-import google.generativeai as genai
+from google import genai
+from google.genai import types
 
 load_dotenv()
 
-_DEFAULT_SYSTEM_PROMPT = (
-    "Bạn là tư vấn viên thông tin đào tạo từ xa của Trường Đại học Công nghệ Thông tin "
-    "- ĐHQG TP.HCM (UIT). Hãy trả lời câu hỏi của sinh viên dựa trên thông tin được cung cấp. "
-    "Nếu không có thông tin liên quan, hãy nói rằng bạn không có đủ thông tin và đề nghị "
-    "sinh viên liên hệ phòng đào tạo hoặc truy cập daa.uit.edu.vn."
-)
+_DEFAULT_SYSTEM_PROMPT = """Bạn là tư vấn viên thông minh và thân thiện của Trường Đại học Công nghệ Thông tin - ĐHQG TP.HCM (UIT), chuyên tư vấn về đào tạo từ xa.
+
+Quy tắc trả lời:
+1. LUÔN trả lời dựa trên thông tin tham khảo được cung cấp — dù thông tin có thể không đầy đủ.
+2. Tổng hợp và diễn đạt lại thông tin một cách rõ ràng, dễ hiểu cho sinh viên.
+3. Nếu thông tin chỉ đề cập một phần, hãy trả lời phần đó và ghi chú "để biết thêm chi tiết, vui lòng liên hệ phòng đào tạo hoặc truy cập daa.uit.edu.vn".
+4. CHỈ nói "không có thông tin" khi thông tin tham khảo hoàn toàn không liên quan đến câu hỏi.
+5. Trả lời bằng tiếng Việt, ngắn gọn, có cấu trúc (dùng bullet points khi cần).
+6. Giọng điệu thân thiện, chuyên nghiệp như nhân viên tư vấn thực sự."""
 
 
 class LLMClient:
-    """Wrapper around Google Gemini API for RAG generation."""
+    """Wrapper around Google Gemini API (google-genai SDK) for RAG generation."""
 
     def __init__(
         self,
@@ -27,41 +31,26 @@ class LLMClient:
         api_key = os.getenv("GEMINI_API_KEY")
         if not api_key:
             raise ValueError("GEMINI_API_KEY not set in environment")
-        genai.configure(api_key=api_key)
+        self.client = genai.Client(api_key=api_key)
         self.model_name = model_name or os.getenv("GEMINI_MODEL", "gemini-2.0-flash")
         self.system_prompt = system_prompt
-        self.model = genai.GenerativeModel(
-            model_name=self.model_name,
-            system_instruction=self.system_prompt,
-        )
 
     def generate(
         self,
         query: str,
         context: str = "",
         history: Optional[List[Dict]] = None,
-        temperature: float = 0.7,
-        max_tokens: int = 512,
+        temperature: float = 0.3,
+        max_tokens: int = 1024,
     ) -> str:
-        """Generate a response given a query and optional RAG context.
-
-        Args:
-            query: User question.
-            context: Retrieved document context to inject before the question.
-            history: Previous conversation turns (list of role/content dicts).
-            temperature: Sampling temperature.
-            max_tokens: Max tokens to generate.
-
-        Returns:
-            Generated answer string, or an error message on failure.
-        """
+        """Generate a response given a query and optional RAG context."""
         contents = []
 
-        # Include last 3 conversation turns for context
+        # Include last 6 conversation turns for context
         if history:
             for msg in history[-6:]:
                 role = "user" if msg["role"] == "user" else "model"
-                contents.append({"role": role, "parts": [msg["content"]]})
+                contents.append(types.Content(role=role, parts=[types.Part(text=msg["content"])]))
 
         # Inject retrieved context before the user query
         if context:
@@ -69,12 +58,14 @@ class LLMClient:
         else:
             user_content = query
 
-        contents.append({"role": "user", "parts": [user_content]})
+        contents.append(types.Content(role="user", parts=[types.Part(text=user_content)]))
 
         try:
-            response = self.model.generate_content(
-                contents,
-                generation_config=genai.GenerationConfig(
+            response = self.client.models.generate_content(
+                model=self.model_name,
+                contents=contents,
+                config=types.GenerateContentConfig(
+                    system_instruction=self.system_prompt,
                     temperature=temperature,
                     max_output_tokens=max_tokens,
                 ),
@@ -87,9 +78,10 @@ class LLMClient:
     def health_check(self) -> bool:
         """Return True if Gemini API is reachable."""
         try:
-            self.model.generate_content(
-                "ping",
-                generation_config=genai.GenerationConfig(max_output_tokens=5),
+            self.client.models.generate_content(
+                model=self.model_name,
+                contents="ping",
+                config=types.GenerateContentConfig(max_output_tokens=5),
             )
             return True
         except Exception:

@@ -138,7 +138,12 @@ class HybridRetriever:
                 merged.append(r)
 
         merged.sort(key=lambda x: x.get("final_score", 0.0), reverse=True)
-        return merged[:k]
+
+        # Chỉ giữ kết quả đủ liên quan (vector score >= 0.25)
+        # Nếu không có kết quả nào đạt ngưỡng, trả về top-k để Gemini tự đánh giá
+        MIN_SCORE = 0.25
+        filtered = [r for r in merged if r.get("final_score", 0.0) >= MIN_SCORE * vector_weight]
+        return (filtered if filtered else merged)[:k]
 
     # ------------------------------------------------------------------
     # Context assembly

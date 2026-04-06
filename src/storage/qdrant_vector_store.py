@@ -71,11 +71,11 @@ def init_collection(client: Optional[QdrantClient] = None) -> QdrantClient:
     return client
 
 
-def _make_point_id(document_id: str, page: int, chunk_idx: int) -> str:
-    """Build a deterministic string ID from document metadata."""
+def _make_point_id(document_id: str, page: int, chunk_idx: int) -> int:
+    """Build a deterministic unsigned int ID from document metadata.
+    Qdrant requires unsigned int (u64) or UUID — take mod 2^63 to stay safe."""
     raw = f"{document_id}_{page}_{chunk_idx}"
-    # Qdrant requires unsigned int or UUID; use a stable numeric hash
-    return str(int(hashlib.md5(raw.encode()).hexdigest(), 16) % (2**63))
+    return int(hashlib.md5(raw.encode()).hexdigest(), 16) % (2**63)
 
 
 def upsert_vectors(
@@ -139,13 +139,13 @@ def search_vectors(
 
     query_filter = Filter(must=conditions) if conditions else None
 
-    hits = client.search(
+    hits = client.query_points(
         collection_name=QDRANT_COLLECTION,
-        query_vector=query_vector,
+        query=query_vector,
         query_filter=query_filter,
         limit=k,
         with_payload=True,
-    )
+    ).points
 
     return [{"score": h.score, **h.payload} for h in hits]
 

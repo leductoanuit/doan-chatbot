@@ -1,69 +1,82 @@
-"""Streamlit chat UI for UIT Chatbot Tu Van Dao Tao Tu Xa.
+"""Streamlit chat UI — gọi RAG pipeline trực tiếp (không cần API server).
 
 Usage:
-    streamlit run src/frontend/streamlit-app.py
+    streamlit run src/frontend/streamlit_app.py
 """
 
 import os
+import sys
 
-import requests
 import streamlit as st
 from dotenv import load_dotenv
 
 load_dotenv()
 
-API_URL = os.getenv("API_URL", "http://localhost:8000")
+# Đảm bảo import từ project root
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", ".."))
 
 st.set_page_config(
-    page_title="UIT - Chatbot Dao Tao Tu Xa",
+    page_title="UIT - Chatbot Tư Vấn Đào Tạo Từ Xa",
     page_icon="🎓",
     layout="centered",
 )
 
-st.title("🎓 Chatbot Tu Van Dao Tao Tu Xa")
-st.caption("Truong Dai hoc Cong nghe Thong tin — DHQG TP.HCM (UIT)")
+st.title("🎓 Chatbot Tư Vấn Đào Tạo Từ Xa")
+st.caption("Trường Đại học Công nghệ Thông tin — ĐHQG TP.HCM (UIT)")
 
-# Session state for chat history
+
+@st.cache_resource(show_spinner="Đang khởi động hệ thống RAG...")
+def load_rag():
+    """Khởi tạo RAG pipeline một lần duy nhất, cache lại cho session."""
+    from src.rag.pipeline import RAGPipeline
+    return RAGPipeline()
+
+
+# Khởi tạo RAG (cached — chỉ load model 1 lần)
+try:
+    rag = load_rag()
+except Exception as e:
+    st.error(f"Lỗi khởi động RAG: {e}")
+    st.stop()
+
+# ------------------------------------------------------------------
+# Session state
+# ------------------------------------------------------------------
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-# Display chat history
+# Hiển thị lịch sử chat
 for msg in st.session_state.messages:
     with st.chat_message(msg["role"]):
         st.markdown(msg["content"])
 
-# Handle example question click from sidebar
+# Xử lý câu hỏi mẫu từ sidebar
 if "_example" in st.session_state and st.session_state["_example"]:
     prompt = st.session_state.pop("_example")
 else:
-    prompt = st.chat_input("Dat cau hoi ve dao tao tu xa...")
+    prompt = st.chat_input("Đặt câu hỏi về đào tạo từ xa...")
 
 if prompt:
-    # Add user message
+    # Hiển thị câu hỏi người dùng
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
 
-    # Generate response
+    # Tạo câu trả lời
     with st.chat_message("assistant"):
-        with st.spinner("Dang tim kiem thong tin..."):
+        with st.spinner("Đang tìm kiếm thông tin..."):
             try:
-                resp = requests.post(
-                    f"{API_URL}/chat",
-                    json={
-                        "message": prompt,
-                        "history": st.session_state.messages[:-1],
-                    },
-                    timeout=30,
+                result = rag.query(
+                    question=prompt,
+                    history=st.session_state.messages[:-1],
+                    top_k=5,
                 )
-                resp.raise_for_status()
-                data = resp.json()
-                answer = data["answer"]
+                answer = result["answer"]
 
-                # Append source citations
-                sources = data.get("sources", [])
+                # Thêm trích dẫn nguồn
+                sources = result.get("sources", [])
                 if sources:
-                    answer += "\n\n---\n**Nguon tham khao:**"
+                    answer += "\n\n---\n**Nguồn tham khảo:**"
                     for s in sources[:3]:
                         answer += (
                             f"\n- `{s['source']}` trang {s['page']}"
@@ -75,23 +88,23 @@ if prompt:
                     {"role": "assistant", "content": answer}
                 )
             except Exception as exc:
-                error_msg = f"Loi ket noi: {exc}"
+                error_msg = f"Lỗi: {exc}"
                 st.error(error_msg)
                 st.session_state.messages.append(
                     {"role": "assistant", "content": error_msg}
                 )
 
-# ---------------------------------------------------------------------------
-# Sidebar: example questions + Word export
-# ---------------------------------------------------------------------------
+# ------------------------------------------------------------------
+# Sidebar: câu hỏi mẫu + xóa lịch sử
+# ------------------------------------------------------------------
 with st.sidebar:
-    st.header("Cau hoi mau")
+    st.header("Câu hỏi mẫu")
     examples = [
-        "Dieu kien tuyen sinh dao tao tu xa?",
-        "Chuong trinh dao tao tu xa khoa 2024?",
-        "Quy trinh chuyen tu chinh quy sang tu xa?",
-        "Hoc phi dao tao tu xa bao nhieu?",
-        "Quy che dao tao tu xa nhu the nao?",
+        "Điều kiện tuyển sinh đào tạo từ xa?",
+        "Chương trình đào tạo từ xa khóa 2024?",
+        "Quy trình chuyển từ chính quy sang từ xa?",
+        "Học phí đào tạo từ xa bao nhiêu?",
+        "Quy chế đào tạo từ xa như thế nào?",
     ]
     for ex in examples:
         if st.button(ex, use_container_width=True):
@@ -99,31 +112,11 @@ with st.sidebar:
             st.rerun()
 
     st.divider()
-    st.header("Xuat bao cao")
-    report_type = st.selectbox("Loai", ["chat", "technical"])
-    if st.button("📄 Xuat Word (.docx)"):
-        if st.session_state.messages:
-            try:
-                resp = requests.post(
-                    f"{API_URL}/export",
-                    json={
-                        "history": st.session_state.messages,
-                        "report_type": report_type,
-                    },
-                    timeout=15,
-                )
-                resp.raise_for_status()
-                st.download_button(
-                    "Tai file",
-                    resp.content,
-                    "bao-cao.docx",
-                    mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-                )
-            except Exception as exc:
-                st.error(f"Loi: {exc}")
-        else:
-            st.warning("Chua co lich su chat de xuat.")
+
+    if st.button("🗑️ Xóa lịch sử chat", use_container_width=True):
+        st.session_state.messages = []
+        st.rerun()
 
     st.divider()
-    st.caption("Do an tot nghiep — UIT 2026")
-    st.caption("Nguon: daa.uit.edu.vn | LLM: Gemini API")
+    st.caption("Đồ án tốt nghiệp — UIT 2026")
+    st.caption("LLM: Gemini API | Vector DB: Qdrant")

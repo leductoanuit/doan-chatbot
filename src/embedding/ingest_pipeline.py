@@ -23,7 +23,20 @@ from src.storage.qdrant_vector_store import init_collection, search_vectors, ups
 load_dotenv()
 
 
-def ingest(data_path: str = "data/processed/all_documents.json") -> None:
+METADATA_PATH = "data/processed/document-metadata.json"
+
+
+def _load_metadata_map() -> dict[str, dict]:
+    """Load document metadata keyed by source_file for fast lookup."""
+    if not os.path.exists(METADATA_PATH):
+        print(f"[ingest] WARNING: {METADATA_PATH} not found, metadata will be sparse")
+        return {}
+    with open(METADATA_PATH, "r", encoding="utf-8") as fh:
+        entries = json.load(fh)
+    return {e["source_file"]: e for e in entries}
+
+
+def ingest(data_path: str = "data/processed/all_documents_ocr.json") -> None:
     """Load documents, chunk, embed, and upsert into Qdrant."""
 
     # ------------------------------------------------------------------
@@ -33,6 +46,10 @@ def ingest(data_path: str = "data/processed/all_documents.json") -> None:
     with open(data_path, "r", encoding="utf-8") as fh:
         documents = json.load(fh)
     print(f"[ingest] Loaded {len(documents)} documents")
+
+    # Load rich metadata for each source file
+    meta_map = _load_metadata_map()
+    print(f"[ingest] Loaded metadata for {len(meta_map)} source files")
 
     # ------------------------------------------------------------------
     # 2. Chunk
@@ -56,10 +73,16 @@ def ingest(data_path: str = "data/processed/all_documents.json") -> None:
     for chunk in chunks:
         src = chunk["metadata"].get("source", "unknown")
         if src not in sources_seen:
+            # Use rich metadata from document-metadata.json if available
+            rich_meta = meta_map.get(src, {})
             doc_id = insert_document({
                 "source_file": src,
-                "document_type": chunk["metadata"].get("document_type", ""),
-                "system_type": chunk["metadata"].get("system_type", ""),
+                "title": rich_meta.get("title"),
+                "document_number": rich_meta.get("document_number"),
+                "issue_date": rich_meta.get("issue_date"),
+                "issuing_body": rich_meta.get("issuing_body"),
+                "document_type": rich_meta.get("document_type", ""),
+                "system_type": rich_meta.get("system_type", ""),
             })
             sources_seen[src] = doc_id
         chunk["metadata"]["document_id"] = sources_seen[src]
@@ -125,7 +148,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Ingest documents into Qdrant")
     parser.add_argument(
         "--data",
-        default="data/processed/all_documents.json",
+        default="data/processed/all_documents_ocr.json",
         help="Path to processed JSON file",
     )
     args = parser.parse_args()
