@@ -8,12 +8,6 @@
 .venv/
 venv/
 
-# Data (generated)
-data/raw/
-data/processed/
-data/training/
-models/
-
 # Notebooks
 notebooks/.ipynb_checkpoints/
 
