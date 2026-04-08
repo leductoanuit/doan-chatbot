@@ -17,6 +17,36 @@ class RAGPipeline:
         self.retriever = retriever or HybridRetriever()
         self.llm = llm_client or LLMClient()
 
+    @staticmethod
+    def _expand_query(question: str) -> str:
+        """Normalize and expand query for better embedding match.
+
+        Two problems addressed:
+        1. Short queries missing domain context → append "(hệ đào tạo từ xa UIT)"
+        2. "hệ từ xa" / "chương trình từ xa" shorthand doesn't match corpus phrasing
+           "đào tạo từ xa" → normalize to full form before embedding.
+        """
+        q = question
+
+        # Normalize shorthand variants to full corpus phrasing
+        normalizations = [
+            ("hệ từ xa", "hệ đào tạo từ xa"),
+            ("chương trình từ xa", "chương trình đào tạo từ xa"),
+        ]
+        q_lower = q.lower()
+        for short, full in normalizations:
+            if short in q_lower:
+                idx = q_lower.index(short)
+                q = q[:idx] + full + q[idx + len(short):]
+                q_lower = q.lower()
+
+        # Append domain context when query still lacks it
+        if not any(kw in q_lower for kw in ["đào tạo từ xa", "uit", "đại học công nghệ thông tin"]):
+            q = f"{q} (hệ đào tạo từ xa UIT)"
+            q_lower = q.lower()
+
+        return q
+
     def query(
         self,
         question: str,
@@ -33,8 +63,11 @@ class RAGPipeline:
         Returns:
             Dict with keys: answer, sources, context_used.
         """
-        # 1. Retrieve
-        results = self.retriever.hybrid_search(question, k=top_k)
+        # 1. Expand query with domain context for better retrieval
+        expanded_query = self._expand_query(question)
+
+        # 2. Retrieve using expanded query, but generate answer with original
+        results = self.retriever.hybrid_search(expanded_query, k=top_k)
 
         # 2. Build context string (capped at 1500 words)
         context = self.retriever.build_context(results, max_tokens=1500)

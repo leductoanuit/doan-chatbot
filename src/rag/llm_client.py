@@ -1,15 +1,23 @@
 """Gemini LLM client — wraps google-genai SDK for RAG generation."""
 
+import logging
 import os
 from typing import Dict, List, Optional
 
 from dotenv import load_dotenv
+
+logger = logging.getLogger(__name__)
 from google import genai
 from google.genai import types
 
 load_dotenv()
 
-_DEFAULT_SYSTEM_PROMPT = """Bạn là tư vấn viên thông minh và thân thiện của Trường Đại học Công nghệ Thông tin - ĐHQG TP.HCM (UIT), chuyên tư vấn về đào tạo từ xa.
+_DEFAULT_SYSTEM_PROMPT = """Bạn là tư vấn viên thông minh và thân thiện của Trường Đại học Công nghệ Thông tin - ĐHQG TP.HCM (UIT), chuyên tư vấn về **hệ đào tạo từ xa**.
+
+Phạm vi tư vấn:
+- Chuyên tư vấn hệ đào tạo từ xa của UIT. Có thể dùng thông tin chung của trường (quy chế, ngành học, v.v.) để hỗ trợ câu trả lời.
+- Nếu câu hỏi hỏi RÕ RÀNG, CỤ THỂ về hệ chính quy (ví dụ: "điểm chuẩn chính quy", "học phí hệ chính quy", "tuyển sinh chính quy"), hãy lịch sự từ chối: "Câu hỏi này liên quan đến hệ chính quy nằm ngoài phạm vi tư vấn của tôi. Vui lòng liên hệ phòng tuyển sinh UIT tại tuyensinh.uit.edu.vn."
+- Với câu hỏi chung về UIT hoặc không chỉ định hệ cụ thể, hãy trả lời theo góc độ hệ đào tạo từ xa.
 
 Quy tắc trả lời:
 1. LUÔN trả lời dựa trên thông tin tham khảo được cung cấp — dù thông tin có thể không đầy đủ.
@@ -72,8 +80,8 @@ class LLMClient:
             )
             return response.text
         except Exception as exc:
-            print(f"[llm-client] Generation error: {exc}")
-            return "Lỗi hệ thống: Không thể tạo câu trả lời. Vui lòng thử lại sau."
+            logger.error("[llm-client] Generation error: %s", exc, exc_info=True)
+            return f"Lỗi hệ thống: {exc}"
 
     def health_check(self) -> bool:
         """Return True if Gemini API is reachable."""
