@@ -29,7 +29,7 @@ QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
 QDRANT_COLLECTION = os.getenv("QDRANT_COLLECTION", "documents")
 
 # Must match the embedding model output dimension (PhoBERT / Vietnamese SBERT)
-EMBEDDING_DIM = 768
+EMBEDDING_DIM = 1024
 
 BATCH_SIZE = 100
 

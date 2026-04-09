@@ -11,7 +11,10 @@ from typing import Optional
 
 import psycopg2
 import psycopg2.extras
+from dotenv import load_dotenv
 from psycopg2.extras import execute_values
+
+load_dotenv()
 
 # Connection URL from environment, default to local dev DB
 DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://localhost:5432/chatbot")

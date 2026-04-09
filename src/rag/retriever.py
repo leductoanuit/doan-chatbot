@@ -14,7 +14,7 @@ from src.storage.qdrant_vector_store import get_client, search_vectors
 
 load_dotenv()
 
-_EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "dangvantuan/vietnamese-embedding")
+_EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "BAAI/bge-m3")
 
 
 class HybridRetriever:
@@ -40,7 +40,7 @@ class HybridRetriever:
         system_type: Optional[str] = None,
     ) -> List[Dict]:
         """Semantic search via Qdrant."""
-        query_embedding = self.embedder.encode(query).tolist()
+        query_embedding = self.embedder.encode(query, normalize_embeddings=True).tolist()
         results = search_vectors(
             self.qdrant_client, query_embedding, k=k,
             doc_type=doc_type, system_type=system_type,

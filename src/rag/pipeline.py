@@ -51,7 +51,7 @@ class RAGPipeline:
         self,
         question: str,
         history: Optional[List[Dict]] = None,
-        top_k: int = 5,
+        top_k: int = 10,
     ) -> Dict:
         """Run RAG: retrieve relevant docs then generate an answer with context.
 

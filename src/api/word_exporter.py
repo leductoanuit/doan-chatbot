@@ -105,11 +105,11 @@ def export_technical_report(
         ("Thành phần", "Công nghệ"),
         ("Backend API", "Python 3.11 + FastAPI"),
         ("Mô hình ngôn ngữ", "Gemini 2.0 Flash (Google AI)"),
-        ("Vector Database", "MongoDB Atlas Free Tier (768-dim cosine)"),
-        ("Embedding Model", "dangvantuan/vietnamese-embedding (PhoBERT)"),
-        ("RAG Framework", "LlamaIndex + Hybrid Search"),
+        ("Vector Database", "Qdrant (1024-dim cosine)"),
+        ("Embedding Model", "BAAI/bge-m3"),
+        ("RAG Framework", "Hybrid Search (vector + keyword)"),
         ("LLM Serving", "Gemini API"),
-        ("OCR", "DeepSeek VL2 (Google Colab)"),
+        ("OCR", "Tesseract (local, deskew+binarize)"),
         ("Frontend", "Streamlit"),
     ]
     table = doc.add_table(rows=len(arch_rows), cols=2)
