@@ -40,8 +40,13 @@ class RAGPipeline:
                 q = q[:idx] + full + q[idx + len(short):]
                 q_lower = q.lower()
 
-        # Append domain context when query still lacks it
-        if not any(kw in q_lower for kw in ["đào tạo từ xa", "uit", "đại học công nghệ thông tin"]):
+        # Append domain context only for very short/generic queries lacking any domain signal
+        domain_signals = [
+            "đào tạo từ xa", "uit", "đại học công nghệ thông tin",
+            "quy chế", "học vụ", "tuyển sinh", "học phí", "tín chỉ",
+            "sinh viên", "môn học", "chương trình", "ngành", "bằng",
+        ]
+        if not any(kw in q_lower for kw in domain_signals):
             q = f"{q} (hệ đào tạo từ xa UIT)"
             q_lower = q.lower()
 
