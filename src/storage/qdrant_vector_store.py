@@ -28,7 +28,7 @@ QDRANT_URL = os.getenv("QDRANT_URL", "http://localhost:6333")
 QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
 QDRANT_COLLECTION = os.getenv("QDRANT_COLLECTION", "documents")
 
-# Must match the embedding model output dimension (PhoBERT / Vietnamese SBERT)
+# Must match the embedding model output dimension (BAAI/bge-m3 = 1024)
 EMBEDDING_DIM = 1024
 
 BATCH_SIZE = 100
