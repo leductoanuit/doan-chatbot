@@ -15,6 +15,21 @@ load_dotenv()
 # Đảm bảo import từ project root
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", ".."))
 
+from src.storage.chat_history_store import (
+    init_chat_schema,
+    create_session,
+    save_message,
+    update_session_title,
+    get_session_messages,
+    list_sessions,
+)
+
+# Khởi tạo bảng chat nếu chưa có (idempotent)
+try:
+    init_chat_schema()
+except Exception:
+    pass  # Không block app nếu DB chưa sẵn sàng
+
 st.set_page_config(
     page_title="UIT - Chatbot Tư Vấn Đào Tạo Từ Xa",
     page_icon="🎓",
@@ -40,8 +55,11 @@ except Exception as e:
     st.stop()
 
 # ------------------------------------------------------------------
-# Session state
+# Session state — session_id được tạo lazy khi user gửi tin đầu tiên
 # ------------------------------------------------------------------
+if "session_id" not in st.session_state:
+    st.session_state.session_id = None  # chưa tạo, chờ tin nhắn đầu tiên
+
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
@@ -50,17 +68,27 @@ for msg in st.session_state.messages:
     with st.chat_message(msg["role"]):
         st.markdown(msg["content"])
 
-# Xử lý câu hỏi mẫu từ sidebar
-if "_example" in st.session_state and st.session_state["_example"]:
-    prompt = st.session_state.pop("_example")
-else:
-    prompt = st.chat_input("Đặt câu hỏi về đào tạo từ xa...")
+prompt = st.chat_input("Đặt câu hỏi về đào tạo từ xa...")
 
 if prompt:
     # Hiển thị câu hỏi người dùng
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
+
+    # Tạo session DB lazy khi user gửi tin đầu tiên
+    if st.session_state.session_id is None:
+        try:
+            st.session_state.session_id = create_session(prompt[:60])
+        except Exception:
+            pass
+
+    # Lưu user message vào DB
+    if st.session_state.session_id:
+        try:
+            save_message(st.session_state.session_id, "user", prompt)
+        except Exception:
+            pass
 
     # Tạo câu trả lời
     with st.chat_message("assistant"):
@@ -87,6 +115,19 @@ if prompt:
                 st.session_state.messages.append(
                     {"role": "assistant", "content": answer}
                 )
+
+                # Lưu assistant response vào DB
+                if st.session_state.session_id:
+                    try:
+                        save_message(
+                            st.session_state.session_id,
+                            "assistant",
+                            answer,
+                            sources=result.get("sources"),
+                        )
+                    except Exception:
+                        pass
+
             except Exception as exc:
                 error_msg = f"Lỗi: {exc}"
                 st.error(error_msg)
@@ -95,26 +136,64 @@ if prompt:
                 )
 
 # ------------------------------------------------------------------
-# Sidebar: câu hỏi mẫu + xóa lịch sử
+# Sidebar: xóa lịch sử + danh sách sessions
 # ------------------------------------------------------------------
 with st.sidebar:
-    st.header("Câu hỏi mẫu")
-    examples = [
-        "Điều kiện tuyển sinh đào tạo từ xa?",
-        "Chương trình đào tạo từ xa khóa 2024?",
-        "Quy trình chuyển từ chính quy sang từ xa?",
-        "Học phí đào tạo từ xa bao nhiêu?",
-        "Quy chế đào tạo từ xa như thế nào?",
-    ]
-    for ex in examples:
-        if st.button(ex, use_container_width=True):
-            st.session_state["_example"] = ex
-            st.rerun()
-
-    st.divider()
-
     if st.button("🗑️ Xóa lịch sử chat", use_container_width=True):
         st.session_state.messages = []
+        st.session_state.session_id = None  # session mới sẽ tạo lazy khi chat
+        st.rerun()
+
+    # Danh sách các cuộc hội thoại cũ
+    st.divider()
+    st.header("Lịch sử hội thoại")
+
+    switch_to_session = None
+    try:
+        sessions = list_sessions(limit=20)
+        if sessions:
+            # Thêm option "Hội thoại mới" ở đầu để cho phép không chọn session nào
+            options = ["__new__"] + [s["id"] for s in sessions]
+            labels = ["＋ Hội thoại mới"] + [s["title"] or "Hội thoại mới" for s in sessions]
+
+            # Tìm index session hiện tại
+            current_sid = st.session_state.get("session_id")
+            current_idx = 0  # default: "Hội thoại mới"
+            if current_sid:
+                for i, s in enumerate(sessions):
+                    if s["id"] == current_sid:
+                        current_idx = i + 1  # +1 vì có option đầu
+                        break
+
+            selected = st.radio(
+                "Chọn hội thoại:",
+                range(len(options)),
+                index=current_idx,
+                format_func=lambda i: labels[i],
+                label_visibility="collapsed",
+            )
+
+            selected_id = options[selected]
+            if selected_id == "__new__":
+                if st.session_state.get("session_id") is not None:
+                    switch_to_session = ("__new__", [])
+            elif selected_id != st.session_state.get("session_id"):
+                msgs = get_session_messages(selected_id)
+                switch_to_session = (selected_id, msgs)
+    except Exception as e:
+        st.error(f"Lỗi: {e}")
+
+    # Thực hiện rerun ngoài try-except để RerunException không bị bắt lại
+    if switch_to_session:
+        sid, msgs = switch_to_session
+        if sid == "__new__":
+            st.session_state.session_id = None
+            st.session_state.messages = []
+        else:
+            st.session_state.session_id = sid
+            st.session_state.messages = [
+                {"role": m["role"], "content": m["content"]} for m in msgs
+            ]
         st.rerun()
 
     st.divider()

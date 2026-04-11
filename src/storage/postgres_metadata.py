@@ -76,6 +76,10 @@ def init_schema():
                 cur.execute(idx_sql)
         conn.commit()
 
+    # Initialize chat history tables
+    from src.storage.chat_history_store import init_chat_schema
+    init_chat_schema()
+
 
 def insert_document(metadata: dict) -> str:
     """

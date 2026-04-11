@@ -120,9 +120,14 @@ class HybridRetriever:
         keyword_weight: float = 0.3,
         doc_type: Optional[str] = None,
         system_type: Optional[str] = None,
+        reranker=None,
     ) -> List[Dict]:
-        """Merge vector + keyword results, deduplicate, rank by weighted score."""
-        vector_results = self.vector_search(query, k=k * 4, doc_type=doc_type, system_type=system_type)
+        """Merge vector + keyword results, deduplicate, rank by weighted score.
+
+        If reranker is provided, retrieve k*6 candidates then re-rank to top k.
+        """
+        pull = k * 6 if reranker else k * 4
+        vector_results = self.vector_search(query, k=pull, doc_type=doc_type, system_type=system_type)
         keyword_results = self.keyword_search(query, k=k)
 
         seen: set[int] = set()
@@ -144,11 +149,16 @@ class HybridRetriever:
 
         merged.sort(key=lambda x: x.get("final_score", 0.0), reverse=True)
 
-        # Chỉ giữ kết quả đủ liên quan (vector score >= 0.25)
-        # Nếu không có kết quả nào đạt ngưỡng, trả về top-k để Gemini tự đánh giá
+        # Filter by minimum relevance score
         MIN_SCORE = 0.25
         filtered = [r for r in merged if r.get("final_score", 0.0) >= MIN_SCORE * vector_weight]
-        return (filtered if filtered else merged)[:k]
+        candidates = (filtered if filtered else merged)
+
+        # Re-rank candidates with cross-encoder if provided
+        if reranker:
+            return reranker.rerank(query, candidates, top_k=k)
+
+        return candidates[:k]
 
     # ------------------------------------------------------------------
     # Context assembly

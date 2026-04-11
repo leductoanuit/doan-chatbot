@@ -1,6 +1,6 @@
 # Chuẩn bị câu hỏi bảo vệ đồ án
 
-Hệ thống: **Chatbot tư vấn đào tạo từ xa UIT** — RAG + Gemini + Qdrant + BGE-M3
+Hệ thống: **Chatbot tư vấn đào tạo từ xa UIT** — RAG + Gemini + Qdrant + BGE-M3 + BGE-Reranker-v2-M3
 
 ---
 
@@ -120,7 +120,33 @@ chunk C: cosine=0.20 → final=0.140 ❌ loại
 - Keyword-only chunks (final_score = 0.15) luôn dưới ngưỡng → chỉ xuất hiện qua fallback
 - Nếu không có chunk nào đạt ngưỡng → fallback trả về top-k để Gemini tự đánh giá
 
-Kết quả cuối sort giảm dần theo final_score, lấy top-k.
+Kết quả cuối sort giảm dần theo final_score, lấy top-k candidates → đưa qua **Re-ranker** để sắp xếp lại lần cuối.
+
+---
+
+**Q: Re-ranking hoạt động như thế nào trong hệ thống?**
+
+A: Sau hybrid search, hệ thống dùng **BAAI/bge-reranker-v2-m3** (cross-encoder) để re-rank lại kết quả:
+
+```
+Query → Hybrid Search (top 30) → BGE Reranker → top 5 → Gemini
+```
+
+- **Bi-encoder** (BGE-M3): embed query và chunk **độc lập** → cosine similarity → nhanh nhưng không hiểu mối quan hệ ngữ nghĩa sâu
+- **Cross-encoder** (BGE-Reranker): nhận **cặp (query, chunk)** cùng lúc → score chính xác hơn nhưng chậm hơn
+
+Giải pháp hybrid: bi-encoder retrieve nhanh top 30, cross-encoder re-rank chính xác → top 5 gửi Gemini. Score sau re-rank đạt **0.49–0.54** so với **0.25–0.26** trước đó.
+
+```python
+# src/rag/reranker.py
+class BGEReranker:
+    MODEL_NAME = "BAAI/bge-reranker-v2-m3"
+
+    def rerank(self, query, chunks, top_k=5):
+        pairs = [(query, c["content"]) for c in chunks]
+        scores = self.model.predict(pairs)  # cross-encoder scoring
+        return sorted(chunks, key=rerank_score, reverse=True)[:top_k]
+```
 
 ---
 
@@ -186,7 +212,7 @@ A:
 
 A:
 1. **Đánh giá định lượng**: implement RAGAS pipeline để đo Faithfulness, Answer Relevancy, Context Precision.
-2. **Re-ranking**: dùng Cross-Encoder để re-rank top-k chunks sau retrieval.
+2. ~~**Re-ranking**~~: ✅ Đã implement — BAAI/bge-reranker-v2-m3 re-rank top 30 → top 5 trước khi gửi Gemini.
 3. **Chunking thông minh hơn**: chunk theo điều khoản (semantic chunking) thay vì theo trang.
 4. **Update pipeline tự động**: khi có tài liệu mới → tự động embed và upsert vào Qdrant.
 5. **Guardrails**: phát hiện và từ chối câu hỏi ngoài phạm vi chính xác hơn.
