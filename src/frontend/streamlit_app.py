@@ -22,6 +22,7 @@ from src.storage.chat_history_store import (
     update_session_title,
     get_session_messages,
     list_sessions,
+    delete_all_sessions,
 )
 
 # Khởi tạo bảng chat nếu chưa có (idempotent)
@@ -62,6 +63,12 @@ if "session_id" not in st.session_state:
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
+
+if "radio_key" not in st.session_state:
+    st.session_state.radio_key = 0
+
+if "_cleared" not in st.session_state:
+    st.session_state["_cleared"] = False
 
 # Hiển thị lịch sử chat
 for msg in st.session_state.messages:
@@ -140,8 +147,14 @@ if prompt:
 # ------------------------------------------------------------------
 with st.sidebar:
     if st.button("🗑️ Xóa lịch sử chat", use_container_width=True):
+        try:
+            delete_all_sessions()
+        except Exception:
+            pass
         st.session_state.messages = []
-        st.session_state.session_id = None  # session mới sẽ tạo lazy khi chat
+        st.session_state.session_id = None
+        st.session_state["_cleared"] = True
+        st.session_state.radio_key += 1
         st.rerun()
 
     # Danh sách các cuộc hội thoại cũ
@@ -171,10 +184,14 @@ with st.sidebar:
                 index=current_idx,
                 format_func=lambda i: labels[i],
                 label_visibility="collapsed",
+                key=f"session_radio_{st.session_state.radio_key}",
             )
 
             selected_id = options[selected]
-            if selected_id == "__new__":
+            # Bỏ qua switch nếu vừa nhấn Xóa (tránh radio cũ tự load lại session)
+            if st.session_state.get("_cleared"):
+                st.session_state["_cleared"] = False
+            elif selected_id == "__new__":
                 if st.session_state.get("session_id") is not None:
                     switch_to_session = ("__new__", [])
             elif selected_id != st.session_state.get("session_id"):

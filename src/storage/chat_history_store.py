@@ -113,6 +113,15 @@ def get_session_messages(session_id: str) -> list[dict]:
     ]
 
 
+def delete_all_sessions() -> None:
+    """Delete all chat sessions and messages from the database."""
+    sql = "DELETE FROM chat_sessions;"  # CASCADE deletes chat_messages too
+    with get_connection() as conn:
+        with conn.cursor() as cur:
+            cur.execute(sql)
+        conn.commit()
+
+
 def list_sessions(limit: int = 20) -> list[dict]:
     """Return recent sessions ordered by last activity."""
     sql = """
