@@ -1,0 +1,292 @@
+<mxfile host="app.diagrams.net" modified="2026-04-16" version="21.0.0">
+  <diagram id="rag-pipeline" name="RAG Pipeline">
+    <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1900" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- ===== TITLE ===== -->
+        <mxCell id="2" value="RAG Pipeline — UIT Distance Learning Chatbot (daa.uit.edu.vn)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="350" y="10" width="1000" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- ===== INGESTION BACKGROUND ===== -->
+        <mxCell id="3" value="&lt;b style=&quot;font-size:13px;&quot;&gt;① Data Ingestion Pipeline (Offline / One-time)&lt;/b&gt;" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;align=left;verticalAlign=top;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="20" y="60" width="1590" height="230" as="geometry" />
+        </mxCell>
+
+        <!-- Raw Documents -->
+        <mxCell id="10" value="📄 Raw Documents&#xa;(PDF / HTML / Images)" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=0.27;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="50" y="130" width="135" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- PDF Extractor + Web Scraper -->
+        <mxCell id="11" value="🔍 PDF Extractor&#xa;+ Web Scraper&#xa;pdf_extractor.py&#xa;web_scraper.py" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="240" y="125" width="150" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Text Cleaner + QA Generator -->
+        <mxCell id="12" value="🧹 Text Cleaner&#xa;+ QA Generator&#xa;text_cleaner.py&#xa;qa_generator.py" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="450" y="125" width="150" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Processed JSON -->
+        <mxCell id="13" value="📁 all_documents.json&#xa;(Processed Text)" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=0.27;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="665" y="130" width="140" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- Text Chunker -->
+        <mxCell id="14" value="✂️ Text Chunker&#xa;chunker.py&#xa;(Overlap sliding window)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="865" y="125" width="150" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- BGE-M3 Embedder -->
+        <mxCell id="15" value="🧠 BGE-M3 Embedder&#xa;BAAI/bge-m3&#xa;SentenceTransformer&#xa;embedder.py" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="125" width="155" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Qdrant Vector Store -->
+        <mxCell id="16" value="🗄️ Qdrant Vector Store&#xa;(Dense Embeddings)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1320" y="105" width="150" height="65" as="geometry" />
+        </mxCell>
+
+        <!-- PostgreSQL Metadata -->
+        <mxCell id="17" value="🐘 PostgreSQL&#xa;(Doc Metadata + Chunks)&#xa;postgres_metadata.py" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1320" y="195" width="150" height="65" as="geometry" />
+        </mxCell>
+
+        <!-- Ingestion edges -->
+        <mxCell id="e10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" source="10" target="11" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" source="11" target="12" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" source="12" target="13" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" source="13" target="14" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" source="14" target="15" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" source="15" target="16" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e15l" value="upsert vectors" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontSize=9;" vertex="1" connectable="0" parent="e15">
+          <mxGeometry x="-0.2" relative="1" as="geometry"><mxPoint as="offset"/></mxGeometry>
+        </mxCell>
+        <mxCell id="e16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" source="15" target="17" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e16l" value="insert metadata" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontSize=9;" vertex="1" connectable="0" parent="e16">
+          <mxGeometry x="-0.2" relative="1" as="geometry"><mxPoint as="offset"/></mxGeometry>
+        </mxCell>
+
+        <!-- ===== QUERY PIPELINE BACKGROUND ===== -->
+        <mxCell id="4" value="&lt;b style=&quot;font-size:13px;&quot;&gt;② Query Pipeline (Runtime)&lt;/b&gt;" style="rounded=1;arcSize=3;whiteSpace=wrap;html=1;align=left;verticalAlign=top;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="20" y="320" width="1840" height="350" as="geometry" />
+        </mxCell>
+
+        <!-- User -->
+        <mxCell id="20" value="👤 User" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="55" y="440" width="80" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Streamlit UI -->
+        <mxCell id="21" value="🖥️ Streamlit UI&#xa;streamlit_app.py&#xa;Chat Interface" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="195" y="435" width="145" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- Chat History Store -->
+        <mxCell id="22" value="💬 Chat History Store&#xa;chat_history_store.py&#xa;(PostgreSQL)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="195" y="545" width="145" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- Query Expansion -->
+        <mxCell id="23" value="🔧 Query Expansion&#xa;+ Normalization&#xa;_expand_query()&#xa;pipeline.py" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="405" y="430" width="150" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- BGE-M3 Query Embed -->
+        <mxCell id="24" value="🧠 BGE-M3&#xa;Query Embedding&#xa;BAAI/bge-m3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="625" y="350" width="140" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- Vector Search -->
+        <mxCell id="25" value="🔢 Vector Search&#xa;(Semantic Similarity)&#xa;Qdrant ANN&#xa;weight: 0.7" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="625" y="435" width="140" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Keyword Search -->
+        <mxCell id="26" value="🔑 Keyword Search&#xa;(Qdrant Scroll)&#xa;Bigram + Unigram&#xa;weight: 0.3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="625" y="535" width="140" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Qdrant reference (runtime) -->
+        <mxCell id="27" value="🗄️ Qdrant&#xa;Collection" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="830" y="355" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Hybrid Merge -->
+        <mxCell id="28" value="⚖️ Hybrid Merge&#xa;Dedup + Weighted Score&#xa;vec(0.7) + kw(0.3)&#xa;MIN_SCORE = 0.25" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="840" y="455" width="155" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- BGE Reranker -->
+        <mxCell id="29" value="🏆 BGE Reranker&#xa;bge-reranker-v2-m3&#xa;CrossEncoder&#xa;candidates → top-10" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1070" y="455" width="155" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Context Builder -->
+        <mxCell id="30" value="📝 Context Builder&#xa;build_context()&#xa;Max 1500 tokens&#xa;[Nguồn: ...] citations" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1305" y="455" width="155" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Gemini LLM -->
+        <mxCell id="31" value="✨ Gemini 2.0 Flash&#xa;LLMClient&#xa;gemini-2.0-flash&#xa;temp=0.3 | max=1024 tokens&#xa;System Prompt (UIT advisor)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1545" y="420" width="165" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- ===== QUERY EDGES ===== -->
+
+        <!-- User → Streamlit -->
+        <mxCell id="eq1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" source="20" target="21" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="eq1l" value="câu hỏi" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontSize=9;" vertex="1" connectable="0" parent="eq1">
+          <mxGeometry x="-0.5" relative="1" as="geometry"><mxPoint as="offset"/></mxGeometry>
+        </mxCell>
+
+        <!-- Streamlit → Query Expansion -->
+        <mxCell id="eq2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" source="21" target="23" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Streamlit ↔ Chat History -->
+        <mxCell id="eq12a" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;" edge="1" source="21" target="22" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="eq12al" value="save / load" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontSize=9;" vertex="1" connectable="0" parent="eq12a">
+          <mxGeometry x="-0.5" relative="1" as="geometry"><mxPoint as="offset"/></mxGeometry>
+        </mxCell>
+
+        <!-- Query Expansion → BGE Embed (for vector) -->
+        <mxCell id="eq3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" source="23" target="24" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Query Expansion → Vector Search -->
+        <mxCell id="eq4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" source="23" target="25" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Query Expansion → Keyword Search -->
+        <mxCell id="eq5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" source="23" target="26" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- BGE-M3 → Vector Search (query embedding) -->
+        <mxCell id="eq_bge_vs" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" source="24" target="25" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="eq_bge_vsl" value="query vector" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontSize=9;" vertex="1" connectable="0" parent="eq_bge_vs">
+          <mxGeometry x="-0.5" relative="1" as="geometry"><mxPoint as="offset"/></mxGeometry>
+        </mxCell>
+
+        <!-- Qdrant → Vector Search (read) -->
+        <mxCell id="eq_qd_vs" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;" edge="1" source="27" target="25" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <!-- Qdrant → Keyword Search (scroll) -->
+        <mxCell id="eq_qd_ks" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;" edge="1" source="27" target="26" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Vector Search → Hybrid Merge -->
+        <mxCell id="eq6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" source="25" target="28" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Keyword Search → Hybrid Merge -->
+        <mxCell id="eq7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" source="26" target="28" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Hybrid Merge → BGE Reranker -->
+        <mxCell id="eq8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" source="28" target="29" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="eq8l" value="top-60 candidates" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontSize=9;" vertex="1" connectable="0" parent="eq8">
+          <mxGeometry x="-0.5" relative="1" as="geometry"><mxPoint as="offset"/></mxGeometry>
+        </mxCell>
+
+        <!-- Reranker → Context Builder -->
+        <mxCell id="eq9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" source="29" target="30" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="eq9l" value="top-10 reranked" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontSize=9;" vertex="1" connectable="0" parent="eq9">
+          <mxGeometry x="-0.5" relative="1" as="geometry"><mxPoint as="offset"/></mxGeometry>
+        </mxCell>
+
+        <!-- Context Builder → Gemini -->
+        <mxCell id="eq10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" edge="1" source="30" target="31" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="eq10l" value="context (≤1500 tokens)" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontSize=9;" vertex="1" connectable="0" parent="eq10">
+          <mxGeometry x="-0.5" relative="1" as="geometry"><mxPoint as="offset"/></mxGeometry>
+        </mxCell>
+
+        <!-- Chat History → Gemini (last 6 turns) -->
+        <mxCell id="eq12b" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;exitX=1;exitY=0.5;entryX=0.5;entryY=1;" edge="1" source="22" target="31" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1628" y="580" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="eq12bl" value="history (last 6 turns)" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontSize=9;" vertex="1" connectable="0" parent="eq12b">
+          <mxGeometry x="-0.3" relative="1" as="geometry"><mxPoint as="offset"/></mxGeometry>
+        </mxCell>
+
+        <!-- Gemini → Streamlit (answer return) -->
+        <mxCell id="eq11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#b85450;strokeWidth=2;" edge="1" source="31" target="21" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1628" y="660" />
+              <mxPoint x="268" y="660" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="eq11l" value="💬 Answer + Sources" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;fontSize=10;fontStyle=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" connectable="0" parent="eq11">
+          <mxGeometry x="-0.1" relative="1" as="geometry"><mxPoint as="offset"/></mxGeometry>
+        </mxCell>
+
+        <!-- ===== LEGEND ===== -->
+        <mxCell id="leg_bg" value="&lt;b&gt;Legend&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="20" y="700" width="700" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="l1" value="Process" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="30" y="725" width="90" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="l2" value="AI / ML Model" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="135" y="725" width="100" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="l3" value="Database" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=8;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="255" y="720" width="90" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="l4" value="Data / Intermediate" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="360" y="725" width="120" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="l5" value="UI / Interface" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="498" y="725" width="90" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="l6" value="Optional / Async" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="605" y="725" width="100" height="35" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
