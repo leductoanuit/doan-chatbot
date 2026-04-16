@@ -1,13 +1,13 @@
-"""Web scraper for daa.uit.edu.vn — BFS crawl with respectful rate limiting."""
+"""Web scraper for daa.uit.edu.vn — BFS crawl with Playwright (JS rendering)."""
 
 import json
 import os
 import time
 from urllib.parse import urljoin, urlparse
-from urllib.robotparser import RobotFileParser
 
 import requests
 from bs4 import BeautifulSoup
+from playwright.sync_api import sync_playwright, Page
 
 
 # Seed URLs for distance learning (dao tao tu xa) pages
@@ -19,9 +19,12 @@ SEED_URLS = [
     "https://daa.uit.edu.vn/34-quy-trinh-chuyen-sinh-vien-tu-hinh-thuc-dao-tao-chinh-quy-sang-hinh-thuc-dao-tao-tu-xa",
 ]
 
+# Wait this long (ms) after page load for JS to render content
+JS_RENDER_WAIT_MS = 2000
+
 
 class UitDaaScraper:
-    """Crawls daa.uit.edu.vn, collects page text and PDF links."""
+    """Crawls daa.uit.edu.vn with Playwright, collects page text and PDF links."""
 
     def __init__(
         self,
@@ -31,50 +34,36 @@ class UitDaaScraper:
         self.base_url = base_url
         self.seed_urls = seed_urls or SEED_URLS
         self.visited: set[str] = set()
-        self.session = requests.Session()
-        self.session.headers.update({
-            "User-Agent": "Mozilla/5.0 (compatible; UIT-DoAn-Bot/1.0)"
+        self.delay = 1  # seconds between page navigations
+        # requests.Session used only for PDF binary downloads
+        self._dl_session = requests.Session()
+        self._dl_session.headers.update({
+            "User-Agent": (
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                "AppleWebKit/537.36 (KHTML, like Gecko) "
+                "Chrome/124.0.0.0 Safari/537.36"
+            ),
+            "Accept": "application/pdf,*/*",
+            "Accept-Language": "vi,en;q=0.9",
+            "Referer": self.base_url,
         })
-        self.delay = 2  # seconds between requests
-        self._robots: RobotFileParser | None = None
 
     # ------------------------------------------------------------------
-    # robots.txt
+    # Page scraping (Playwright)
     # ------------------------------------------------------------------
 
-    def _load_robots(self) -> RobotFileParser:
-        if self._robots is None:
-            rp = RobotFileParser()
-            rp.set_url(f"{self.base_url}/robots.txt")
-            try:
-                rp.read()
-            except Exception:
-                pass  # If robots.txt unreachable, allow all
-            self._robots = rp
-        return self._robots
-
-    def _can_fetch(self, url: str) -> bool:
-        return self._load_robots().can_fetch("*", url)
-
-    # ------------------------------------------------------------------
-    # Scraping
-    # ------------------------------------------------------------------
-
-    def scrape_page(self, url: str) -> dict | None:
-        """Fetch a single page, extract text, PDF links, and internal links."""
-        if url in self.visited or not self._can_fetch(url):
-            return None
-        self.visited.add(url)
-
+    def _extract_page_data(self, pw_page: Page, url: str) -> dict:
+        """Navigate to url, wait for JS render, extract text + links."""
         try:
-            resp = self.session.get(url, timeout=15)
-            resp.raise_for_status()
-            resp.encoding = "utf-8"
-        except requests.RequestException as exc:
+            pw_page.goto(url, wait_until="domcontentloaded", timeout=20000)
+            # Wait for JS to finish rendering content
+            pw_page.wait_for_timeout(JS_RENDER_WAIT_MS)
+        except Exception as exc:
             print(f"[scraper] SKIP {url} — {exc}")
             return None
 
-        soup = BeautifulSoup(resp.content, "html.parser")
+        content = pw_page.content()
+        soup = BeautifulSoup(content, "html.parser")
 
         # Prefer <main> or common content wrappers; fall back to <body>
         main = (
@@ -96,8 +85,7 @@ class UitDaaScraper:
 
         for anchor in soup.find_all("a", href=True):
             href: str = urljoin(url, anchor["href"])
-            # Normalise: strip fragment
-            href = href.split("#")[0]
+            href = href.split("#")[0]  # strip fragment
             if not href.startswith("http"):
                 continue
 
@@ -109,30 +97,46 @@ class UitDaaScraper:
             elif urlparse(href).netloc == base_netloc:
                 page_data["internal_links"].append(href)
 
-        time.sleep(self.delay)
         return page_data
+
+    def scrape_page(self, pw_page: Page, url: str) -> dict | None:
+        """Fetch a single page, extract text, PDF links, and internal links."""
+        if url in self.visited:
+            return None
+        self.visited.add(url)
+        result = self._extract_page_data(pw_page, url)
+        time.sleep(self.delay)
+        return result
 
     def crawl(self, max_pages: int = 500) -> list[dict]:
         """BFS crawl starting from all seed URLs up to max_pages pages."""
-        # Initialize queue with all seed URLs
         queue: list[str] = list(self.seed_urls)
         all_pages: list[dict] = []
 
-        while queue and len(all_pages) < max_pages:
-            url = queue.pop(0)
-            page = self.scrape_page(url)
-            if page is None:
-                continue
-            all_pages.append(page)
-            for link in page["internal_links"]:
-                if link not in self.visited:
-                    queue.append(link)
+        with sync_playwright() as playwright:
+            browser = playwright.chromium.launch(headless=True)
+            context = browser.new_context(
+                user_agent="Mozilla/5.0 (compatible; UIT-DoAn-Bot/1.0)"
+            )
+            pw_page = context.new_page()
+
+            while queue and len(all_pages) < max_pages:
+                url = queue.pop(0)
+                page = self.scrape_page(pw_page, url)
+                if page is None:
+                    continue
+                all_pages.append(page)
+                for link in page["internal_links"]:
+                    if link not in self.visited:
+                        queue.append(link)
+
+            browser.close()
 
         print(f"[scraper] Crawled {len(all_pages)} pages from daa.uit.edu.vn")
         return all_pages
 
     # ------------------------------------------------------------------
-    # PDF download
+    # PDF download (requests — binary, no JS needed)
     # ------------------------------------------------------------------
 
     def download_pdfs(
@@ -140,26 +144,40 @@ class UitDaaScraper:
         pdf_links: list[dict],
         save_dir: str = "data/raw/pdfs",
     ) -> None:
-        """Download all PDFs, skip already-downloaded ones."""
+        """Download all PDFs, skip already-downloaded ones (by URL and by file)."""
         os.makedirs(save_dir, exist_ok=True)
+        seen_urls: set[str] = set()
         for pdf in pdf_links:
-            filename = pdf["url"].split("/")[-1] or "document.pdf"
+            url = pdf["url"]
+            # Skip duplicate URLs within the same batch
+            if url in seen_urls:
+                continue
+            seen_urls.add(url)
+
+            # URL-encode non-ASCII characters in the path so requests can handle them
+            from urllib.parse import quote, urlsplit, urlunsplit
+            parts = urlsplit(url)
+            safe_url = urlunsplit(parts._replace(path=quote(parts.path, safe="/%")))
+
+            # Use the last path segment (decoded) as the local filename
+            from urllib.parse import unquote
+            filename = unquote(safe_url.split("/")[-1]) or "document.pdf"
             filepath = os.path.join(save_dir, filename)
-            # Avoid overwriting — append counter if file already exists
+            # Skip if already downloaded
             if os.path.exists(filepath):
-                name, ext = os.path.splitext(filename)
-                counter = 1
-                while os.path.exists(filepath):
-                    filepath = os.path.join(save_dir, f"{name}_{counter}{ext}")
-                    counter += 1
+                safe_name = filename.encode("ascii", errors="replace").decode()
+                print(f"[scraper] Already exists, skip {safe_name}")
+                continue
             try:
-                resp = self.session.get(pdf["url"], timeout=60)
+                resp = self._dl_session.get(safe_url, timeout=60)
                 resp.raise_for_status()
                 with open(filepath, "wb") as fh:
                     fh.write(resp.content)
-                print(f"[scraper] Downloaded {filename}")
+                safe_name = filename.encode("ascii", errors="replace").decode()
+                print(f"[scraper] Downloaded {safe_name}")
             except requests.RequestException as exc:
-                print(f"[scraper] PDF error {pdf['url']} — {exc}")
+                # Encode error message safely for Windows terminals
+                print(f"[scraper] PDF error {safe_url} - {str(exc).encode('ascii', errors='replace').decode()}")
             time.sleep(self.delay)
 
 
