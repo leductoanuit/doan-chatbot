@@ -13,8 +13,8 @@ from pathlib import Path
 import fitz  # PyMuPDF
 from docx import Document
 
-RAW_DIR = Path(__file__).parent
-OUTPUT_DIR = RAW_DIR.parent / "processed"
+RAW_DIR = Path(__file__).parent.parent / "data" / "raw"
+OUTPUT_DIR = Path(__file__).parent.parent / "data" / "processed"
 OUTPUT_FILE = OUTPUT_DIR / "document-metadata.json"
 
 SUPPORTED_EXT = {".pdf", ".docx", ".json"}

@@ -102,7 +102,8 @@ def process_json_file(input_path, output_path):
     print("✓ Done!")
 
 if __name__ == '__main__':
-    input_file = Path('/Users/cps/do an chatbot/data/processed/all_documents_ocr.json')
-    output_file = Path('/Users/cps/do an chatbot/data/processed/all_documents_ocr_cleaned.json')
+    base_dir = Path(__file__).parent.parent / "data" / "processed"
+    input_file = base_dir / "all_documents_ocr.json"
+    output_file = base_dir / "all_documents_ocr_cleaned.json"
 
     process_json_file(input_file, output_file)

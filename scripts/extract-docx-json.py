@@ -9,8 +9,8 @@ from pathlib import Path
 
 from docx import Document
 
-RAW_DIR = Path(__file__).parent
-OUTPUT_DIR = RAW_DIR.parent / "processed"
+RAW_DIR = Path(__file__).parent.parent / "data" / "raw"
+OUTPUT_DIR = Path(__file__).parent.parent / "data" / "processed"
 OCR_FILE = OUTPUT_DIR / "all_documents_ocr.json"
 
 
