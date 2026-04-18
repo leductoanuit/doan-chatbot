@@ -8,6 +8,7 @@ Usage: python3 data/raw/generate-metadata.py
 
 import json
 import re
+import unicodedata
 from pathlib import Path
 
 import fitz  # PyMuPDF
@@ -54,9 +55,11 @@ _DOCTYPE_RULES = [
     (r"(?i)(thông tư liên tịch|TTLT)", "thong_tu"),
     (r"(?i)(thông tư|[-_]TT[-_]|/TT-)", "thong_tu"),
     (r"(?i)(chương trình đào tạo|CTĐT|cử nhân|kỹ sư)", "chuong_trinh_dao_tao"),
-    (r"(?i)(thông báo|tuyển sinh|khai giảng)", "thong_bao"),
+    # huong_dan must come before thong_bao — FAQ filenames contain "tuyển sinh" keywords
+    # that would otherwise match thong_bao first
     (r"(?i)(hướng dẫn|câu hỏi thường gặp|FAQ|hồ sơ)", "huong_dan"),
     (r"(?i)(biểu mẫu|quy trình|bieu_mau|quy_trinh)", "bieu_mau"),
+    (r"(?i)(thông báo|tuyển sinh|khai giảng)", "thong_bao"),
 ]
 
 # System type detection
@@ -134,21 +137,54 @@ def find_doc_number(text: str):
     return None
 
 
-def find_date(text: str):
-    """Extract earliest plausible date from text."""
+def _parse_date_str(text: str):
+    """Try all date patterns against text, return first valid match."""
     for pattern, fmt in _DATE_PATTERNS:
         m = re.search(pattern, text)
         if m:
             g = [int(x) for x in m.groups()]
             try:
                 result = fmt.format(*g)
-                # Validate: year between 2000-2030, month 1-12, day 1-31
                 parts = result.split("-")
                 y, mo, d = int(parts[0]), int(parts[1]), int(parts[2])
                 if 2000 <= y <= 2030 and 1 <= mo <= 12 and 1 <= d <= 31:
                     return result
             except (IndexError, ValueError):
                 continue
+    return None
+
+
+def find_date(combined: str, filename: str = ""):
+    """Extract issue date — filename takes priority over document body.
+
+    Filenames like '28_2023_tt_bgddt' embed the issue year in a structured
+    way, while body text may contain unrelated dates (e.g. referenced laws).
+
+    Strategy:
+    - Filename: try all patterns (numeric dates in filenames are reliable)
+    - Body fallback: only accept the formal Vietnamese pattern
+      "ngày X tháng Y năm Z" — numeric-only dates in body text are
+      often references to other laws, not the document's own issue date
+    """
+    if filename:
+        date = _parse_date_str(filename)
+        if date:
+            return date
+
+    # Body fallback: only formal VN date format is trustworthy
+    vn_pattern, vn_fmt = _DATE_PATTERNS[2]  # "ngày X tháng Y năm Z"
+    m = re.search(vn_pattern, combined)
+    if m:
+        g = [int(x) for x in m.groups()]
+        try:
+            result = vn_fmt.format(*g)
+            parts = result.split("-")
+            y, mo, d = int(parts[0]), int(parts[1]), int(parts[2])
+            if 2000 <= y <= 2030 and 1 <= mo <= 12 and 1 <= d <= 31:
+                return result
+        except (IndexError, ValueError):
+            pass
+
     return None
 
 
@@ -171,6 +207,18 @@ def find_sys_type(text: str) -> str:
         if re.search(pattern, text):
             return stype
     return "dao_tao"  # default
+
+
+def make_doc_id(filename: str) -> str:
+    """Generate stable slug ID from filename (no extension, lowercase).
+
+    NFC normalization ensures Vietnamese composed chars (e.g. 'ồ' not 'o'+combining)
+    stay intact so the slug is human-readable.
+    """
+    stem = Path(filename).stem
+    stem = unicodedata.normalize("NFC", stem)
+    slug = re.sub(r"[^\w]+", "-", stem, flags=re.UNICODE).strip("-").lower()
+    return slug
 
 
 def build_title(filename: str, doc_num, doc_type: str) -> str:
@@ -218,13 +266,15 @@ def main():
         combined = filename + "\n" + snippet
 
         doc_num = find_doc_number(combined)
-        date = find_date(combined)
+        date = find_date(combined, filename)
         issuer = find_issuing_body(combined)
         doc_type = find_doc_type(combined)
         sys_type = find_sys_type(combined)
         title = build_title(filename, doc_num, doc_type)
 
+        doc_id = make_doc_id(filename)
         entry = {
+            "doc_id": doc_id,
             "source_file": filename,
             "title": title,
             "document_number": doc_num,
@@ -234,10 +284,12 @@ def main():
             "system_type": sys_type,
         }
         results.append(entry)
-        print(f"  type={doc_type} | sys={sys_type} | num={doc_num} | date={date}")
+        print(f"  doc_id={doc_id} | type={doc_type} | sys={sys_type} | date={date}")
 
+    # Output as dict keyed by source_file for O(1) lookup
+    output = {e["source_file"]: e for e in results}
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-        json.dump(results, f, ensure_ascii=False, indent=2)
+        json.dump(output, f, ensure_ascii=False, indent=2)
 
     print(f"\n{'=' * 60}")
     print(f"Done. {len(results)} entries → {OUTPUT_FILE}")

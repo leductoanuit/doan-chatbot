@@ -32,12 +32,12 @@ except Exception:
     pass  # Không block app nếu DB chưa sẵn sàng
 
 st.set_page_config(
-    page_title="UIT - Chatbot Tư Vấn Đào Tạo Từ Xa",
+    page_title="UIT - Chatbot tư vấn đào tạo từ xa",
     page_icon="🎓",
     layout="centered",
 )
 
-st.title("🎓 Chatbot Tư Vấn Đào Tạo Từ Xa")
+st.title("🎓 Chatbot tư vấn đào tạo từ xa")
 st.caption("Trường Đại học Công nghệ Thông tin — ĐHQG TP.HCM (UIT)")
 
 
@@ -111,12 +111,18 @@ if prompt:
                 # Thêm trích dẫn nguồn
                 sources = result.get("sources", [])
                 if sources:
-                    answer += "\n\n---\n**Nguồn tham khảo:**"
-                    for s in sources[:3]:
-                        answer += (
-                            f"\n- `{s['source']}` trang {s['page']}"
-                            f" (score: {s['score']})"
-                        )
+                    # Chỉ hiển thị PDF và URL, bỏ qua .docx (dữ liệu tổng hợp nội bộ)
+                    visible_sources = [
+                        s for s in sources
+                        if not s["source"].lower().endswith(".docx")
+                    ]
+                    if visible_sources:
+                        answer += "\n\n---\n**Nguồn tham khảo:**"
+                        for s in visible_sources[:3]:
+                            answer += (
+                                f"\n- `{s['source']}` trang {s['page']}"
+                                f" (score: {s['score']})"
+                            )
 
                 st.markdown(answer)
                 st.session_state.messages.append(

@@ -12,8 +12,8 @@ import cv2
 import numpy as np
 import pytesseract
 
-RAW_DIR = Path(__file__).parent
-OUTPUT_DIR = RAW_DIR.parent / "processed"
+RAW_DIR = Path(__file__).parent.parent / "data" / "raw"
+OUTPUT_DIR = Path(__file__).parent.parent / "data" / "processed"
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 

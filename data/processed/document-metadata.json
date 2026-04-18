@@ -1,5 +1,6 @@
-[
-  {
+{
+  "1499-qd-dhcntt-10-12-2024.pdf": {
+    "doc_id": "1499-qd-dhcntt-10-12-2024",
     "source_file": "1499-qd-dhcntt-10-12-2024.pdf",
     "title": "Quyết định – 1499 qd dhcntt 10 12 2024",
     "document_number": null,
@@ -8,7 +9,8 @@
     "document_type": "quyet_dinh",
     "system_type": "dao_tao"
   },
-  {
+  "17_2016_TTLT_BGDDT_BTTTT.pdf": {
+    "doc_id": "17_2016_ttlt_bgddt_btttt",
     "source_file": "17_2016_TTLT_BGDDT_BTTTT.pdf",
     "title": "Thông tư – 17 2016 TTLT BGDDT BTTTT",
     "document_number": null,
@@ -17,7 +19,8 @@
     "document_type": "thong_tu",
     "system_type": "dao_tao"
   },
-  {
+  "213-qd-dhcntt_19-3-2024_pdf.pdf": {
+    "doc_id": "213-qd-dhcntt_19-3-2024_pdf",
     "source_file": "213-qd-dhcntt_19-3-2024_pdf.pdf",
     "title": "Quyết định 134/2006/QĐ-TTg",
     "document_number": "134/2006/QĐ-TTg",
@@ -26,7 +29,8 @@
     "document_type": "quyet_dinh",
     "system_type": "tuyen_sinh"
   },
-  {
+  "21_2019_TT_BGDDT.signed.pdf": {
+    "doc_id": "21_2019_tt_bgddt-signed",
     "source_file": "21_2019_TT_BGDDT.signed.pdf",
     "title": "Thông tư – 21 2019 TT BGDDT.signed",
     "document_number": null,
@@ -35,7 +39,8 @@
     "document_type": "thong_tu",
     "system_type": "dao_tao"
   },
-  {
+  "28_2023_tt_bgddt._quy_che_dttx_nam_2023.pdf": {
+    "doc_id": "28_2023_tt_bgddt-_quy_che_dttx_nam_2023",
     "source_file": "28_2023_tt_bgddt._quy_che_dttx_nam_2023.pdf",
     "title": "Thông tư – 28 2023 tt bgddt. quy che dttx nam 2023",
     "document_number": null,
@@ -44,7 +49,8 @@
     "document_type": "thong_tu",
     "system_type": "dao_tao"
   },
-  {
+  "507-qd-dhcntt-27-5-2024_quy_che_dao_tao_cho_sinh_vien.pdf": {
+    "doc_id": "507-qd-dhcntt-27-5-2024_quy_che_dao_tao_cho_sinh_vien",
     "source_file": "507-qd-dhcntt-27-5-2024_quy_che_dao_tao_cho_sinh_vien.pdf",
     "title": "Quyết định 134/2006/QĐ-TTg",
     "document_number": "134/2006/QĐ-TTg",
@@ -53,70 +59,78 @@
     "document_type": "quyet_dinh",
     "system_type": "dao_tao"
   },
-  {
-    "source_file": "citd_quy_trinh_bieu_mau_chung_chi.json",
-    "title": "Hướng dẫn – citd quy trinh bieu mau chung chi",
+  "790-qd-dhcntt_28-9-22_quy_che_dao_tao.pdf": {
+    "doc_id": "790-qd-dhcntt_28-9-22_quy_che_dao_tao",
+    "source_file": "790-qd-dhcntt_28-9-22_quy_che_dao_tao.pdf",
+    "title": "Quyết định – 790 qd dhcntt 28 9 22 quy che dao tao",
     "document_number": null,
-    "issue_date": null,
+    "issue_date": "2022-09-28",
     "issuing_body": "Trường ĐH Công nghệ Thông tin",
-    "document_type": "huong_dan",
-    "system_type": "chung_chi"
-  },
-  {
-    "source_file": "citd_quy_trinh_bieu_mau_detail.json",
-    "title": "Hướng dẫn – citd quy trinh bieu mau detail",
-    "document_number": null,
-    "issue_date": null,
-    "issuing_body": "Trường ĐH Công nghệ Thông tin",
-    "document_type": "huong_dan",
+    "document_type": "quyet_dinh",
     "system_type": "dao_tao"
   },
-  {
-    "source_file": "CTĐT ngành Trí tuệ Nhân tạo – Hình thức đào tạo từ xa (Áp dụng từ khoá 2024).docx",
-    "title": "Chương trình đào tạo – CTĐT ngành Trí tuệ Nhân tạo – Hình thức đào tạo từ xa (Áp dụng từ khoá 2024)",
+  "CTĐT ngành Trí tuệ Nhân tạo – Hình thức đào tạo từ xa (Áp dụng từ khoá 2024).docx": {
+    "doc_id": "ctđt-ngành-trí-tuệ-nhân-tạo-hình-thức-đào-tạo-từ-xa-áp-dụng-từ-khoá-2024",
+    "source_file": "CTĐT ngành Trí tuệ Nhân tạo – Hình thức đào tạo từ xa (Áp dụng từ khoá 2024).docx",
+    "title": "Chương trình đào tạo – CTĐT ngành Trí tuệ Nhân tạo – Hình thức đào tạo từ xa (Áp dụng từ khoá 2024)",
     "document_number": null,
     "issue_date": null,
     "issuing_body": "Trường ĐH Công nghệ Thông tin",
     "document_type": "chuong_trinh_dao_tao",
     "system_type": "dao_tao"
   },
-  {
+  "Cử nhân CNTT.docx": {
+    "doc_id": "cử-nhân-cntt",
+    "source_file": "Cử nhân CNTT.docx",
+    "title": "Chương trình đào tạo – Cử nhân CNTT",
+    "document_number": null,
+    "issue_date": null,
+    "issuing_body": "Trường ĐH Công nghệ Thông tin",
+    "document_type": "chuong_trinh_dao_tao",
+    "system_type": "dao_tao"
+  },
+  "Các câu hỏi thường gặp.docx": {
+    "doc_id": "các-câu-hỏi-thường-gặp",
     "source_file": "Các câu hỏi thường gặp.docx",
-    "title": "Thông báo – Các câu hỏi thường gặp",
-    "document_number": null,
-    "issue_date": "2006-06-08",
-    "issuing_body": "Trường ĐH Công nghệ Thông tin",
-    "document_type": "thong_bao",
-    "system_type": "tuyen_sinh"
-  },
-  {
-    "source_file": "Cử nhân CNTT.docx",
-    "title": "Chương trình đào tạo – Cử nhân CNTT",
+    "title": "Hướng dẫn – Các câu hỏi thường gặp",
     "document_number": null,
     "issue_date": null,
     "issuing_body": "Trường ĐH Công nghệ Thông tin",
-    "document_type": "chuong_trinh_dao_tao",
-    "system_type": "dao_tao"
+    "document_type": "huong_dan",
+    "system_type": "tuyen_sinh"
   },
-  {
-    "source_file": "Hồ sơ tuyển sinh.docx",
-    "title": "Chương trình đào tạo – Hồ sơ tuyển sinh",
+  "Hồ sơ tuyển sinh.docx": {
+    "doc_id": "hồ-sơ-tuyển-sinh",
+    "source_file": "Hồ sơ tuyển sinh.docx",
+    "title": "Chương trình đào tạo – Hồ sơ tuyển sinh",
     "document_number": null,
     "issue_date": null,
     "issuing_body": "Trường ĐH Công nghệ Thông tin",
     "document_type": "chuong_trinh_dao_tao",
     "system_type": "tuyen_sinh"
   },
-  {
+  "QD256_200415_cong-nhan-du-dieu-kien-to-chuc-sat-hach-UD-CNTT.pdf": {
+    "doc_id": "qd256_200415_cong-nhan-du-dieu-kien-to-chuc-sat-hach-ud-cntt",
     "source_file": "QD256_200415_cong-nhan-du-dieu-kien-to-chuc-sat-hach-UD-CNTT.pdf",
     "title": "Quyết định – QD256 200415 cong nhan du dieu kien to chuc sat hach UD CNTT",
     "document_number": null,
-    "issue_date": "2014-03-26",
+    "issue_date": null,
     "issuing_body": "Bộ TT&TT",
     "document_type": "quyet_dinh",
     "system_type": "chung_chi"
   },
-  {
+  "TUYỂN SINH CỬ NHÂN ĐẠI HỌC – HÌNH THỨC HỌC TRỰC TUYẾN — ĐỢT KHAI GIẢNG THÁNG 3 NĂM 2026.docx": {
+    "doc_id": "tuyển-sinh-cử-nhân-đại-học-hình-thức-học-trực-tuyến-đợt-khai-giảng-tháng-3-năm-2026",
+    "source_file": "TUYỂN SINH CỬ NHÂN ĐẠI HỌC – HÌNH THỨC HỌC TRỰC TUYẾN — ĐỢT KHAI GIẢNG THÁNG 3 NĂM 2026.docx",
+    "title": "Chương trình đào tạo – TUYỂN SINH CỬ NHÂN ĐẠI HỌC – HÌNH THỨC HỌC TRỰC TUYẾN — ĐỢT KHAI GIẢNG THÁNG 3 NĂM 2026",
+    "document_number": null,
+    "issue_date": null,
+    "issuing_body": "Trường ĐH Công nghệ Thông tin",
+    "document_type": "chuong_trinh_dao_tao",
+    "system_type": "tuyen_sinh"
+  },
+  "ThongTu-03.KyNangCNTT.pdf": {
+    "doc_id": "thongtu-03-kynangcntt",
     "source_file": "ThongTu-03.KyNangCNTT.pdf",
     "title": "Hướng dẫn – ThongTu 03.KyNangCNTT",
     "document_number": null,
@@ -125,13 +139,24 @@
     "document_type": "huong_dan",
     "system_type": "dao_tao"
   },
-  {
-    "source_file": "TUYỂN SINH CỬ NHÂN ĐẠI HỌC – HÌNH THỨC HỌC TRỰC TUYẾN — ĐỢT KHAI GIẢNG THÁNG 3 NĂM 2026.docx",
-    "title": "Chương trình đào tạo – TUYỂN SINH CỬ NHÂN ĐẠI HỌC – HÌNH THỨC HỌC TRỰC TUYẾN — ĐỢT KHAI GIẢNG THÁNG 3 NĂM 2026",
+  "citd_quy_trinh_bieu_mau_chung_chi.json": {
+    "doc_id": "citd_quy_trinh_bieu_mau_chung_chi",
+    "source_file": "citd_quy_trinh_bieu_mau_chung_chi.json",
+    "title": "Hướng dẫn – citd quy trinh bieu mau chung chi",
     "document_number": null,
-    "issue_date": "2025-12-15",
+    "issue_date": null,
     "issuing_body": "Trường ĐH Công nghệ Thông tin",
-    "document_type": "chuong_trinh_dao_tao",
-    "system_type": "tuyen_sinh"
+    "document_type": "huong_dan",
+    "system_type": "chung_chi"
+  },
+  "citd_quy_trinh_bieu_mau_detail.json": {
+    "doc_id": "citd_quy_trinh_bieu_mau_detail",
+    "source_file": "citd_quy_trinh_bieu_mau_detail.json",
+    "title": "Hướng dẫn – citd quy trinh bieu mau detail",
+    "document_number": null,
+    "issue_date": null,
+    "issuing_body": "Trường ĐH Công nghệ Thông tin",
+    "document_type": "huong_dan",
+    "system_type": "dao_tao"
   }
-]
+}

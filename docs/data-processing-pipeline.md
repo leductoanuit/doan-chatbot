@@ -17,7 +17,7 @@ data/raw/                            data/processed/
 
 ---
 
-## Bước 1 — OCR PDF (`data/raw/ocr-local.py`)
+## Bước 1 — OCR PDF (`scripts/ocr-local.py`)
 
 **Input:** Thư mục ảnh PNG trong `data/raw/` (mỗi thư mục = 1 PDF đã render sẵn)
 
@@ -36,7 +36,7 @@ data/raw/                            data/processed/
 
 ---
 
-## Bước 2 — Trích xuất DOCX + JSON (`data/raw/extract-docx-json.py`)
+## Bước 2 — Trích xuất DOCX + JSON (`scripts/extract-docx-json.py`)
 
 **DOCX:** `python-docx` đọc paragraph + bảng → chunk ~2000 ký tự
 
@@ -52,14 +52,14 @@ Cả 2 **append** vào `all_documents_ocr.json` đã có từ bước 1.
 
 ---
 
-## Bước 3 — Sinh metadata (`data/raw/generate-metadata.py`)
+## Bước 3 — Sinh metadata (`scripts/generate-metadata.py`)
 
 Hoàn toàn **offline**, không cần API — dùng regex + pattern matching trên tên file và nội dung trang đầu.
 
 | Trường | Cách xác định |
 |--------|--------------|
 | `document_number` | Regex trên tên file + nội dung trang 1 PDF |
-| `issue_date` | Regex ngày `DD/MM/YYYY`, `ngày X tháng Y năm Z` |
+| `issue_date` | Ưu tiên regex từ **tên file**; fallback body chỉ nhận format `ngày X tháng Y năm Z` (tránh nhặt nhầm ngày trích dẫn luật) |
 | `issuing_body` | Keyword: `BGDĐT`, `BTTTT`, `ĐHCNTT`... |
 | `document_type` | Keyword: `quyết định`, `thông tư`, `TTLT`... |
 | `system_type` | Keyword: `đào tạo`, `chứng chỉ`, `tuyển sinh`... |
@@ -83,11 +83,15 @@ Hoàn toàn **offline**, không cần API — dùng regex + pattern matching tr�
 ## Thứ tự chạy
 
 ```bash
-python3 data/raw/ocr-local.py              # Bước 1: OCR PDF
-python3 data/raw/extract-docx-json.py      # Bước 2: DOCX + JSON
-python3 data/raw/generate-metadata.py      # Bước 3: Metadata
-python3 src/embedding/ingest_pipeline.py   # Bước 4: Embed + Store
+python3 scripts/ocr-local.py                                           # Bước 1: OCR PDF
+python3 scripts/extract-docx-json.py                                   # Bước 2: DOCX + JSON
+python3 scripts/clean-ocr-json.py                                      # Bước 3a: Clean OCR noise
+python3 scripts/generate-metadata.py                                   # Bước 3b: Metadata
+python3 src/embedding/ingest_pipeline.py \                             # Bước 4: Embed + Store
+    --data data/processed/all_documents_ocr_cleaned.json
 ```
+
+> Dùng `all_documents_ocr_cleaned.json` (đã clean) thay vì `all_documents_ocr.json` để chất lượng embedding tốt hơn.
 
 ---
 
@@ -96,7 +100,18 @@ python3 src/embedding/ingest_pipeline.py   # Bước 4: Embed + Store
 | Nguồn | Số chunks |
 |-------|-----------|
 | PDF (8 file, Tesseract OCR) | 163 |
-| DOCX (5 file) | 58 |
+| DOCX (5 file) | 60 |
 | JSON (2 file) | 24 |
-| **Tổng** | **245** |
-| Metadata entries | 15 (map 100%) |
+| **Tổng** | **247** |
+| Metadata entries | 16 (map 100%) |
+
+---
+
+## Lưu ý khi thêm tài liệu mới
+
+| Loại file | Việc cần làm |
+|-----------|-------------|
+| PDF scan | Render PNG vào `data/raw/<tên-pdf>/` rồi chạy lại Bước 1 |
+| PDF text | Dùng `src/scraper/pdf_extractor.py` trực tiếp (không cần OCR) |
+| DOCX | Đặt vào `data/raw/`, chạy lại Bước 2 |
+| JSON scraper | Đặt vào `data/raw/`, chạy lại Bước 2 |

@@ -32,7 +32,9 @@ Quy tắc trả lời:
 3. Nếu thông tin chỉ đề cập một phần, hãy trả lời phần đó và ghi chú "để biết thêm chi tiết, vui lòng liên hệ phòng đào tạo hoặc truy cập daa.uit.edu.vn".
 4. CHỈ nói "không có thông tin" khi thông tin tham khảo hoàn toàn không liên quan đến câu hỏi.
 5. Trả lời bằng tiếng Việt, ngắn gọn, có cấu trúc (dùng bullet points khi cần).
-6. Giọng điệu thân thiện, chuyên nghiệp như nhân viên tư vấn thực sự."""
+8. Khi câu hỏi yêu cầu **so sánh** (ví dụ: "so sánh", "khác nhau", "điểm khác biệt", "so với"), LUÔN trình bày kết quả dưới dạng **bảng Markdown** với các cột rõ ràng.
+6. Giọng điệu thân thiện, chuyên nghiệp như nhân viên tư vấn thực sự.
+7. Nếu thông tin tham khảo có chứa URL/link liên quan đến câu hỏi, LUÔN giữ nguyên và đưa vào cuối câu trả lời dưới dạng "🔗 Tham khảo thêm: <url>"."""
 
 
 class LLMClient:

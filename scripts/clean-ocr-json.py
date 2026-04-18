@@ -1,109 +1,103 @@
 #!/usr/bin/env python3
+"""Clean OCR JSON: remove garbled pages and normalize text noise.
+
+Usage:
+    python3 scripts/clean-ocr-json.py                         # default paths
+    python3 scripts/clean-ocr-json.py -i INPUT -o OUTPUT
 """
-Clean OCR JSON: Remove unnecessary characters and fix common OCR errors
-"""
+import argparse
 import json
 import re
 from pathlib import Path
 
-# Common OCR artifacts and unnecessary characters to remove/fix
-OCR_FIXES = {
-    # Common OCR misreads
-    r'\bÔ\b': 'ô',
-    r'\bÓ\b': 'ó',
-    r'\bOO\b': 'ô',
-    r'\boo\b': 'ô',
-    r'Oo\b': '',
-    r'\bOo\b': '',
-    # Remove repeated special characters
-    r'_+': ' ',
-    r'-{2,}': '-',
-    # Clean up strange diacritics
-    r'ď': 'd',
-    r'ť': 't',
-    r'ň': 'n',
-    r'ì': 'i',
-    r'í': 'í',
-    # Remove noise patterns
-    r'\s{2,}': ' ',
-    r'\n{2,}': '\n',
-}
 
-def clean_text(text):
-    """Clean OCR text by removing artifacts and fixing common errors"""
-    if not text:
-        return text
+# ── Text normalisation ────────────────────────────────────────────────────────
 
-    # Apply regex fixes
-    for pattern, replacement in OCR_FIXES.items():
-        text = re.sub(pattern, replacement, text, flags=re.MULTILINE)
-
-    # Remove common OCR noise patterns
-    # Lines that are just symbols
-    text = re.sub(r'^\s*[_\-=\*\.]+\s*$', '', text, flags=re.MULTILINE)
-
-    # Fix common letter substitutions
-    replacements = {
-        'đđ': 'đ',
-        'óó': 'ó',
-        'óo': 'ô',
-        'à¤': 'ă',
-        'ằ': 'ă',
-        'àƒ': 'à',
-    }
-
-    for old, new in replacements.items():
+def _normalize(text: str) -> str:
+    """Light normalisation: collapse whitespace, fix repeated chars."""
+    # Collapse 3+ spaces to single space
+    text = re.sub(r' {3,}', ' ', text)
+    # Collapse 3+ newlines to double newline
+    text = re.sub(r'\n{3,}', '\n\n', text)
+    # Remove lines consisting only of separator symbols
+    text = re.sub(r'^\s*[_\-=\*\.]{3,}\s*$', '', text, flags=re.MULTILINE)
+    # Fix doubled Vietnamese special chars
+    for old, new in [('đđ', 'đ'), ('óó', 'ó'), ('àà', 'à'), ('ữữ', 'ữ')]:
         text = text.replace(old, new)
+    return text.strip()
 
-    # Remove lines that are just random symbols or mostly non-Vietnamese characters
-    lines = text.split('\n')
-    cleaned_lines = []
 
-    for line in lines:
-        # Skip lines that are mostly symbols
-        symbol_count = sum(1 for c in line if c in '_-=*@#$%^&()[]{}|<>,.:;')
-        if symbol_count / len(line) > 0.5 and len(line) < 5:
-            continue
-        # Skip lines that look like OCR artifacts (only numbers/symbols)
-        if re.match(r'^[\d\s\-\._,]*$', line):
-            continue
-        cleaned_lines.append(line.strip())
+# ── Garbled page detection ────────────────────────────────────────────────────
 
-    text = '\n'.join(cleaned_lines)
+# Characters common in valid Vietnamese/Latin text
+_LONG_WORD = re.compile(r'[a-zA-Z\u00C0-\u024F\u1E00-\u1EFF]{3,}')
 
-    # Final cleanup
-    text = text.strip()
 
-    return text
+def _long_word_ratio(text: str) -> float:
+    """Fraction of words containing ≥3 consecutive alphabetic chars (no digits/symbols).
+    Garbled OCR pages have near-zero ratio; real Vietnamese text is typically 0.4+.
+    """
+    words = text.split()
+    if not words:
+        return 1.0
+    return sum(1 for w in words if _LONG_WORD.search(w)) / len(words)
 
-def process_json_file(input_path, output_path):
-    """Process JSON file and clean OCR content"""
-    print(f"Reading {input_path}...")
 
-    with open(input_path, 'r', encoding='utf-8') as f:
-        data = json.load(f)
+def is_garbled(text: str, min_long_word_ratio: float = 0.20) -> bool:
+    """Return True if the page content looks like OCR garbage."""
+    if not text or len(text.strip()) < 20:
+        return True
+    return _long_word_ratio(text) < min_long_word_ratio
 
-    print(f"Processing {len(data)} documents...")
 
-    cleaned_data = []
-    for i, doc in enumerate(data):
-        if 'content' in doc:
-            original_length = len(doc['content'])
-            doc['content'] = clean_text(doc['content'])
-            cleaned_length = len(doc['content'])
-            print(f"  Doc {i+1}: {original_length} → {cleaned_length} chars")
+# ── Main processing ───────────────────────────────────────────────────────────
 
-        cleaned_data.append(doc)
+def clean_documents(docs: list[dict]) -> tuple[list[dict], dict]:
+    """Clean and filter documents. Returns (cleaned_docs, stats)."""
+    cleaned = []
+    stats = {"total": len(docs), "removed_garbled": 0, "cleaned": 0}
 
-    print(f"\nWriting cleaned data to {output_path}...")
-    with open(output_path, 'w', encoding='utf-8') as f:
-        json.dump(cleaned_data, f, ensure_ascii=False, indent=2)
+    for doc in docs:
+        content = doc.get("content", "")
 
-    print("✓ Done!")
+        if is_garbled(content):
+            stats["removed_garbled"] += 1
+            continue  # Drop the page entirely
 
-if __name__ == '__main__':
-    base_dir = Path(__file__).parent.parent / "data" / "processed"
-    input_file = base_dir / "all_documents_ocr.json"
-    output_file = base_dir / "all_documents_ocr_cleaned.json"
+        normalized = _normalize(content)
+        if normalized != content:
+            stats["cleaned"] += 1
 
-    process_json_file(input_file, output_file)
+        cleaned.append({**doc, "content": normalized})
+
+    stats["kept"] = len(cleaned)
+    return cleaned, stats
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Clean OCR JSON documents")
+    base = Path(__file__).parent.parent / "data" / "processed"
+    parser.add_argument("-i", "--input", default=str(base / "all_documents_ocr.json"))
+    parser.add_argument("-o", "--output", default=str(base / "all_documents_ocr_cleaned.json"))
+    args = parser.parse_args()
+
+    print(f"Reading {args.input} …")
+    with open(args.input, encoding="utf-8") as f:
+        docs = json.load(f)
+
+    cleaned, stats = clean_documents(docs)
+
+    print(f"  Total pages  : {stats['total']}")
+    print(f"  Garbled (removed): {stats['removed_garbled']}")
+    print(f"  Normalized   : {stats['cleaned']}")
+    print(f"  Kept         : {stats['kept']}")
+
+    print(f"Writing {args.output} …")
+    with open(args.output, "w", encoding="utf-8") as f:
+        json.dump(cleaned, f, ensure_ascii=False, indent=2)
+
+    print("Done.")
+
+
+if __name__ == "__main__":
+    main()
