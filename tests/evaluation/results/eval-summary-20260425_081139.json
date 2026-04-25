@@ -1,0 +1,64 @@
+{
+  "timestamp": "2026-04-25T08:11:39.761740",
+  "total_questions": 5,
+  "metrics": {
+    "faithfulness": 0.2,
+    "answer_relevancy": 0.8,
+    "context_precision": 0.04,
+    "context_recall": 0.3
+  },
+  "by_category": {
+    "tuyen_sinh": {
+      "faithfulness": 0.2,
+      "answer_relevancy": 0.8,
+      "context_precision": 0.04,
+      "context_recall": 0.3
+    }
+  },
+  "by_difficulty": {
+    "easy": {
+      "faithfulness": 0.25,
+      "answer_relevancy": 0.75,
+      "context_precision": 0.05,
+      "context_recall": 0.375
+    },
+    "medium": {
+      "faithfulness": 0.0,
+      "answer_relevancy": 1.0,
+      "context_precision": 0.0,
+      "context_recall": 0.0
+    }
+  },
+  "worst_context_recall": [
+    {
+      "question": "Khi nào trường tổ chức tuyển sinh hệ đào tạo từ xa?",
+      "category": "tuyen_sinh",
+      "context_recall": 0.0,
+      "faithfulness": 0.0
+    },
+    {
+      "question": "Tốt nghiệp THPT có thể học chương trình nào của UIT hệ từ xa?",
+      "category": "tuyen_sinh",
+      "context_recall": 0.0,
+      "faithfulness": 0.5
+    },
+    {
+      "question": "Bảo lưu kết quả trúng tuyển thực hiện trong trường hợp nào và nộp đơn khi nào?",
+      "category": "tuyen_sinh",
+      "context_recall": 0.0,
+      "faithfulness": 0.0
+    },
+    {
+      "question": "Lệ phí xét tuyển hệ đào tạo từ xa UIT là bao nhiêu?",
+      "category": "tuyen_sinh",
+      "context_recall": 0.5,
+      "faithfulness": 0.0
+    },
+    {
+      "question": "Chương trình liên thông đại học hệ từ xa dành cho đối tượng nào?",
+      "category": "tuyen_sinh",
+      "context_recall": 1.0,
+      "faithfulness": 0.5
+    }
+  ]
+}

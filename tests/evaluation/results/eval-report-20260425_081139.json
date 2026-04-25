@@ -1,0 +1,143 @@
+{
+  "aggregate": {
+    "faithfulness": 0.2,
+    "answer_relevancy": 0.8,
+    "context_precision": 0.04,
+    "context_recall": 0.3
+  },
+  "samples": [
+    {
+      "question": "Khi nào trường tổ chức tuyển sinh hệ đào tạo từ xa?",
+      "ground_truth": "Hằng năm, Trường dự kiến tổ chức nhận hồ sơ xét tuyển hệ đào tạo từ xa và khai giảng 3 đợt cố định: Đợt 1 từ 01/12 đến 15/01 khai giảng dự kiến vào tháng 2 năm sau.",
+      "reference_contexts": [
+        "Hằng năm, Trường dự kiến tổ chức nhận hồ sơ xét tuyển hệ đào tạo từ xa và khai giảng 3 đợt cố định:\n Đợt 1: 01/12 đến 15/01, khai giảng dự kiến vào tháng 2 năm sau"
+      ],
+      "answer": "Hằng năm, Trường Đại học Công nghệ Thông tin (UIT) dự kiến tổ chức nhận hồ sơ xét tuyển hệ đào tạo từ xa và khai giảng 3 đợt cố định:\n\n*   **Đợt 1:** 01/12 đến 15/01, khai giảng dự kiến vào tháng 2 năm sau.\n*   **Đợt 2:** 01/3 đến 30/4, khai giảng dự kiến vào tháng 6.\n*   **Đợt 3:** 01/7 đến 30/8, khai giảng dự kiến vào tháng 10.\n\nBạn có thể theo dõi Fanpage của Trung tâm Phát triển Công nghệ Thông tin (CITD) để nắm bắt thông tin mới nhất: 🔗 [https://www.facebook.com/CITD.UIT](https://www.facebook.com/CITD.UIT)\n",
+      "contexts": [
+        "Chương trình Liên thông đại học (1,5 2 năm): Dành cho các bạn đã tốt nghiệp cao đẳng các ngành thuộc lĩnh vực công nghệ thông tin. Xét tuyển căn cứ tr",
+        "Là Trung tâm hoạt động về Khoa học Công nghệ và Đào tạo trực thuộc Trường Đại học Công nghệ Thông tin, Đại học Quốc gia Thành phố Hồ Chí Minh. Được Nh",
+        "HỒ SƠ DỰ TUYỂN LIÊN THÔNG ĐẠI HỌC hệ Đào tạo Từ xa\nHồ sơ cập nhật tháng 12 năm 2025\nỨng viên CTĐT Liên thông Đại học ngành Công nghệ Thông tin và Trí ",
+        "ĐẠI HỌC QUỐC GIA TP.HCM CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM\n_ TRUONG ĐẠI HỌC Độc lập - Tự do - Hạnh phúc\nCONG NGHE THONG TIN a\n; QUY CHE\nTUYEN SINH HIN"
+      ],
+      "category": "tuyen_sinh",
+      "difficulty": "easy",
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 1.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0
+      }
+    },
+    {
+      "question": "Lệ phí xét tuyển hệ đào tạo từ xa UIT là bao nhiêu?",
+      "ground_truth": "Lệ phí xét tuyển là 150.000đ/hồ sơ. Ứng viên chuyển khoản về tài khoản Trung tâm Phát triển Công nghệ Thông tin, số tài khoản 007 100 352 5391 tại Ngân hàng Vietcombank Chi nhánh TP.HCM.",
+      "reference_contexts": [
+        "Lệ phí xét tuyển:\n150.000đ/hồ sơ\nỨng viên chuyển khoản về và chụp lại màn hình:\nTên tài khoản:\nTrung tâm Phát triển Công nghệ Thông tin\nSố tài khoản:\n007 100 352 5391\nTại:\nNgân hàng TMCP Ngoại thương (Vietcombank) Chi nhánh TP.HCM"
+      ],
+      "answer": "Lỗi hệ thống: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to https://cloud.google.com/vertex-ai/generative-ai/docs/error-code-429 for more details.', 'status': 'RESOURCE_EXHAUSTED'}}",
+      "contexts": [
+        "HỒ SƠ DỰ TUYỂN LIÊN THÔNG ĐẠI HỌC hệ Đào tạo Từ xa\nHồ sơ cập nhật tháng 12 năm 2025\nỨng viên CTĐT Liên thông Đại học ngành Công nghệ Thông tin và Trí ",
+        "02 bản Sơ yếu lý lịch (có chứng thực chữ ký, ứng viên có thể thực hiện ở bất kỳ phường/xã hoặc phòng công chứng hoặc nơi làm việc, không phải gửi về n",
+        "Hướng dẫn nộp lệ phí xét tuyển Trung Tâm Phát Triển Công Nghệ Thông Tin - CITD\nHướng dẫn nộp lệ phí xét tuyển\nVũ Khánh\n02/12/2021\n39528\nHồ sơ cập nhật",
+        "Trong quá trình học, bạn sẽ không phải đến lớp mà có thể học hoàn toàn qua mạng ở bất kỳ địa điểm nào (chỉ cần có máy tính hoặc thiết bị kết nối inter",
+        "02 bản sao có chứng thực Căn cước (thí sinh không sử dụng CMND để nộp);\n02 túi đựng hồ sơ (ứng viên có thể mua tại bất kỳ cửa hàng in ấn, văn phòng ph",
+        "QUY TRÌNH RÚT HỌC PHÍ Trung Tâm Phát Triển Công Nghệ Thông Tin - CITD\nQUY TRÌNH RÚT HỌC PHÍ\nVũ Khánh\n09/05/2024\n5117\nĐối tượng áp dụng:\nTân sinh viên ",
+        "Phát Triển Công Nghệ Thông Tin CITD Trang chủ Giới thiệu Tổng Quan Đao Tao Cử Nhân Lịch Học Kế hoạch năm học Thông báo chung Thông báo học vụ Chương t",
+        "Điều 6. Kế hoạch tuyến sinh\n1. Trường DHCNTT xây dựng kế hoạch và triển khai thực hiện các đợt tuyển sinh phù hợp\nvới tình hình thực tế tại Trường.\n2."
+      ],
+      "category": "tuyen_sinh",
+      "difficulty": "easy",
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.5
+      }
+    },
+    {
+      "question": "Tốt nghiệp THPT có thể học chương trình nào của UIT hệ từ xa?",
+      "ground_truth": "Chương trình Cử nhân hệ đào tạo từ xa qua mạng của trường phù hợp với tất cả các bạn đã tốt nghiệp THPT, Trung cấp. Nhà trường chỉ xét tuyển dựa trên hồ sơ, không thi tuyển đầu vào.",
+      "reference_contexts": [
+        "Chương trình Cử nhân Hệ đào tào từ xa qua mạng của trường phù hợp với tất cả các bạn đã tốt nghiệp THPT, Trung cấp. Nhà trường chỉ xét tuyển dựa trên hồ sơ, không thi tuyển đầu vào"
+      ],
+      "answer": "Chào bạn, với bằng tốt nghiệp THPT, bạn có thể đăng ký chương trình Cử nhân (Đại học văn bằng 1) hệ đào tạo từ xa của UIT ở các ngành sau:\n\n*   **Công nghệ Thông tin**\n*   **Trí tuệ Nhân tạo**\n\nĐể biết thêm chi tiết về chương trình đào tạo, bạn có thể truy cập trang web của trường hoặc liên hệ phòng đào tạo để được tư vấn cụ thể hơn.",
+      "contexts": [
+        "Link tham khảo: https://student.uit.edu.vn/29-quy-dinh-ve-do-tot-nghiep-tai-doanh-nghiep\n26. Định hướng chuyên ngành của ngành Trí tuệ nhân tạo hệ từ ",
+        "02 bản Sơ yếu lý lịch (có chứng thực chữ ký, ứng viên có thể thực hiện ở bất kỳ phường/xã hoặc phòng công chứng hoặc nơi làm việc, không phải gửi về n",
+        "Chương trình đào tạo Cử nhân Văn bằng Đại học thứ 2 ngành Công nghệ thông tin Hình thức đào tạo từ xa (Áp dụng từ khoá tuyển 2024)\nTên chương trình: C",
+        "Tổng số tín chỉ cho các môn học cơ sở ngành đạt tối thiểu 57 tín chỉ.\n2.3.2 Các môn tự chọn ngành\nTổng số tín chỉ cho các môn học tự chọn ngành đạt tố",
+        "2.1.1. Nhóm ngành đúng\nNhóm ngành đúng (có thể được cập nhật theo điều chỉnh của Bộ Giáo dục và Đào tạo):\n2.1.2. Nhóm ngành gần\nNhóm ngành gần (có thể",
+        "Phần 1: Bắt buộc đối với tất cả sinh viên của ngành, nhằm cung cấp kiến thức nền tảng về lập trình, cơ sở dữ liệu, mạng máy tính, phần cứng máy tính. ",
+        "STT Mã môn Tên môn TC LT TH\n1 IT001 Nhập môn lập trình 4 3 1\n2 IT002 Lập trình hướng đối tượng 4 3 1\n3 IT003 Cấu trúc dữ liệu và giải thuật 4 3 1\n4 IT",
+        "Khối kiến thức tốt nghiệp (10 TC) (2) Chuyên đề tốt nghiệp 4 19.23\nKhối kiến thức tốt nghiệp (10 TC) (2) Đồ án tốt nghiệp 6 19.23\nKhối kiến thức tốt n",
+        "phạm, bằng tốt nghiệp cao dang su pham, van bang giao dục đại hoc va chứng chi\ncủa hệ thong giáo dục quôc dân.\nĐiều 2. Thông tư này có hiệu lực thi hà",
+        "2. Thủ trưởng cơ sở giáo dục đại học, cơ sở đào tạo giáo viên phê duyệt\nmẫu phôi văn băng: gửi mẫu phôi văn bằng cho Bộ Giáo dục và Đào tạo, cơ\nquan q"
+      ],
+      "category": "tuyen_sinh",
+      "difficulty": "easy",
+      "scores": {
+        "faithfulness": 0.5,
+        "answer_relevancy": 1.0,
+        "context_precision": 0.1,
+        "context_recall": 0.0
+      }
+    },
+    {
+      "question": "Bảo lưu kết quả trúng tuyển thực hiện trong trường hợp nào và nộp đơn khi nào?",
+      "ground_truth": "Sau khi được xét trúng tuyển vào Trường, do một số hoàn cảnh đặc biệt như được điều động vào các lực lượng vũ trang, thai sản, bệnh tật, tai nạn, hoàn cảnh khó khăn xảy ra đột xuất, thí sinh trúng tuyển có thể xin bảo lưu kết quả. Thí sinh trúng tuyển phải nộp đơn xin bảo lưu chậm nhất 15 ngày kể từ ngày trúng tuyển.",
+      "reference_contexts": [
+        "Điều 14. Bảo lưu kết quả trúng tuyển\nSau khi được xét tring tuyển vào Trường, do một số hoàn cảnh đặc biệt như được điều động vào các lực lượng vũ trang, thai sản, bệnh tật, tai nạn, hoàn cảnh khó khăn xảy ra đột xuất, thí sinh tring tuyến có thé xin bảo lưu kết qua. Thí sinh trúng tuyên phải nộp don xin bảo lưu chậm nhất 15 ngày ké từ ngày trúng tuyển."
+      ],
+      "answer": "Bạn có thể bảo lưu kết quả trúng tuyển vào Trường Đại học Công nghệ Thông tin (UIT) nếu gặp phải một số hoàn cảnh đặc biệt sau:\n\n*   Được điều động vào các lực lượng vũ trang.\n*   Thai sản.\n*   Bệnh tật, tai nạn.\n*   Hoàn cảnh khó khăn xảy ra đột xuất.\n\n**Thời gian nộp đơn:**\n\n*   Chậm nhất 15 ngày kể từ ngày gọi nhập học.\n\nBạn cần nộp đơn xin bảo lưu cho Phòng Đào tạo Đại học (P. ĐTĐH) thông qua Trung tâm Phát triển Công nghệ Thông tin (TTPTCNTT) và chỉ được bảo lưu khi có quyết định chấp thuận của Hiệu trưởng. 🔗 Tham khảo: Điều 14 trong [Nguồn: 507-qd-dhcntt-27-5-2024\\_quy\\_che\\_dao\\_tao\\_cho\\_sinh\\_vien.pdf]\n",
+      "contexts": [
+        "Học trực tuyến: Giảng viên giảng dạy, hướng dẫn sinh viên học tập trao đổi, thảo\nluận thông qua các hệ thống phần mềm giảng dạy trực tuyến.\nĐiều 13. L",
+        "HƯỚNG DẪN TẠM DỪNG VÀ BẢO LƯU KẾT QUẢ HỌC TẬP Trung Tâm Phát Triển Công Nghệ Thông Tin - CITD\nHƯỚNG DẪN TẠM DỪNG VÀ BẢO LƯU KẾT QUẢ HỌC TẬP\nVũ Khánh\n1",
+        "Là Trung tâm hoạt động về Khoa học Công nghệ và Đào tạo trực thuộc Trường Đại học Công nghệ Thông tin, Đại học Quốc gia Thành phố Hồ Chí Minh. Được Nh",
+        "Nội dung ghi trên bằng tuân thủ đúng Thông tư số 27/2019/TTBGDĐT (Không thể hiện hình thức đào tạo trên bằng, thể hiện trên bảng điểm). Áp dụng cho cá",
+        "nhận sinh viên (tạm hoãn nghĩa vụ quân sự và các trường hợp khác) Hướng dẫn sinh viên gia hạn học phí (dành cho sinh viên có hoàn cảnh khó khăn) Hướng",
+        "Điều 14. Chế độ báo cáo, lưu trữ và công khai thông tin\n1. Trước ngày 31 tháng 12 hằng năm:\na) Cơ sở đào tạo báo cáo Độ Giáo dục và Dao tạo, Ủy ban nh",
+        "TUYỂN SINH CỬ NHÂN ĐẠI HỌC HÌNH THỨC HỌC TRỰC TUYẾN ĐỢT KHAI GIẢNG THÁNG 3 NĂM 2026\nTrường Đại học Công nghệ Thông tin, ĐHQG-HCM thông báo tuyển sinh ",
+        "GỬI GIẤY XÁC NHẬN VỀ NHÀ. Nội dung: Kính gửi Cô Phạm Thị Nhàn, Em tên là , MSSV:., đang theo học ngành Công nghệ Thông tin, hệ đào tạo từ xa tại Trườn",
+        "Hướng dẫn chuyển đổi tín chỉ và công nhận kết quả học tập Trung Tâm Phát Triển Công Nghệ Thông Tin - CITD Hướng dẫn chuyển đổi tín chỉ và công nhận kế",
+        "2. Tổ chức thi, đánh giá kết thúc học phần theo hình thức trực tiếp người học phải tập trung tại cơ sở đào tạo hoặc tại cơ sở phôi hợp đào tạo theo qu"
+      ],
+      "category": "tuyen_sinh",
+      "difficulty": "medium",
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 1.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0
+      }
+    },
+    {
+      "question": "Chương trình liên thông đại học hệ từ xa dành cho đối tượng nào?",
+      "ground_truth": "Chương trình Liên thông đại học (1,5-2 năm) dành cho các bạn đã tốt nghiệp cao đẳng các ngành thuộc lĩnh vực công nghệ thông tin. Xét tuyển căn cứ trên bằng tốt nghiệp cao đẳng và điểm tích lũy tại hệ Cao đẳng.",
+      "reference_contexts": [
+        "Chương trình Liên thông đại học (1,5 2 năm): Dành cho các bạn đã tốt nghiệp cao đẳng các ngành thuộc lĩnh vực công nghệ thông tin. Xét tuyển căn cứ trên bằng tốt nghiệp cao đẳng và điểm tích luỹ tại hệ Cao đẳng."
+      ],
+      "answer": "Chương trình liên thông đại học hệ đào tạo từ xa của UIT dành cho các bạn đã tốt nghiệp cao đẳng các ngành thuộc lĩnh vực công nghệ thông tin. Xét tuyển căn cứ trên bằng tốt nghiệp cao đẳng và điểm tích lũy tại hệ Cao đẳng. Bạn có thể xem các ngành được liên thông tại đây.\n\nĐể biết thêm chi tiết, vui lòng liên hệ phòng đào tạo hoặc truy cập daa.uit.edu.vn.",
+      "contexts": [
+        "Chương trình Liên thông đại học (1,5 2 năm): Dành cho các bạn đã tốt nghiệp cao đẳng các ngành thuộc lĩnh vực công nghệ thông tin. Xét tuyển căn cứ tr",
+        "Hằng năm, Nhà Trường đều đặn tổ chức các ngày hội việc làm mà quy tụ hơn 40 đơn vị thuộc lĩnh vực công nghệ thông tin tham gia. Sinh viên và phụ huynh",
+        "ị Điều 1, Mục đích, đối tượng, phạm vị ấp dụng\n Mục đích; hướng dẫn quy trình chuyển Sinh viên từ hình thức đào tạo chính quy sang\nhình thức dao tạo t",
+        "Sinh viên phai đap ứng đủ cac điều kiên khác theo Quy chê đào tạo hiên hành của Trường Đại hoc Công nghê Thông tin.\nCTĐT Liên thông Đại học ngành Trí ",
+        "CHƯƠNG 1. QUY ĐỊNH CHUNG\nĐiều 1. Phạm vi điều chỉnh và đối tượng áp dụng\n1. Quy chế này quy định về dao tao từ xa (DTTX) trình độ đại học, bao gồm: nh",
+        "TUYỂN SINH CỬ NHÂN ĐẠI HỌC HÌNH THỨC HỌC TRỰC TUYẾN ĐỢT KHAI GIẢNG THÁNG 3 NĂM 2026\nTrường Đại học Công nghệ Thông tin, ĐHQG-HCM thông báo tuyển sinh ",
+        "Chương trình liên thông đại học có số tín chỉ tích luỹ để tốt nghiệp là 52 tín chỉ cho liên thông từ ngành đúng và 72 cho liên thông từ ngành gần.\nTín",
+        "BỘ GIÁO DỤC VÀ ĐÀO TẠO CỘNG HOÀ XÃ HỘI CHỦ NGHĨA VIỆT NAM\nĐộc lập - Tự do - Hạnh phúc\nC_ Vvư\nae NCB\n: Ea OF QUY CHE\n° NA) bởưiO TẠO TU XA TRÌNH ĐỘ ĐẠI",
+        "Lưu ý: Sinh viên đủ điều kiện làm Khóa luận tốt nghiệp theo quy chế của trường mới có thể đăng ký làm Khóa luận tốt nghiệp.\n3.5.2. Hình thức 2: Chuyên",
+        "4. Phương thức Phát thanh - Truyền hình sử dụng phương tiện phát sóng, bao gôm các chương trình phát thanh hoặc chương trình truyền hình dé truyền tải"
+      ],
+      "category": "tuyen_sinh",
+      "difficulty": "easy",
+      "scores": {
+        "faithfulness": 0.5,
+        "answer_relevancy": 1.0,
+        "context_precision": 0.1,
+        "context_recall": 1.0
+      }
+    }
+  ],
+  "judge_model": "gemini-2.0-flash"
+}

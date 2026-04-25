@@ -58,8 +58,12 @@ def run_rag_pipeline(questions: list[dict]) -> list[dict]:
     samples = []
     for item in tqdm(questions, desc="Running RAG queries"):
         try:
+            # Call retriever directly to get full chunk content (not 150-char preview)
+            expanded_q = pipeline._expand_query(item["question"])
+            raw_results = retriever.hybrid_search(expanded_q, k=10, reranker=reranker)
+            contexts = [r["content"] for r in raw_results]
+
             result = pipeline.query(item["question"], top_k=10)
-            contexts = [s["preview"].rstrip("…") for s in result.get("sources", [])]
             samples.append({
                 "question": item["question"],
                 "ground_truth": item["ground_truth"],

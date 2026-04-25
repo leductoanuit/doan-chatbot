@@ -1,0 +1,94 @@
+{
+  "timestamp": "2026-04-25T08:34:38.172769",
+  "total_questions": 35,
+  "metrics": {
+    "faithfulness": 0.7229,
+    "answer_relevancy": 0.7714,
+    "context_precision": 0.6771,
+    "context_recall": 0.8571
+  },
+  "by_category": {
+    "ctdt": {
+      "faithfulness": 0.6667,
+      "answer_relevancy": 0.8333,
+      "context_precision": 0.7833,
+      "context_recall": 0.9167
+    },
+    "hoc_phi": {
+      "faithfulness": 0.3,
+      "answer_relevancy": 0.2,
+      "context_precision": 0.8,
+      "context_recall": 1.0
+    },
+    "hoc_vu": {
+      "faithfulness": 0.9,
+      "answer_relevancy": 0.9167,
+      "context_precision": 0.6,
+      "context_recall": 0.8333
+    },
+    "quy_che": {
+      "faithfulness": 0.6,
+      "answer_relevancy": 0.6,
+      "context_precision": 0.64,
+      "context_recall": 1.0
+    },
+    "tuyen_sinh": {
+      "faithfulness": 0.8571,
+      "answer_relevancy": 1.0,
+      "context_precision": 0.6571,
+      "context_recall": 0.6429
+    }
+  },
+  "by_difficulty": {
+    "easy": {
+      "faithfulness": 0.7,
+      "answer_relevancy": 0.8,
+      "context_precision": 0.645,
+      "context_recall": 0.75
+    },
+    "hard": {
+      "faithfulness": 0.6667,
+      "answer_relevancy": 0.6667,
+      "context_precision": 0.7,
+      "context_recall": 1.0
+    },
+    "medium": {
+      "faithfulness": 0.775,
+      "answer_relevancy": 0.75,
+      "context_precision": 0.725,
+      "context_recall": 1.0
+    }
+  },
+  "worst_context_recall": [
+    {
+      "question": "Chương trình liên thông đại học hệ từ xa dành cho đối tượng nào?",
+      "category": "tuyen_sinh",
+      "context_recall": 0.0,
+      "faithfulness": 1.0
+    },
+    {
+      "question": "Nộp hồ sơ xét tuyển hệ đào tạo từ xa UIT ở đâu?",
+      "category": "tuyen_sinh",
+      "context_recall": 0.0,
+      "faithfulness": 1.0
+    },
+    {
+      "question": "Quy trình phúc khảo điểm thi như thế nào?",
+      "category": "hoc_vu",
+      "context_recall": 0.0,
+      "faithfulness": 1.0
+    },
+    {
+      "question": "Lịch học và hình thức học hệ đào tạo từ xa UIT như thế nào?",
+      "category": "hoc_vu",
+      "context_recall": 0.0,
+      "faithfulness": 1.0
+    },
+    {
+      "question": "Số tín chỉ tốt nghiệp chương trình văn bằng 1 ngành CNTT hệ đào tạo từ xa là bao nhiêu?",
+      "category": "ctdt",
+      "context_recall": 0.5,
+      "faithfulness": 1.0
+    }
+  ]
+}

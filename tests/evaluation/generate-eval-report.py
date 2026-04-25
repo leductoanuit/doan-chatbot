@@ -171,7 +171,7 @@ def main():
             print(f"Results directory not found: {RESULTS_DIR}")
             print("Run: python tests/evaluation/run-evaluation.py first")
             sys.exit(1)
-        reports = sorted(RESULTS_DIR.glob("eval-report-*.json"))
+        reports = sorted(RESULTS_DIR.glob("eval-summary-*.json"))
         if not reports:
             print("No eval-report-*.json found in", RESULTS_DIR)
             sys.exit(1)
