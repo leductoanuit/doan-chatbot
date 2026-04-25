@@ -50,3 +50,7 @@ numpy==1.*
 # Utilities
 python-dotenv==1.*
 tqdm==4.*
+
+# Evaluation (optional — install separately before running evaluation)
+# ragas>=0.2.0
+# langchain-google-genai>=2.0.0
