@@ -5,10 +5,49 @@ Usage:
 """
 
 import os
+import re
 import sys
 
 import streamlit as st
 from dotenv import load_dotenv
+
+
+def _fix_markdown_table(text: str) -> str:
+    """Fix single-line markdown tables — LLM sometimes concatenates all rows on one line."""
+    # Also handle literal \\n sequences the LLM might emit
+    text = text.replace("\\n", "\n")
+
+    def split_table_line(line: str) -> str:
+        if not line.startswith("|") or len(line) < 120:
+            return line
+
+        # Strategy: find all table rows using regex
+        # A row is: starts with |, ends with |, contains at least one cell
+        # Try to extract complete rows by finding | ... | patterns
+        # that contain the same number of columns as the header
+
+        # Count columns using the separator row (| --- | --- |) as anchor
+        sep_idx = line.find('| ---')
+        if sep_idx < 0:
+            sep_idx = line.find('|---')
+        if sep_idx < 0:
+            return line
+        header = line[:sep_idx]
+        num_cols = header.count('|') - 1
+        if num_cols < 2:
+            return line
+
+        # Extract all rows: each row has exactly num_cols cells
+        # Pattern: | cell | cell | ... | (num_cols cells)
+        cell = r'[^|]*'
+        row_pattern = r'\|' + (r'[^|]+\|' * num_cols)
+        rows = re.findall(row_pattern, line)
+        if len(rows) <= 1:
+            return line
+        return "\n".join(rows)
+
+    lines = text.split("\n")
+    return "\n".join(split_table_line(ln) for ln in lines)
 
 load_dotenv()
 
@@ -106,27 +145,39 @@ if prompt:
                     history=st.session_state.messages[:-1],
                     top_k=5,
                 )
-                answer = result["answer"]
-
-                # Thêm trích dẫn nguồn
+                answer = _fix_markdown_table(result["answer"])
                 sources = result.get("sources", [])
-                if sources:
-                    # Chỉ hiển thị PDF và URL, bỏ qua .docx (dữ liệu tổng hợp nội bộ)
-                    visible_sources = [
-                        s for s in sources
-                        if not s["source"].lower().endswith(".docx")
-                    ]
-                    if visible_sources:
-                        answer += "\n\n---\n**Nguồn tham khảo:**"
-                        for s in visible_sources[:3]:
-                            answer += (
-                                f"\n- `{s['source']}` trang {s['page']}"
-                                f" (score: {s['score']})"
-                            )
 
+                # Build sources markdown separately to avoid breaking table rendering
+                sources_md = ""
+                if sources:
+                    seen_sources: set = set()
+                    lines = []
+                    for s in sources:
+                        src = s["source"]
+                        if src in seen_sources or len(lines) >= 3:
+                            continue
+                        seen_sources.add(src)
+                        if src.lower().endswith(".docx"):
+                            display = src.removesuffix(".docx")
+                            lines.append(f"- 📄 {display} (score: {s['score']})")
+                        else:
+                            lines.append(
+                                f"- `{src}` trang {s['page']} (score: {s['score']})"
+                            )
+                    if lines:
+                        sources_md = "**Nguồn tham khảo:**\n" + "\n".join(lines)
+
+                # Render answer and sources in separate st.markdown calls
                 st.markdown(answer)
+                if sources_md:
+                    st.divider()
+                    st.markdown(sources_md)
+
+                # Store combined for history/DB
+                full_content = answer + (f"\n\n---\n{sources_md}" if sources_md else "")
                 st.session_state.messages.append(
-                    {"role": "assistant", "content": answer}
+                    {"role": "assistant", "content": full_content}
                 )
 
                 # Lưu assistant response vào DB
@@ -135,8 +186,8 @@ if prompt:
                         save_message(
                             st.session_state.session_id,
                             "assistant",
-                            answer,
-                            sources=result.get("sources"),
+                            full_content,
+                            sources=sources,
                         )
                     except Exception:
                         pass

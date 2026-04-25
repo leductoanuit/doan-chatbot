@@ -124,9 +124,9 @@ class HybridRetriever:
     ) -> List[Dict]:
         """Merge vector + keyword results, deduplicate, rank by weighted score.
 
-        If reranker is provided, retrieve k*6 candidates then re-rank to top k.
+        If reranker is provided, retrieve k*3 candidates then re-rank to top k.
         """
-        pull = k * 6 if reranker else k * 4
+        pull = k * 3 if reranker else k * 2
         vector_results = self.vector_search(query, k=pull, doc_type=doc_type, system_type=system_type)
         keyword_results = self.keyword_search(query, k=k)
 

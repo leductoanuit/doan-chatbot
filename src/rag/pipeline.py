@@ -1,10 +1,25 @@
 """RAG pipeline — orchestrates retrieval and LLM generation."""
 
+import re
 from typing import Dict, List, Optional
 
 from src.rag.retriever import HybridRetriever
 from src.rag.llm_client import LLMClient
 from src.rag.reranker import BGEReranker
+from src.rag.query_processor import (
+    rewrite_standalone_query,
+    generate_query_variants,
+    reciprocal_rank_fusion,
+    classify_query_intent,
+)
+
+# Chitchat patterns — skip RAG, answer directly with LLM
+_CHITCHAT_PATTERNS = [
+    r"^(hi|hello|hey|xin chào|chào|alo|ơi)\b",
+    r"^(cảm ơn|cám ơn|thanks|thank you|ok|okay|ổn rồi|được rồi)\b",
+    r"^(bạn là ai|bạn tên gì|ai tạo ra bạn|em là ai|mày là ai)\b",
+    r"^(bạn có thể (làm|giúp|hỗ trợ)|bạn giỏi không|bạn biết gì)\b",
+]
 
 
 class RAGPipeline:
@@ -19,46 +34,12 @@ class RAGPipeline:
         self.llm = llm_client or LLMClient()
         self.reranker = BGEReranker()
 
-    @staticmethod
-    def _expand_query(question: str) -> str:
-        """Normalize and expand query for better embedding match.
-
-        Two problems addressed:
-        1. Short queries missing domain context → append "(hệ đào tạo từ xa UIT)"
-        2. "hệ từ xa" / "chương trình từ xa" shorthand doesn't match corpus phrasing
-           "đào tạo từ xa" → normalize to full form before embedding.
-        """
-        q = question
-
-        # Normalize shorthand variants to full corpus phrasing
-        normalizations = [
-            ("hệ từ xa", "hệ đào tạo từ xa"),
-            ("chương trình từ xa", "chương trình đào tạo từ xa"),
-        ]
-        q_lower = q.lower()
-        for short, full in normalizations:
-            if short in q_lower:
-                idx = q_lower.index(short)
-                q = q[:idx] + full + q[idx + len(short):]
-                q_lower = q.lower()
-
-        # Append domain context only for very short/generic queries lacking any domain signal
-        domain_signals = [
-            "đào tạo từ xa", "uit", "đại học công nghệ thông tin",
-            "quy chế", "học vụ", "tuyển sinh", "học phí", "tín chỉ",
-            "sinh viên", "môn học", "chương trình", "ngành", "bằng",
-        ]
-        if not any(kw in q_lower for kw in domain_signals):
-            q = f"{q} (hệ đào tạo từ xa UIT)"
-            q_lower = q.lower()
-
-        return q
-
     def query(
         self,
         question: str,
         history: Optional[List[Dict]] = None,
         top_k: int = 10,
+        use_multi_query: bool = False,
     ) -> Dict:
         """Run RAG: retrieve relevant docs then generate an answer with context.
 
@@ -66,27 +47,65 @@ class RAGPipeline:
             question: User question string.
             history: Prior conversation turns (list of role/content dicts).
             top_k: Number of document chunks to retrieve.
+            use_multi_query: Enable RAG Fusion with multi-query generation.
 
         Returns:
             Dict with keys: answer, sources, context_used.
         """
-        # 1. Expand query with domain context for better retrieval
-        expanded_query = self._expand_query(question)
+        # 0. Chitchat fast path — skip RAG entirely for greetings/small talk
+        q_lower = question.lower().strip()
+        if any(re.search(p, q_lower) for p in _CHITCHAT_PATTERNS):
+            answer = self.llm.generate(query=question, context="", history=history)
+            return {"answer": answer, "sources": [], "context_used": 0}
 
-        # 2. Retrieve + rerank using expanded query
-        results = self.retriever.hybrid_search(expanded_query, k=top_k, reranker=self.reranker)
+        # 1. Rewrite if query depends on conversation context (Phase 01)
+        retrieval_query = rewrite_standalone_query(question, history or [], self.llm)
 
-        # 2. Build context string (capped at 1500 words)
-        context = self.retriever.build_context(results, max_tokens=1500)
+        # 2. Classify intent for metadata routing
+        system_type_filter = classify_query_intent(retrieval_query)
 
-        # 3. Generate
+        # 4. Retrieve candidates
+        if use_multi_query:
+            # RAG Fusion: generate variants, retrieve per query, merge via RRF (Phase 02)
+            variants = generate_query_variants(retrieval_query, self.llm, n=2)
+            all_queries = [retrieval_query] + variants
+            per_query_k = max(top_k, 10)
+            results_lists = [
+                self.retriever.hybrid_search(q, k=per_query_k, system_type=system_type_filter)
+                for q in all_queries
+            ]
+            candidates = reciprocal_rank_fusion(results_lists)
+            # Fallback: if filter yielded too few candidates, retry without filter
+            if len(candidates) < 3 and system_type_filter:
+                results_lists = [
+                    self.retriever.hybrid_search(q, k=per_query_k)
+                    for q in all_queries
+                ]
+                candidates = reciprocal_rank_fusion(results_lists)
+            results = self.reranker.rerank(question, candidates, top_k=top_k)
+        else:
+            # Single-query path with metadata routing
+            results = self.retriever.hybrid_search(
+                retrieval_query, k=top_k, reranker=self.reranker,
+                system_type=system_type_filter,
+            )
+            # Fallback: if filter too narrow, retry against full corpus
+            if len(results) < 3 and system_type_filter:
+                results = self.retriever.hybrid_search(
+                    retrieval_query, k=top_k, reranker=self.reranker,
+                )
+
+        # 5. Build context string (capped at 800 words to prevent LLM hallucination)
+        context = self.retriever.build_context(results, max_tokens=800)
+
+        # 6. Generate — always use original question for natural response
         answer = self.llm.generate(
             query=question,
             context=context,
             history=history,
         )
 
-        # 4. Collect source metadata for citation
+        # 7. Collect source metadata for citation
         sources = [
             {
                 "source": r.get("metadata", {}).get("source", ""),

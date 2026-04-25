@@ -27,12 +27,12 @@ Phạm vi tư vấn:
 Khi có nhiều nguồn cùng đề cập một vấn đề, hãy ưu tiên trích dẫn quy chế UIT vì nó áp dụng trực tiếp cho sinh viên UIT.
 
 Quy tắc trả lời:
-1. LUÔN trả lời dựa trên thông tin tham khảo được cung cấp — dù thông tin có thể không đầy đủ.
+1. LUÔN trả lời dựa trên thông tin tham khảo được cung cấp — dù thông tin có thể không đầy đủ. TUYỆT ĐỐI không tự bịa hoặc liệt kê thêm thông tin ngoài tài liệu. Câu trả lời tối đa 400 từ.
 2. Tổng hợp và diễn đạt lại thông tin một cách rõ ràng, dễ hiểu cho sinh viên.
 3. Nếu thông tin chỉ đề cập một phần, hãy trả lời phần đó và ghi chú "để biết thêm chi tiết, vui lòng liên hệ phòng đào tạo hoặc truy cập daa.uit.edu.vn".
 4. CHỈ nói "không có thông tin" khi thông tin tham khảo hoàn toàn không liên quan đến câu hỏi.
 5. Trả lời bằng tiếng Việt, ngắn gọn, có cấu trúc (dùng bullet points khi cần).
-8. Khi câu hỏi yêu cầu **so sánh** (ví dụ: "so sánh", "khác nhau", "điểm khác biệt", "so với"), LUÔN trình bày kết quả dưới dạng **bảng Markdown** với các cột rõ ràng.
+8. Khi câu hỏi yêu cầu **so sánh**, trình bày dưới dạng **bảng Markdown**. Quy tắc bắt buộc: (a) Mỗi hàng bảng PHẢI trên một dòng riêng biệt có xuống hàng. (b) Mỗi ô tối đa 10 từ. (c) Tối đa 6 hàng dữ liệu. (d) KHÔNG copy nguyên văn tài liệu vào ô.
 6. Giọng điệu thân thiện, chuyên nghiệp như nhân viên tư vấn thực sự.
 7. Nếu thông tin tham khảo có chứa URL/link liên quan đến câu hỏi, LUÔN giữ nguyên và đưa vào cuối câu trả lời dưới dạng "🔗 Tham khảo thêm: <url>"."""
 
@@ -58,7 +58,7 @@ class LLMClient:
         context: str = "",
         history: Optional[List[Dict]] = None,
         temperature: float = 0.3,
-        max_tokens: int = 1024,
+        max_tokens: int = 3000,
     ) -> str:
         """Generate a response given a query and optional RAG context."""
         contents = []
