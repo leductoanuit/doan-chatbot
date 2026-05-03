@@ -11,6 +11,7 @@ from src.rag.query_processor import (
     generate_query_variants,
     reciprocal_rank_fusion,
     classify_query_intent,
+    extract_comparison_subqueries,
 )
 
 # Chitchat patterns — skip RAG, answer directly with LLM
@@ -64,10 +65,23 @@ class RAGPipeline:
         # 2. Classify intent for metadata routing
         system_type_filter = classify_query_intent(retrieval_query)
 
+        # 3. Boost top_k and force multi-query for comparison queries
+        _COMPARISON_SIGNALS = ["so sánh", "khác nhau", "giống nhau", " vs ", "khác gì", "điểm khác", "điểm giống"]
+        is_comparison = any(kw in q_lower for kw in _COMPARISON_SIGNALS)
+        if is_comparison:
+            top_k = top_k * 2
+            use_multi_query = True  # Ensure both entities get dedicated retrieval
+
         # 4. Retrieve candidates
         if use_multi_query:
-            # RAG Fusion: generate variants, retrieve per query, merge via RRF (Phase 02)
-            variants = generate_query_variants(retrieval_query, self.llm, n=2)
+            # RAG Fusion: merge via RRF across multiple queries
+            # For comparison queries, use entity-specific sub-queries (no LLM needed)
+            # Otherwise fall back to LLM-generated variants
+            if is_comparison:
+                entity_queries = extract_comparison_subqueries(retrieval_query)
+                variants = entity_queries if entity_queries else generate_query_variants(retrieval_query, self.llm, n=2)
+            else:
+                variants = generate_query_variants(retrieval_query, self.llm, n=2)
             all_queries = [retrieval_query] + variants
             per_query_k = max(top_k, 10)
             results_lists = [
@@ -83,6 +97,10 @@ class RAGPipeline:
                 ]
                 candidates = reciprocal_rank_fusion(results_lists)
             results = self.reranker.rerank(question, candidates, top_k=top_k)
+            # Use rerank_score as final_score so source display is consistent with single-query path
+            for r in results:
+                if "rerank_score" in r:
+                    r["final_score"] = r["rerank_score"]
         else:
             # Single-query path with metadata routing
             results = self.retriever.hybrid_search(
@@ -95,8 +113,9 @@ class RAGPipeline:
                     retrieval_query, k=top_k, reranker=self.reranker,
                 )
 
-        # 5. Build context string (capped at 800 words to prevent LLM hallucination)
-        context = self.retriever.build_context(results, max_tokens=800)
+        # 5. Build context string — larger budget for comparison queries (more entities to cover)
+        context_budget = 3500 if is_comparison else 2000
+        context = self.retriever.build_context(results, max_tokens=context_budget)
 
         # 6. Generate — always use original question for natural response
         answer = self.llm.generate(

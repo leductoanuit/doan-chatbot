@@ -173,7 +173,7 @@ class HybridRetriever:
             content = r["content"]
             approx_tokens = len(content.split())
             if token_count + approx_tokens > max_tokens:
-                break
+                continue
             source = r.get("metadata", {}).get("source", "N/A")
             parts.append(f"[Nguồn: {source}]\n{content}")
             token_count += approx_tokens

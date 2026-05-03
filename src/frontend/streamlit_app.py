@@ -87,6 +87,21 @@ def load_rag():
     return RAGPipeline()
 
 
+@st.cache_data
+def load_doc_titles() -> dict[str, str]:
+    """Load document title map: source_file → title."""
+    import json, pathlib
+    meta_path = pathlib.Path(__file__).parent.parent.parent / "data/processed/document-metadata.json"
+    try:
+        with open(meta_path, encoding="utf-8") as f:
+            meta = json.load(f)
+        if isinstance(meta, list):
+            return {e["source_file"]: e.get("title", "") for e in meta}
+        return {k: v.get("title", "") for k, v in meta.items()}
+    except Exception:
+        return {}
+
+
 # Khởi tạo RAG (cached — chỉ load model 1 lần)
 try:
     rag = load_rag()
@@ -149,22 +164,23 @@ if prompt:
                 sources = result.get("sources", [])
 
                 # Build sources markdown separately to avoid breaking table rendering
+                doc_titles = load_doc_titles()
                 sources_md = ""
+                MIN_SOURCE_SCORE = 0.35
                 if sources:
                     seen_sources: set = set()
                     lines = []
                     for s in sources:
                         src = s["source"]
+                        score = s["score"]
                         if src in seen_sources or len(lines) >= 3:
                             continue
+                        if score < MIN_SOURCE_SCORE:
+                            continue
                         seen_sources.add(src)
-                        if src.lower().endswith(".docx"):
-                            display = src.removesuffix(".docx")
-                            lines.append(f"- 📄 {display} (score: {s['score']})")
-                        else:
-                            lines.append(
-                                f"- `{src}` trang {s['page']} (score: {s['score']})"
-                            )
+                        title = doc_titles.get(src, "").strip()
+                        display = title if title else src.rsplit(".", 1)[0]
+                        lines.append(f"- 📄 {display} (score: {score})")
                     if lines:
                         sources_md = "**Nguồn tham khảo:**\n" + "\n".join(lines)
 

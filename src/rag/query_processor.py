@@ -16,9 +16,7 @@ _INTENT_RULES: List[tuple] = [
         ["tuyển sinh", "xét tuyển", "điều kiện vào", "hồ sơ đăng ký",
          "nộp hồ sơ", "thời hạn đăng ký", "kết quả trúng tuyển",
          "học phí", "chi phí", "tiền học", "đóng tiền",
-         "miễn giảm học phí", "hoàn học phí",
-         "ngành", "chương trình", "bằng cử nhân", "hệ từ xa",
-         "đào tạo từ xa", "liên thông", "văn bằng 2"],
+         "miễn giảm học phí", "hoàn học phí"],
         "tuyen_sinh",
     ),
     (
@@ -30,7 +28,9 @@ _INTENT_RULES: List[tuple] = [
         ["quy chế", "điều khoản", "quy định học vụ", "kỷ luật", "học vụ",
          "bảo lưu", "thôi học", "cảnh báo học vụ", "tốt nghiệp",
          "chương trình đào tạo", "môn học", "tín chỉ",
-         "chương trình", "học gì", "học những gì", "môn gì"],
+         "chương trình", "học gì", "học những gì", "môn gì",
+         "gồm những môn", "cơ sở ngành", "chuyên ngành", "môn nào",
+         "văn bằng 1", "học kỳ", "kế hoạch giảng dạy"],
         "dao_tao",
     ),
 ]
@@ -131,6 +131,27 @@ def reciprocal_rank_fusion(
         merged.append(chunk)
 
     return merged
+
+
+def extract_comparison_subqueries(query: str) -> List[str]:
+    """For comparison queries (A vs B), return entity-specific sub-queries.
+
+    Ensures both entities get dedicated retrieval passes via RRF.
+    """
+    q = query.lower().strip()
+    patterns = [
+        r'so sánh\s+(.+?)\s+(?:và|vs|với)\s+(.+?)(?:\s+(?:về|trong|hệ|trường|có)|\?|$)',
+        r'(?:điểm khác nhau|khác nhau|giống nhau)\s+(?:giữa\s+)?(.+?)\s+(?:và|vs)\s+(.+?)(?:\?|$)',
+    ]
+    for pattern in patterns:
+        m = re.search(pattern, q)
+        if m:
+            a, b = m.group(1).strip(), m.group(2).strip()
+            return [
+                f"chương trình đào tạo {a} hệ đào tạo từ xa",
+                f"chương trình đào tạo {b} hệ đào tạo từ xa",
+            ]
+    return []
 
 
 def classify_query_intent(query: str) -> Optional[str]:

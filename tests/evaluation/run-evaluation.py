@@ -15,6 +15,7 @@ import json
 import logging
 import os
 import sys
+import time
 from datetime import datetime
 from pathlib import Path
 
@@ -25,21 +26,29 @@ sys.path.insert(0, str(Path(__file__).parent))
 from dotenv import load_dotenv
 from tqdm import tqdm
 
+from eval_report_builder import build_report, compute_latency_stats
+
 load_dotenv()
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 logger = logging.getLogger(__name__)
 
 DATASET_PATH = Path(__file__).parent / "eval-dataset.json"
+ROBUSTNESS_DATASET_PATH = Path(__file__).parent / "eval-dataset-robustness.json"
 RESULTS_DIR = Path(__file__).parent / "results"
 
 
-def load_dataset(sample: int = 0) -> list[dict]:
+def load_dataset(sample: int = 0, include_robustness: bool = False) -> list[dict]:
     with open(DATASET_PATH) as f:
         data = json.load(f)
+    if include_robustness and ROBUSTNESS_DATASET_PATH.exists():
+        with open(ROBUSTNESS_DATASET_PATH) as f:
+            data += json.load(f)
+        logger.info("Merged robustness dataset (%d total questions)", len(data))
     if sample and sample < len(data):
         logger.info("Using sample of %d questions (out of %d)", sample, len(data))
         return data[:sample]
     return data
+
 
 
 def run_rag_pipeline(questions: list[dict]) -> list[dict]:
@@ -57,6 +66,7 @@ def run_rag_pipeline(questions: list[dict]) -> list[dict]:
 
     samples = []
     for item in tqdm(questions, desc="Running RAG queries"):
+        t0 = time.perf_counter()
         try:
             # Call retriever directly to get full chunk content (not 150-char preview)
             expanded_q = pipeline._expand_query(item["question"])
@@ -64,6 +74,7 @@ def run_rag_pipeline(questions: list[dict]) -> list[dict]:
             contexts = [r["content"] for r in raw_results]
 
             result = pipeline.query(item["question"], top_k=10)
+            latency_ms = (time.perf_counter() - t0) * 1000
             samples.append({
                 "question": item["question"],
                 "ground_truth": item["ground_truth"],
@@ -72,8 +83,11 @@ def run_rag_pipeline(questions: list[dict]) -> list[dict]:
                 "contexts": contexts,
                 "category": item.get("category", ""),
                 "difficulty": item.get("difficulty", ""),
+                "eval_type": item.get("eval_type", "standard"),
+                "latency_ms": round(latency_ms, 2),
             })
         except Exception as exc:
+            latency_ms = (time.perf_counter() - t0) * 1000
             logger.warning("RAG query failed for '%s': %s", item["question"][:50], exc)
             samples.append({
                 "question": item["question"],
@@ -83,6 +97,8 @@ def run_rag_pipeline(questions: list[dict]) -> list[dict]:
                 "contexts": [],
                 "category": item.get("category", ""),
                 "difficulty": item.get("difficulty", ""),
+                "eval_type": item.get("eval_type", "standard"),
+                "latency_ms": round(latency_ms, 2),
             })
 
     return samples
@@ -98,63 +114,19 @@ def save_results(eval_result: dict, output_dir: Path) -> Path:
     return out_path
 
 
-def build_report(eval_result: dict) -> dict:
-    """Aggregate scores by category and difficulty."""
-    samples = eval_result["samples"]
-    metrics = ["faithfulness", "answer_relevancy", "context_precision", "context_recall"]
-
-    def avg_scores(subset):
-        if not subset:
-            return {}
-        return {m: round(sum(s["scores"][m] for s in subset) / len(subset), 4) for m in metrics}
-
-    # By category
-    categories = set(s["category"] for s in samples)
-    by_category = {
-        cat: avg_scores([s for s in samples if s["category"] == cat])
-        for cat in sorted(categories)
-    }
-
-    # By difficulty
-    difficulties = set(s["difficulty"] for s in samples)
-    by_difficulty = {
-        diff: avg_scores([s for s in samples if s["difficulty"] == diff])
-        for diff in sorted(difficulties)
-    }
-
-    # Worst 5 by context_recall (retrieval misses)
-    sorted_by_recall = sorted(samples, key=lambda s: s["scores"].get("context_recall", 1))
-    worst_recall = [
-        {
-            "question": s["question"],
-            "category": s["category"],
-            "context_recall": s["scores"].get("context_recall"),
-            "faithfulness": s["scores"].get("faithfulness"),
-        }
-        for s in sorted_by_recall[:5]
-    ]
-
-    return {
-        "timestamp": datetime.now().isoformat(),
-        "total_questions": len(samples),
-        "metrics": eval_result["aggregate"],
-        "by_category": by_category,
-        "by_difficulty": by_difficulty,
-        "worst_context_recall": worst_recall,
-    }
-
 
 def main():
     parser = argparse.ArgumentParser(description="Evaluate RAG chatbot quality")
     parser.add_argument("--sample", type=int, default=0, help="Use N questions (0 = all)")
     parser.add_argument("--output", default=str(RESULTS_DIR), help="Output directory")
     parser.add_argument("--skip-rag", action="store_true", help="Load existing RAG outputs (debug)")
+    parser.add_argument("--robustness", action="store_true", help="Include robustness dataset")
     args = parser.parse_args()
 
     output_dir = Path(args.output)
 
     # Step 1: Load dataset
-    questions = load_dataset(sample=args.sample)
+    questions = load_dataset(sample=args.sample, include_robustness=args.robustness)
     logger.info("Loaded %d questions from dataset", len(questions))
 
     # Step 2: Run RAG pipeline (or load cached results)
@@ -177,6 +149,8 @@ def main():
 
     # Step 4: Build report and save
     logger.info("Step 3/3: Building report...")
+    latency_stats = compute_latency_stats(eval_result["samples"])
+    eval_result["latency"] = latency_stats
     report = build_report(eval_result)
 
     # Save both raw + summary

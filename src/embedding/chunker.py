@@ -77,7 +77,8 @@ def chunk_documents(documents: List[Dict]) -> List[Dict]:
                     "chunk_idx": idx,
                     "total_chunks": len(text_chunks),
                     "method": doc.get("method", "unknown"),
-                    "document_type": "educational",
+                    "document_type": doc.get("document_type", "educational"),
+                    "system_type": doc.get("system_type", ""),
                 },
             })
     return chunked

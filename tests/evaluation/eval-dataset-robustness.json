@@ -1,0 +1,119 @@
+[
+  {
+    "question": "Khi nào trường tổ chức tuyển sinh hệ đào tạo từ xa?",
+    "ground_truth": "Hằng năm, Trường dự kiến tổ chức nhận hồ sơ xét tuyển hệ đào tạo từ xa và khai giảng 3 đợt cố định: Đợt 1 từ 01/12 đến 15/01 khai giảng dự kiến vào tháng 2 năm sau.",
+    "reference_contexts": [
+      "Hằng năm, Trường dự kiến tổ chức nhận hồ sơ xét tuyển hệ đào tạo từ xa và khai giảng 3 đợt cố định:\n Đợt 1: 01/12 đến 15/01, khai giảng dự kiến vào tháng 2 năm sau"
+    ],
+    "noisy_contexts": [
+      "Hằng năm, Trường dự kiến tổ chức nhận hồ sơ xét tuyển hệ đào tạo từ xa và khai giảng 3 đợt cố định:\n Đợt 1: 01/12 đến 15/01, khai giảng dự kiến vào tháng 2 năm sau",
+      "Mức học phí của chương trình đào tạo thạc sĩ chính quy được điều chỉnh theo từng năm học theo quyết định của Hội đồng trường. Sinh viên cần kiểm tra thông báo học phí trước mỗi học kỳ.",
+      "Quy trình xử lý kỷ luật sinh viên: Bước 1 - Lập biên bản vi phạm; Bước 2 - Thông báo cho sinh viên và gia đình; Bước 3 - Họp hội đồng kỷ luật trong vòng 15 ngày làm việc."
+    ],
+    "eval_type": "noise",
+    "category": "tuyen_sinh",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Lệ phí xét tuyển hệ đào tạo từ xa UIT là bao nhiêu?",
+    "ground_truth": "Lệ phí xét tuyển là 150.000đ/hồ sơ. Ứng viên chuyển khoản về tài khoản Trung tâm Phát triển Công nghệ Thông tin, số tài khoản 007 100 352 5391 tại Ngân hàng Vietcombank Chi nhánh TP.HCM.",
+    "reference_contexts": [
+      "Lệ phí xét tuyển:\n150.000đ/hồ sơ\nỨng viên chuyển khoản về và chụp lại màn hình:\nTên tài khoản: Trung tâm Phát triển Công nghệ Thông tin\nSố tài khoản: 007 100 352 5391\nTại: Ngân hàng TMCP Ngoại thương (Vietcombank) Chi nhánh TP.HCM"
+    ],
+    "noisy_contexts": [
+      "Lệ phí xét tuyển:\n150.000đ/hồ sơ\nỨng viên chuyển khoản về và chụp lại màn hình:\nTên tài khoản: Trung tâm Phát triển Công nghệ Thông tin\nSố tài khoản: 007 100 352 5391\nTại: Ngân hàng TMCP Ngoại thương (Vietcombank) Chi nhánh TP.HCM",
+      "Sinh viên có thể đăng ký thi lại các học phần không đạt yêu cầu trong học kỳ tiếp theo. Số lần thi lại tối đa là 2 lần cho mỗi học phần theo quy định hiện hành của Bộ Giáo dục.",
+      "Chứng chỉ tiếng Anh được chấp nhận bao gồm: IELTS từ 5.5, TOEFL iBT từ 72, hoặc chứng chỉ B1 theo khung CEFR châu Âu do các trường đại học được Bộ công nhận cấp."
+    ],
+    "eval_type": "noise",
+    "category": "tuyen_sinh",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Chương trình liên thông đại học hệ từ xa dành cho đối tượng nào?",
+    "ground_truth": "Chương trình Liên thông đại học (1,5-2 năm) dành cho các bạn đã tốt nghiệp cao đẳng các ngành thuộc lĩnh vực công nghệ thông tin. Xét tuyển căn cứ trên bằng tốt nghiệp cao đẳng và điểm tích lũy tại hệ Cao đẳng.",
+    "reference_contexts": [
+      "Chương trình Liên thông đại học (1,5 2 năm): Dành cho các bạn đã tốt nghiệp cao đẳng các ngành thuộc lĩnh vực công nghệ thông tin. Xét tuyển căn cứ trên bằng tốt nghiệp cao đẳng và điểm tích luỹ tại hệ Cao đẳng."
+    ],
+    "noisy_contexts": [
+      "Chương trình Liên thông đại học (1,5 2 năm): Dành cho các bạn đã tốt nghiệp cao đẳng các ngành thuộc lĩnh vực công nghệ thông tin. Xét tuyển căn cứ trên bằng tốt nghiệp cao đẳng và điểm tích luỹ tại hệ Cao đẳng.",
+      "Điều kiện xét học bổng khuyến khích học tập: Sinh viên có điểm GPA từ 3.2 trở lên trong học kỳ vừa qua, không có môn học nào bị điểm F và không bị xử lý kỷ luật trong năm học.",
+      "Phòng Công tác sinh viên chịu trách nhiệm quản lý hồ sơ sinh viên, xác nhận giấy tờ và hỗ trợ các thủ tục hành chính trong suốt quá trình học tập tại trường."
+    ],
+    "eval_type": "noise",
+    "category": "tuyen_sinh",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Bảo lưu kết quả trúng tuyển thực hiện trong trường hợp nào và nộp đơn khi nào?",
+    "ground_truth": "Sau khi được xét trúng tuyển vào Trường, do một số hoàn cảnh đặc biệt như được điều động vào các lực lượng vũ trang, thai sản, bệnh tật, tai nạn, hoàn cảnh khó khăn xảy ra đột xuất, thí sinh trúng tuyển có thể xin bảo lưu kết quả. Thí sinh trúng tuyển phải nộp đơn xin bảo lưu chậm nhất 15 ngày kể từ ngày trúng tuyển.",
+    "reference_contexts": [
+      "Điều 14. Bảo lưu kết quả trúng tuyển\nSau khi được xét tring tuyển vào Trường, do một số hoàn cảnh đặc biệt như được điều động vào các lực lượng vũ trang, thai sản, bệnh tật, tai nạn, hoàn cảnh khó khăn xảy ra đột xuất, thí sinh tring tuyến có thé xin bảo lưu kết qua. Thí sinh trúng tuyên phải nộp don xin bảo lưu chậm nhất 15 ngày ké từ ngày trúng tuyển."
+    ],
+    "noisy_contexts": [
+      "Điều 14. Bảo lưu kết quả trúng tuyển\nSau khi được xét tring tuyển vào Trường, do một số hoàn cảnh đặc biệt như được điều động vào các lực lượng vũ trang, thai sản, bệnh tật, tai nạn, hoàn cảnh khó khăn xảy ra đột xuất, thí sinh tring tuyến có thé xin bảo lưu kết qua. Thí sinh trúng tuyên phải nộp don xin bảo lưu chậm nhất 15 ngày ké từ ngày trúng tuyển.",
+      "Quy định về trang phục trong phòng thi: Sinh viên phải mặc đồng phục hoặc trang phục lịch sự. Không được mặc quần short, áo ba lỗ hoặc trang phục không phù hợp với môi trường học thuật.",
+      "Chương trình đào tạo thạc sĩ CNTT bao gồm các môn học về trí tuệ nhân tạo, học máy, xử lý ngôn ngữ tự nhiên và an ninh mạng với tổng thời lượng 60 tín chỉ trong 2 năm."
+    ],
+    "eval_type": "noise",
+    "category": "tuyen_sinh",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Sinh viên hệ từ xa có thể học theo hình thức nào?",
+    "ground_truth": "Sinh viên hệ đào tạo từ xa học chủ yếu qua mạng internet, tham gia lớp học trực tuyến theo lịch, và có thể xem lại bài giảng đã được ghi hình. Sinh viên cần tham dự đầy đủ các buổi học và hoàn thành bài tập theo yêu cầu của giảng viên.",
+    "reference_contexts": [
+      "Hệ đào tạo từ xa qua mạng: Sinh viên học trực tuyến qua hệ thống LMS, tham gia các buổi học theo lịch định kỳ, xem lại video bài giảng và hoàn thành bài tập trực tuyến."
+    ],
+    "noisy_contexts": [
+      "Hệ đào tạo từ xa qua mạng: Sinh viên học trực tuyến qua hệ thống LMS, tham gia các buổi học theo lịch định kỳ, xem lại video bài giảng và hoàn thành bài tập trực tuyến.",
+      "Hội đồng tuyển sinh họp xét hồ sơ dựa trên các tiêu chí: điểm bình quân THPT hoặc điểm tốt nghiệp cao đẳng, kinh nghiệm làm việc trong ngành CNTT và chứng chỉ chuyên môn.",
+      "Thư viện trường mở cửa từ 7h30 đến 21h00 các ngày trong tuần, cung cấp không gian học tập yên tĩnh với hơn 50.000 đầu sách và tài liệu chuyên ngành CNTT."
+    ],
+    "eval_type": "noise",
+    "category": "hoc_vu",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Cách nấu phở bò ngon tại nhà như thế nào?",
+    "ground_truth": "__REJECT__",
+    "eval_type": "negative",
+    "category": "out_of_domain",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Thời tiết Hà Nội hôm nay như thế nào, có nên mang ô không?",
+    "ground_truth": "__REJECT__",
+    "eval_type": "negative",
+    "category": "out_of_domain",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Đội tuyển bóng đá Việt Nam sẽ đá với đội nào ở vòng tiếp theo?",
+    "ground_truth": "__REJECT__",
+    "eval_type": "negative",
+    "category": "out_of_domain",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Giá vàng SJC hôm nay là bao nhiêu tiền một lượng?",
+    "ground_truth": "__REJECT__",
+    "eval_type": "negative",
+    "category": "out_of_domain",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Làm thế nào để cài đặt hệ điều hành Windows 11 trên máy tính cá nhân?",
+    "ground_truth": "__REJECT__",
+    "eval_type": "negative",
+    "category": "out_of_domain",
+    "difficulty": "medium"
+  },
+  {
+    "question": "ChatGPT là gì và có thể dùng nó để viết luận văn tốt nghiệp không?",
+    "ground_truth": "__REJECT__",
+    "eval_type": "negative",
+    "category": "out_of_domain",
+    "difficulty": "medium"
+  }
+]
