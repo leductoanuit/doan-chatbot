@@ -314,5 +314,590 @@
     ],
     "category": "hoc_vu",
     "difficulty": "easy"
+  },
+  {
+    "question": "Nếu tôi học liên thông đại học ngành gần và muốn lấy bằng Cử nhân Trí tuệ Nhân tạo hệ đào tạo từ xa năm 2026, tôi cần tích lũy bao nhiêu tín chỉ để tốt nghiệp? Bằng có ghi hình thức đào tạo không?",
+    "ground_truth": "Bạn cần tích lũy 75 tín chỉ để tốt nghiệp nếu liên thông từ ngành gần. Bằng Cử nhân Đại học do Trường Đại học Công nghệ Thông tin cấp không ghi hình thức đào tạo trên bằng.",
+    "reference_contexts": [
+      "Chương trình liên thông đại học có số tín chỉ tích luỹ để tốt nghiệp là 55 tín chỉ cho liên thông từ ngành đúng và 75 cho liên thông từ ngành gần.\nNội dung ghi trên bằng: Không ghi hình thức đào tạo trên bằng."
+    ],
+    "category": "tuyen_sinh",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Sau khi hoàn thành chương trình Cử nhân Trí tuệ Nhân tạo hệ đào tạo từ xa, tôi có phải thi tốt nghiệp không? Bằng tốt nghiệp của tôi có giá trị như thế nào?",
+    "ground_truth": "Trường không tổ chức thi tốt nghiệp mà sẽ xét tốt nghiệp cho bạn sau khi bạn học hoàn tất các học phần của chương trình đào tạo và tích luỹ đủ số lượng tín chỉ Nhà trường yêu cầu. Bằng tốt nghiệp có giá trị vĩnh viễn và hoàn toàn có thể học lên Thạc sĩ Chính quy tại Trường hoặc các đơn vị đào tạo khác.",
+    "reference_contexts": [
+      "Trường không tổ chức thi tốt nghiệp mà sẽ xét tốt nghiệp cho bạn sau khi bạn học hoàn tất các học phần của chương trình đào tạo và tích luỹ đủ số lượng tín chỉ Nhà trường yêu cầu như mục 9 phía trên:\nGiá trị: Vĩnh viễn, hoàn toàn có thể học lên Thạc sĩ Chính quy tại Trường hoặc các đơn vị đào tạo khác."
+    ],
+    "category": "tuyen_sinh",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Mình cần chuẩn bị những gì để nộp hồ sơ xét tuyển đại học từ xa vậy?",
+    "ground_truth": "Bạn cần chuẩn bị: 02 bản sao có chứng thực Căn cước (không dùng CMND), 02 túi đựng hồ sơ, bìa hồ sơ dự tuyển đã in và dán bên ngoài 01 túi đựng hồ sơ (túi còn lại bỏ vào cùng hồ sơ), và lệ phí xét tuyển 150.000đ.",
+    "reference_contexts": [
+      "02 bản sao có chứng thực Căn cước (thí sinh không sử dụng CMND để nộp);\n02 túi đựng hồ sơ (ứng viên có thể mua tại bất kỳ cửa hàng in ấn, văn phòng phẩm);\nThí sinh tải bìa hồ sơ dự tuyển, in khổ A4 và dán bên ngoài túi dựng hồ sơ (lưu ý chỉ dán bên ngoài 01 túi đựng hồ sơ, túi còn lại bỏ vào cùng hồ sơ) Tải mẫu tại đây\nHướng dẫn nộp hồ sơ, thí sinh xem tại đây\nLệ phí xét tuyển: 150.000đ/hồ sơ"
+    ],
+    "category": "tuyen_sinh",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Nếu mình nộp lệ phí xét tuyển bằng hình thức chuyển khoản thì cần ghi nội dung chuyển khoản như thế nào và số tài khoản của trường là gì?",
+    "ground_truth": "Nội dung chuyển khoản bạn ghi: Lệ phí xét tuyển ĐTTX Họ và tên CCCD hoặc viết tắt: LPXT ĐTTX Họ và tên Số CCCD. Ví dụ: Lệ phí xét tuyển ĐTTX Nguyễn Văn A 012345678 hoặc LPXTĐTTX Nguyễn Văn A 079020345678. Số tài khoản của Trung tâm Phát triển Công nghệ Thông tin là 007 100 352 5391 tại Ngân hàng TMCP Ngoại thương (Vietcombank) Chi nhánh TP.HCM.",
+    "reference_contexts": [
+      "Ứng viên chuyển khoản về và chụp lại màn hình:\nTên tài khoản: Trung tâm Phát triển Công nghệ Thông tin\nSố tài khoản: 007 100 352 5391\nTại: Ngân hàng TMCP Ngoại thương (Vietcombank) Chi nhánh TP.HCM.\nNội dung nộp tiền: Sinh viên nộp ghi rõ nội dung nộp tiền như sau: Lệ phí xét tuyển ĐTTX Họ và tên CCCD hoặc viết tắt: LPXT ĐTTX Họ và tên Số CCCD\nVí dụ: Lệ phí xét tuyển ĐTTX Nguyễn Văn A 012345678 hoặc LPXTĐTTX Nguyễn Văn A 079020345678"
+    ],
+    "category": "tuyen_sinh",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Nếu em trượt môn Giải tích trong học kỳ 1 năm học 2025-2026, thì khi nào em có thể đăng ký học lại môn này?",
+    "ground_truth": "Bạn phải đợi đến học kỳ 3 năm học 2025-2026 mới được đăng ký học lại môn Giải tích.",
+    "reference_contexts": [
+      "Quy định về thời gian: SV muốn đăng ký học lại/ học cải thiện một môn học phải đăng ký ở học kỳ cách ít nhất một học kỳ đã học môn học đó.\nVí dụ: SV học môn Giải tích ở HK1 (2025 2026) thì phải đợi đến HK3 (2025 2026) mới được đăng ký học lại/ học cải thiện môn này."
+    ],
+    "category": "tuyen_sinh",
+    "difficulty": "hard"
+  },
+  {
+    "question": "Em có thể đăng ký học cải thiện điểm môn học ngay trong học kỳ kế tiếp sau khi học môn đó không?",
+    "ground_truth": "Không, sinh viên muốn đăng ký học cải thiện một môn học phải đăng ký ở học kỳ cách ít nhất một học kỳ đã học môn học đó.",
+    "reference_contexts": [
+      "Quy định về thời gian: SV muốn đăng ký học lại/ học cải thiện một môn học phải đăng ký ở học kỳ cách ít nhất một học kỳ đã học môn học đó."
+    ],
+    "category": "tuyen_sinh",
+    "difficulty": "hard"
+  },
+  {
+    "question": "Trường Đại học Công nghệ Thông tin có phải là trường công lập không? Nếu có thì trường trực thuộc đơn vị nào và được thành lập năm nào?",
+    "ground_truth": "Trường Đại học Công nghệ Thông tin là trường đại học công lập, trực thuộc Đại học Quốc gia TP.HCM và được thành lập vào ngày 08/06/2006.",
+    "reference_contexts": [
+      "Trường Đại học Công nghê Thông tin là trường đại học công lâp, là môt trong 6 trường đại học thành viên của Đại học Quôc gia TP.HCM.\nTrường Đại học Công nghê Thông tin được thành lâp vào ngày 08/06/2006 theo quyêt định của Thủ tướng Chính phủ, là trường đại học công lâp chuyên ngành Công nghê Thông tin đâu tiên của Viêt Nam."
+    ],
+    "category": "tuyen_sinh",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Trung tâm Phát triển Công nghệ Thông tin có mối quan hệ như thế nào với trường Đại học Công nghệ Thông tin và trung tâm này có chức năng gì?",
+    "ground_truth": "Trung tâm Phát triển Công nghệ Thông tin là tên tiền thân của Trường Đại học Công nghệ Thông tin và sau khi trường được thành lập thì trung tâm này trực thuộc trường.",
+    "reference_contexts": [
+      "Trung tâm Phát triển Công nghệ Thông tin được thành lập từ năm 1998, là tên tiền thân của Trường Đại học Công nghệ Thông tin. Sau khi thành lập Trường Đại học Công nghệ Thông tin, ĐHQG-HCM, Trung tâm Phát triển Công nghệ Thông tin được thành lập trực thuộc Trường từ năm 2006."
+    ],
+    "category": "tuyen_sinh",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Nếu tôi học từ xa ngành Công nghệ Thông tin tại trường, tôi sẽ học qua phần mềm nào và sau khi trúng tuyển tôi có được cấp tài khoản Microsoft không?",
+    "ground_truth": "Chương trình đào tạo từ xa ngành Công nghệ Thông tin được thực hiện qua phần mềm Microsoft Teams và hệ thống moodle elearning.citd.vn. Mỗi sinh viên sau khi trúng tuyển đều được cấp tài khoản và mật khẩu phần mềm Microsoft 365 miễn phí sử dụng cho các dịch vụ của Microsoft.",
+    "reference_contexts": [
+      "Chương trình đào tạo từ xa ngành Công nghệ Thông tin được thực hiện qua phần mềm Microsoft Teams và hệ thống moodle elearning.citd.vn (hệ thống lưu trữ học liệu và làm bài tập). Mỗi sinh viên sau khi trúng tuyển đều được cấp tài khoản và mật khẩu phần mềm Microsoft 365 miễn phí sử dụng cho các dịch vụ của Microsoft."
+    ],
+    "category": "tuyen_sinh",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Bằng cử nhân từ xa của trường mình có được học lên thạc sĩ chính quy không? Bằng này có khác gì so với bằng cử nhân khác không?",
+    "ground_truth": "Bằng Cử nhân Đại học hệ đào tạo từ xa của Trường Đại học Công nghệ Thông tin cấp hoàn toàn có thể dùng để đăng ký học Sau đại học (Thạc sĩ, Tiến sĩ) hệ chính quy của Trường Đại học Công nghệ Thông tin. Được xếp bậc lương và hưởng các quyền lợi ngang với Cử nhân Đại học các hệ đào tạo khác khi công tác tại các cơ quan, tổ chức, doanh nghiệp. Mang lại cơ hội nghề nghiệp ngang bằng với các bằng cử nhân/kỹ sư khác.",
+    "reference_contexts": [
+      "Bằng Cử nhân Đại học hệ đào tạo từ xa của Trường Đại học Công nghệ Thông tin cấp hoàn toàn có thể dùng để đăng ký học Sau đại học (Thạc sĩ, Tiến sĩ) hệ chính quy của Trường Đại học Công nghệ Thông tin.\nNgoài bạn ra vẫn có thể học tiếp văn bằng 2 hoặc các chương trình cao hơn như Thạc sĩ, Tiến sĩ trong và ngoài nước.\nĐược xếp bậc lương và hưởng các quyền lợi ngang với Cử nhân Đại học các hệ đào tạo khác khi công tác tại các cơ quan, tổ chức, doanh nghiệp.\nMang lại cơ hội nghề nghiệp ngang bằng với các bằng cử nhân/kỹ sư khác."
+    ],
+    "category": "tuyen_sinh",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Nếu em muốn học lại môn Giải tích mà em đã học ở học kỳ 1 năm học 2025-2026, thì đến học kỳ nào em mới được đăng ký học lại?",
+    "ground_truth": "Bạn phải đợi đến học kỳ 3 năm học 2025-2026 mới được đăng ký học lại môn Giải tích.",
+    "reference_contexts": [
+      "Ví dụ: SV học môn Giải tích ở HK1 (2025 2026) thì phải đợi đến HK3 (2025 2026) mới được đăng ký học lại/ học cải thiện môn này."
+    ],
+    "category": "tuyen_sinh",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Theo quy định của trường, em có thể đăng ký học lại môn học ngay ở học kỳ kế tiếp sau khi đã học môn đó không?",
+    "ground_truth": "Không, sinh viên muốn đăng ký học lại/ học cải thiện một môn học phải đăng ký ở học kỳ cách ít nhất một học kỳ đã học môn học đó.",
+    "reference_contexts": [
+      "Quy định về thời gian: SV muốn đăng ký học lại/ học cải thiện một môn học phải đăng ký ở học kỳ cách ít nhất một học kỳ đã học môn học đó."
+    ],
+    "category": "tuyen_sinh",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Cho mình hỏi lệ phí xét tuyển liên thông đại học từ xa là bao nhiêu vậy?",
+    "ground_truth": "Lệ phí xét tuyển là 150.000đ/hồ sơ.",
+    "reference_contexts": [
+      "Lệ phí xét tuyển: 150.000đ/hồ sơ"
+    ],
+    "category": "tuyen_sinh",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Sau khi tốt nghiệp Cử nhân Công nghệ Thông tin, tôi có thể làm việc ở những lĩnh vực nào?",
+    "ground_truth": "Sinh viên tốt nghiệp Chương trình đào tạo Cử nhân Công nghê Thông tin có kha năng làm viêc ở những phạm vi và lĩnh vực khac nhau như: Chuyên viên thiêt kê, xây dựng và quan lý các dự án nghiên cứu và ứng dụng CNTT, chủ yêu trong lĩnh vực: giao thông, xây dựng, đia lý, môi trường, viễn thám. Chuyên viên quan lý, giam sat, đầu tư cac dự án công nghê thông tin. Chuyên viên khai thác dữ liêu và thông tin ứng dụng cho các doanh nghiêp trong vấn đề phân tich đinh lượng. Chuyên viên co kĩ năng phat triển các ứng dụng truyền thông xã hội và công nghê. Cán bộ giang dạy, nghiên cứu khoa hoc và ứng dụng CNTT ở cac trường đại hoc và cao đẳng trên ca nước.",
+    "reference_contexts": [
+      "Sinh viên tôt nghiêp Chương trình đào tạo Cử nhân Công nghê Thông tin có kha năng làm viêc ở những phạm vi và lĩnh vực khac nhau như:\nChuyên viên thiêt kê, xây dựng và quan lý các dự án nghiên cứu và ứng dụng CNTT, chủ yêu trong lĩnh vực: giao thông, xây dựng, đia lý, môi trường, viễn thám.\nChuyên viên quan lý, giam sat, đầu tư cac dự án công nghê thông tin.\nChuyên viên khai thác dữ liêu và thông tin ứng dụng cho các doanh nghiêp trong vấn đề phân tich đinh lượng.\nChuyên viên co kĩ năng phat triển các ứng dụng truyền thông xã hội và công nghê\nCán bộ giang dạy, nghiên cứu khoa hoc và ứng dụng CNTT ở cac trường đại hoc và cao đẳng trên ca nước."
+    ],
+    "category": "hoc_vu",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Chương trình Cử nhân Công nghệ Thông tin trang bị cho sinh viên những kiến thức gì?",
+    "ground_truth": "Chương trình Cử nhân Công nghê Thông tin đào tạo những cử nhân ngành Công nghê thông tin nắm vững các kiên thức cơ ban và chuyên môn sâu về công nghê thông tin (CNTT); đap ứng các yêu cầu về nghiên cứu phát triển và ứng dụng công nghê thông tin của xã hội; có năng lực tham mưu, tư vấn và có kha năng tổ chức thực hiên nhiêm vụ với tư cach của một chuyên viên trong lĩnh vực CNTT.",
+    "reference_contexts": [
+      "Chương trình Cử nhân Công nghê Thông tin đào tạo những cử nhân ngành Công nghê thông tin nắm vững các kiên thức cơ ban và chuyên môn sâu về công nghê thông tin (CNTT); đap ứng các yêu cầu về nghiên cứu phát triển và ứng dụng công nghê thông tin của xã hội; có năng lực tham mưu, tư vấn và có kha năng tổ chức thực hiên nhiêm vụ với tư cach của một chuyên viên trong lĩnh vực CNTT."
+    ],
+    "category": "hoc_vu",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Sau khi tốt nghiệp cử nhân Công nghệ Thông tin, em có thể làm những công việc gì liên quan đến dữ liệu và thông tin, và em có thể làm việc ở đâu?",
+    "ground_truth": "Sau khi tốt nghiệp, bạn có thể làm chuyên viên khai thác dữ liệu và thông tin ứng dụng cho các doanh nghiệp trong vấn đề phân tích định lượng. Bạn cũng có thể làm cán bộ giảng dạy, nghiên cứu khoa học và ứng dụng CNTT ở các trường đại học và cao đẳng trên cả nước.",
+    "reference_contexts": [
+      "Sinh viên tôt nghiêp Chương trình đào tạo Cử nhân Công nghê Thông tin có kha năng làm viêc ở những phạm vi và lĩnh vực khac nhau như:\nChuyên viên khai thác dữ liêu và thông tin ứng dụng cho các doanh nghiêp trong vấn đề phân tich đinh lượng.\nCán bộ giang dạy, nghiên cứu khoa hoc và ứng dụng CNTT ở cac trường đại hoc và cao đẳng trên ca nước."
+    ],
+    "category": "hoc_vu",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Chương trình Cử nhân Công nghệ Thông tin này kéo dài bao lâu, và sau khi tốt nghiệp, bằng của em sẽ được gọi là gì bằng cả tiếng Việt và tiếng Anh?",
+    "ground_truth": "Chương trình đào tạo kéo dài từ 1,5 đến 2 năm (4 học kỳ chính). Sau khi tốt nghiệp, bạn sẽ nhận được bằng Cử nhân Công nghệ Thông tin (tiếng Việt) hoặc Bachelor of Science in Information Technology (tiếng Anh).",
+    "reference_contexts": [
+      "Thời gian đào tạo: 1,5 2 năm (04 học kỳ chính)\nTên văn bằng sau khi tốt nghiệp:\nTiếng Việt: Cử nhân Công nghệ thông tin\nTiếng Anh: Bachelor of Science in Information Technology"
+    ],
+    "category": "hoc_vu",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Mình có thể đến địa điểm nào để nhận thẻ sinh viên trực tiếp và thời gian làm việc ở đó là khi nào?",
+    "ground_truth": "Bạn có thể đến Trung tâm Phát triển Công nghệ Thông tin, số 07-09 Nguyễn Bỉnh Khiêm, phường Sài Gòn, TP. Hồ Chí Minh (Tầng 1, Toà E, Trường Cán bộ Quản lý Giáo dục) vào giờ hành chính (thứ 2 đến thứ 6, sáng từ 8g30-11g30, chiều từ 14g00-17g00). Hoặc bạn có thể nhận tại phòng Hội đồng thi vào ngày thi cuối học kỳ.",
+    "reference_contexts": [
+      "1. Đối với sinh viên nhận trực tiếp hoặc nhờ người thân/bạn bè nhận giúp\nBước 1:\nSinh viên đến Trung tâm Phát triển Công nghệ Thông tin, số 07-09 Nguyễn Bỉnh Khiêm, phường Sài Gòn, TP. Hồ Chí Minh (Tầng 1, Toà E, Trường Cán bộ Quản lý Giáo dục) vào\ngiờ hành chính\n(thứ 2 đến thứ 6, sáng từ 8g30-11g30, chiều từ 14g00-17g00).\n2. Đối với sinh viên nhận trực tiếp vào ngày thi cuối học kỳ\nBước 2:\nSinh viên đến phòng Hội đồng thi đọc MSSV và nhận thẻ, kiểm tra kỹ MSSV, họ tên và ký nhận. Sinh viên có thể lấy giúp bạn bè cùng lớp (sinh viên sẽ ký thay)."
+    ],
+    "category": "hoc_vu",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Khi đến nhận thẻ sinh viên, mình cần làm gì và có thể nhận giúp bạn bè không?",
+    "ground_truth": "Bạn cần đọc MSSV, kiểm tra kỹ MSSV, họ tên và ký nhận. Bạn có thể lấy giúp bạn bè cùng lớp và ký thay cho bạn.",
+    "reference_contexts": [
+      "Bước 2:\nSinh viên đọc MSSV và nhận thẻ, kiểm tra kỹ MSSV, họ tên và ký nhận. Sinh viên có thể lấy giúp bạn bè cùng lớp (sinh viên sẽ ký thay)."
+    ],
+    "category": "hoc_vu",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Để hoàn thành chương trình học, tôi cần tích lũy tối thiểu bao nhiêu tín chỉ cho khối kiến thức giáo dục chuyên nghiệp, bao gồm cả các môn tự chọn?",
+    "ground_truth": "Bạn cần tích lũy tối thiểu 25 tín chỉ cho khối kiến thức giáo dục chuyên nghiệp cơ sở ngành, 8 tín chỉ cho tự chọn ngành và 8 tín chỉ cho tự chọn liên ngành. Tổng cộng là 41 tín chỉ.",
+    "reference_contexts": [
+      "Khối kiên thưc giao duc chuyên nghiêp Cơ sơ nganh 25\nKhối kiên thưc giao duc chuyên nghiêp Tự chọn ngành 8\nKhối kiên thưc giao duc chuyên nghiêp Tự chọn liên ngành 8"
+    ],
+    "category": "hoc_vu",
+    "difficulty": "hard"
+  },
+  {
+    "question": "Môn 'Kỹ thuật lập trình Trí tuệ nhân tạo' thuộc khối kiến thức nào và có bao nhiêu giờ lý thuyết?",
+    "ground_truth": "Môn 'Kỹ thuật lập trình Trí tuệ nhân tạo' thuộc khối kiến thức 'Lập trình và Kỹ thuật phần mềm' và có 4 giờ lý thuyết.",
+    "reference_contexts": [
+      "1. CS311 Kỹ thuật lập trình Trí tuệ nhân tạo TC 4 4 3 1\nLập trình và Kỹ thuật phần mềm (04 TC) Lập trình và Kỹ thuật phần mềm (04 TC) Lập trình và Kỹ thuật phần mềm (04 TC) Lập trình và Kỹ thuật phần mềm (04 TC) Lập trình và Kỹ thuật phần mềm (04 TC) Lập trình và Kỹ thuật phần mềm (04 TC) Lập trình và Kỹ thuật phần mềm (04 TC) Lập trình và Kỹ thuật phần mềm (04 TC)"
+    ],
+    "category": "hoc_vu",
+    "difficulty": "hard"
+  },
+  {
+    "question": "Sau khi tốt nghiệp ngành Trí tuệ nhân tạo, em có thể làm những công việc gì ạ?",
+    "ground_truth": "Sinh viên tốt nghiệp ngành Trí tuệ nhân tạo có thể làm việc: Chuyên gia lập trình Trí tuệ nhân tạo, tham gia phát triển các phần mềm, ứng dụng, các hệ thống tính toán có sử dụng Trí tuệ nhân tạo; Chuyên gia phân tích, thiết kế, xây dựng giải pháp kỹ thuật, giải pháp công nghệ thông minh có sử dụng Trí tuệ nhân tạo tại các công ty, tập đoàn công nghệ; Nhà nghiên cứu về Khoa học máy tính và Trí tuệ nhân tạo tại các trường, viện, trung tâm nghiên cứu, bộ phận Nghiên cứu & Phát triển của các công ty và tập đoàn công nghệ; Tiếp tục theo học các bậc học cao hơn về Khoa học máy tính, Trí tuệ nhân tạo.",
+    "reference_contexts": [
+      "Sinh viên tốt nghiệp ngành Trí tuệ nhân tạo co thể làm việc:\n Chuyên gia lập trình Trí tuệ nhân tạo, tham gia phát triển các phần mềm, ứng dụng, các hệ thống tính toán có sử dụng Trí tuệ nhân tạo.\n Chuyên gia phân tích, thiết kế, xây dựng giải pháp kỹ thuật, giải pháp công nghệ thông minh có sử dụng Trí tuệ nhân tạo tại các công ty, tập đoàn công nghệ.\n Nhà nghiên cứu về Khoa học máy tính và Trí tuệ nhân tạo tại các trường, viện, trung tâm nghiên cứu, bộ phận Nghiên cứu & Phát triển của các công ty và tập đoàn công nghệ.\n Tiếp tục theo học các bậc học cao hơn về Khoa học máy tính, Trí tuệ nhân tạo."
+    ],
+    "category": "hoc_vu",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Những ngành nào được xem là ngành đúng để liên thông lên ngành Trí tuệ nhân tạo vậy ạ?",
+    "ground_truth": "Các ngành đúng để liên thông bao gồm: Khoa học máy tính, Truyền thông và mạng máy tính, Công nghệ thông tin, Công nghệ thông tin (ứng dụng phần mềm), Xử lý dữ liệu, Lập trình máy tính, Quản trị cơ sở dữ liệu, Quản trị mạng máy tính, An ninh mạng.",
+    "reference_contexts": [
+      "Nhóm ngành đúng (có thể được cập nhật theo điều chỉnh của Bộ Giáo dục và Đào tạo):\nSTT Mã ngành Tên ngành\n1 6480101 Khoa học máy tính\n2 6480104 Truyền thông và mạng máy tính\n3 6480201 Công nghệ thông tin\n4 6480202 Công nghệ thông tin (ứng dụng phần mềm)\n5 6480206 Xử lý dữ liệu\n6 6480207 Lập trình máy tính\n7 6480208 Quản trị cơ sở dữ liệu\n8 6480209 Quản trị mạng máy tính\n9 6480216 An ninh mạng"
+    ],
+    "category": "hoc_vu",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Trong học kỳ 4, sinh viên cần tích lũy tối thiểu bao nhiêu tín chỉ cho môn chuyên đề tốt nghiệp và tổng số tín chỉ học kỳ?",
+    "ground_truth": "Trong học kỳ 4, sinh viên cần tích lũy 10 tín chỉ cho môn chuyên đề tốt nghiệp. Tổng số tín chỉ học kỳ 4 là 10.",
+    "reference_contexts": [
+      "Học kỳ 4 Một trong các môn học chuyên đê tôt nghiêp 4\nHọc kỳ 4 Tổng số tín chỉ Học kỳ 4 10\nTốt nghiệp Khối kiến thức tốt nghiệp 10"
+    ],
+    "category": "hoc_vu",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Sinh viên cần tích lũy tối thiểu bao nhiêu tín chỉ cho khối kiến thức giáo dục chuyên nghiệp cơ sở ngành và tự chọn ngành?",
+    "ground_truth": "Sinh viên cần tích lũy 49 tín chỉ cho khối kiến thức giáo dục chuyên nghiệp cơ sở ngành và 8 tín chỉ cho khối kiến thức giáo dục chuyên nghiệp tự chọn ngành.",
+    "reference_contexts": [
+      "Khối kiên thưc giao duc chuyên nghiêp Cơ sơ nganh 49\nKhối kiên thưc giao duc chuyên nghiêp Tự chọn ngành 8"
+    ],
+    "category": "hoc_vu",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Tổng số tín chỉ cần tích lũy cho toàn khóa học là bao nhiêu?",
+    "ground_truth": "Tổng số tín chỉ học toàn khóa là 125, bao gồm 12 tín chỉ Anh văn.",
+    "reference_contexts": [
+      "Tổng số tín chỉ học toàn khóa\n(Bao gồm 12 tín chỉ Anh văn) 125"
+    ],
+    "category": "hoc_vu",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Để nộp hồ sơ xét tốt nghiệp tại Trung tâm Phát triển Công nghệ Thông tin, tôi cần chuẩn bị những gì và lệ phí nộp như thế nào?",
+    "ground_truth": "Bạn cần chuẩn bị đơn xin xét tốt nghiệp và các hồ sơ kèm theo đơn theo mẫu đính kèm. Sau khi Trung tâm nhận được hồ sơ, cán bộ của CITD sẽ liên hệ để đóng lệ phí (không gửi kèm tiền mặt trong hồ sơ).",
+    "reference_contexts": [
+      "Sinh viên chuẩn bị hồ sơ xét tốt nghiệp theo mẫu đính kèm bao gồm:\n Đơn xin xét tốt nghiệp và các hồ sơ kèm theo đơn (\nBấm để tải mẫu và xem hồ sơ kèm theo\nLưu ý:\nSau khi Trung tâm nhận được hồ sơ sẽ có cán bộ của CITD liên hệ để đóng lệ phí\n(không gửi kèm tiền mặt trong hồ sơ)"
+    ],
+    "category": "hoc_phi",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Sau khi nộp hồ sơ xét tốt nghiệp, tôi sẽ nhận được kết quả ở đâu và trước đó trung tâm có liên hệ với tôi không?",
+    "ground_truth": "Sau khi nộp hồ sơ, cán bộ của CITD sẽ liên hệ với bạn để đóng lệ phí. Kết quả xét tốt nghiệp sẽ được công bố tại website.",
+    "reference_contexts": [
+      "Lưu ý:\nSau khi Trung tâm nhận được hồ sơ sẽ có cán bộ của CITD liên hệ để đóng lệ phí\n(không gửi kèm tiền mặt trong hồ sơ)\nBước 4:\nSinh viên đợi kết quả xét tốt nghiệp tại website."
+    ],
+    "category": "hoc_phi",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Ai có thể làm đơn xin rút học phí?",
+    "ground_truth": "Tân sinh viên đã có quyết định cho thôi học và cho phép rút lại học phí, sinh viên đóng học phí nhập học quá thời hạn nhập học và không còn theo học tại trường, ứng viên đóng lệ phí xét tuyển, lệ phí thi chứng chỉ bị dư, bị nhầm.",
+    "reference_contexts": [
+      "Đối tượng áp dụng:\nTân sinh viên đã có quyết định cho thôi học và cho phép rút lại học phí\nSinh viên đóng học phí nhập học quá thời hạn nhập học và không còn theo học tại trường\nỨng viên đóng lệ phí xét tuyển, lệ phí thi chứng chỉ bị dư, bị nhầm"
+    ],
+    "category": "hoc_phi",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Sau khi làm đơn xin rút học phí, tôi cần gửi những giấy tờ gì?",
+    "ground_truth": "Bạn cần gửi kèm chứng từ đã đóng học phí/lệ phí và bản sao CCCD, quyết định cho thôi học (nếu có) về Trung tâm.",
+    "reference_contexts": [
+      "Sinh viên/ứng viên có nhu cầu rút học phí/lệ phí làm đơn xin rút học phí ( tải tại đây) sau đó gửi kèm chứng từ đã đóng học phí/lệ phí và bản sao CCCD, quyết định cho thôi học (nếu có) về Trung tâm."
+    ],
+    "category": "hoc_phi",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Tôi là sinh viên từ xa bị mất thẻ sinh viên, tôi cần làm gì để được cấp lại thẻ?",
+    "ground_truth": "Bạn cần điền thông tin vào đường dẫn https://link.uit.edu.vn/CapLaiTheSV_HDTTX, nộp đơn đề nghị cấp lại thẻ sinh viên và đóng lệ phí 100.000 đồng tại Trung tâm Phát triển Công nghệ Thông tin, số 07-09 Nguyễn Bỉnh Khiêm, phường Bến Nghé, quận 1, TP. Hồ Chí Minh (Tầng 1, Toà E, Trường Cán bộ Quản lý Giáo dục) vào giờ hành chính (thứ 2 đến thứ 6, sáng từ 8g30-11g30, chiều từ 14g00-17g00). Sau đó đợi email thông báo đã in thẻ và đến nhận.",
+    "reference_contexts": [
+      "Sinh viên điền các thông tin vào đường dẫn sau:\nhttps://link.uit.edu.vn/CapLaiTheSV_HDTTX\nSinh viên nộp\nđơn đề nghị cấp lại thẻ sinh viên\nvà đóng lệ phí\ntiền mặt\n100.000 đồng tại Trung tâm Phát triển Công nghệ Thông tin, số 07-09 Nguyễn Bỉnh Khiêm, phường Bến Nghé, quận 1, TP. Hồ Chí Minh (Tầng 1, Toà E, Trường Cán bộ Quản lý Giáo dục) vào giờ hành chính (thứ 2 đến thứ 6, sáng từ 8g30-11g30, chiều từ 14g00-17g00)..\nSinh viên có thể nhờ người thân, bạn bè hoặc gửi bưu điện, các đơn vị vận chuyển khác.\nThí sinh đợi email đã in thẻ và nhận thẻ."
+    ],
+    "category": "hoc_phi",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Lệ phí cấp lại thẻ sinh viên là bao nhiêu?",
+    "ground_truth": "Lệ phí cấp lại thẻ sinh viên là 100.000 đồng.",
+    "reference_contexts": [
+      "Sinh viên nộp\nđơn đề nghị cấp lại thẻ sinh viên\nvà đóng lệ phí\ntiền mặt\n100.000 đồng tại Trung tâm Phát triển Công nghệ Thông tin, số 07-09 Nguyễn Bỉnh Khiêm, phường Bến Nghé, quận 1, TP. Hồ Chí Minh (Tầng 1, Toà E, Trường Cán bộ Quản lý Giáo dục) vào giờ hành chính (thứ 2 đến thứ 6, sáng từ 8g30-11g30, chiều từ 14g00-17g00).."
+    ],
+    "category": "hoc_phi",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Lệ phí xét tuyển là bao nhiêu?",
+    "ground_truth": "Lệ phí xét tuyển là 150.000đ/hồ sơ.",
+    "reference_contexts": [
+      "Lệ phí xét tuyển:\n150.000đ/hồ sơ"
+    ],
+    "category": "hoc_phi",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Tôi cần chuyển khoản lệ phí xét tuyển vào tài khoản nào?",
+    "ground_truth": "Bạn cần chuyển khoản vào tài khoản: Tên tài khoản: Trung tâm Phát triển Công nghệ Thông tin, Số tài khoản: 007 100 352 5391, Tại: Ngân hàng TMCP Ngoại thương (Vietcombank) Chi nhánh TP.HCM.",
+    "reference_contexts": [
+      "Ứng viên chuyển khoản về và chụp lại màn hình:\nTên tài khoản:\nTrung tâm Phát triển Công nghệ Thông tin\nSố tài khoản:\n007 100 352 5391\nTại:\nNgân hàng TMCP Ngoại thương (Vietcombank) Chi nhánh TP.HCM"
+    ],
+    "category": "hoc_phi",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Nếu tôi mất chứng chỉ UD CNTT và muốn xin cấp lại bản sao, nhưng không thể trực tiếp đến nộp hồ sơ, tôi có thể nhờ người khác nộp giúp không? Nếu được, cần chuẩn bị những gì?",
+    "ground_truth": "Nếu bạn không thể trực tiếp đến nộp hồ sơ xin cấp bản sao chứng chỉ UD CNTT, bạn có thể nhờ người khác nộp giúp. Người nộp thay cần mang theo giấy ủy quyền do UBND các cấp hoặc Văn phòng Công chứng ký, đóng dấu xác nhận, cùng với đơn đề nghị cấp bản sao CC UDCNTT đã điền đầy đủ thông tin, ký và bản sao chứng thực căn cước của bạn.",
+    "reference_contexts": [
+      "Bước 2:\nHọc viên điền đầy đủ thông tin, ký và nộp kèm bản sao chứng thực căn cước về Phòng Đào tạo Trung tâm Phát triển Công nghệ Thông tin, số 07 -09 đường Nguyễn Bỉnh Khiêm, phường Bến Nghé, quận 1 (tầng 1, tòa E).\nBước 4\n: Học viên mang bản gốc Căn cước lên Trung tâm Phát triển Công nghệ Thông tin, số 07 09 đường Nguyễn Bỉnh Khiêm, phường Bến Nghé, quận 1, thành phố Hồ Chí Minh (tầng 1, toà E) để nhận kết quả.\nTrường hợp nhận thay, bắt buộc phải có giấy ủy quyền do UBND các cấp hoặc Văn phòng Công chứng ký, đóng dấu xác nhận."
+    ],
+    "category": "hoc_phi",
+    "difficulty": "hard"
+  },
+  {
+    "question": "Tôi cần chuẩn bị những giấy tờ gì và phải trả bao nhiêu tiền để được cấp lại bản sao chứng chỉ UD CNTT nếu tôi bị mất bản gốc?",
+    "ground_truth": "Để được cấp lại bản sao chứng chỉ UD CNTT khi bị mất bản gốc, bạn cần chuẩn bị đơn đề nghị cấp bản sao CC UDCNTT đã điền đầy đủ thông tin và ký, kèm theo bản sao chứng thực căn cước. Lệ phí cấp bản sao là 50.000 đồng/bản.",
+    "reference_contexts": [
+      "Bước 1:\nHọc viên tải\nđơn đề nghị cấp bản sao CC UDCNTT\n(bấm để tải mẫu đính kèm).\nBước 2:\nHọc viên điền đầy đủ thông tin, ký và nộp kèm bản sao chứng thực căn cước về Phòng Đào tạo Trung tâm Phát triển Công nghệ Thông tin, số 07 -09 đường Nguyễn Bỉnh Khiêm, phường Bến Nghé, quận 1 (tầng 1, tòa E).\nLệ phí cấp bản sao chứng chỉ: 50.000 đồng/bản (Năm mươi ngàn đồng chẵn trên bản)."
+    ],
+    "category": "hoc_phi",
+    "difficulty": "hard"
+  },
+  {
+    "question": "Trường có đào tạo chứng chỉ ứng dụng CNTT cơ bản không?",
+    "ground_truth": "Có, trường có đào tạo Chứng chỉ ứng dụng CNTT cơ bản.",
+    "reference_contexts": [
+      "Chứng chỉ ứng dụng CNTT cơ bản Trung Tâm Phát Triển Công Nghệ Thông Tin - CITD"
+    ],
+    "category": "ctdt",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Tôi có thể tìm thông tin về chương trình đào tạo cử nhân văn bằng 1 ngành Công nghệ Thông tin khóa 2024 ở đâu?",
+    "ground_truth": "Bạn có thể tìm thông tin về CTĐT VB1 Khoá 2024 trong phần Chương trình đào tạo > Công nghệ Thông tin > Cử nhân văn bằng 1.",
+    "reference_contexts": [
+      "Chương trình đào tạo\nCông nghệ Thông tin\nCử nhân văn bằng 1\nCTĐT VB1 khoá 2019\nCTĐT VB1 Khoá 2020\nCTĐT VB1 Khoá 2022\nCTĐT VB1 Khoá 2024"
+    ],
+    "category": "ctdt",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Tôi muốn xác minh chứng chỉ ứng dụng công nghệ thông tin thì cần gửi hồ sơ đến đâu?",
+    "ground_truth": "Bạn cần gửi hồ sơ về Trung tâm Phát triển Công nghệ Thông tin, số 07 -09 đường Nguyễn Bỉnh Khiêm, phường Bến Nghé, quận 1 (tầng 1, tòa E).",
+    "reference_contexts": [
+      "Học viên/Đơn vị có nhu cầu xác minh gửi hồ sơ về Trung tâm Phát triển Công nghệ Thông tin, số 07 -09 đường Nguyễn Bỉnh Khiêm, phường Bến Nghé, quận 1 (tầng 1, tòa E), bao gồm:\n Công văn đề nghị xác minh chứng chỉ/Đơn đề nghị xác minh chứng chỉ\n Bản sao chứng chỉ."
+    ],
+    "category": "ctdt",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Sau khi gửi hồ sơ xác minh chứng chỉ ứng dụng CNTT thì bao lâu tôi nhận được kết quả?",
+    "ground_truth": "Sau từ 01 đến 03 ngày làm việc, Trung tâm sẽ trả kết quả xác minh qua đường bưu điện tem thư.",
+    "reference_contexts": [
+      "Sau từ 01 đến 03 ngày làm việc, Trung tâm sẽ trả kết quả xác minh qua đường bưu điện tem thư."
+    ],
+    "category": "ctdt",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Trung tâm CITD cung cấp những loại chứng chỉ ứng dụng CNTT nào?",
+    "ground_truth": "Trung tâm CITD cung cấp Chứng chỉ ứng dụng CNTT cơ bản và Chứng chỉ ứng dụng CNTT nâng cao.",
+    "reference_contexts": [
+      "Chứng chỉ ứng dụng CNTT cơ bản Trung Tâm Phát Triển Công Nghệ Thông Tin - CITD\n...\nChứng chỉ ứng dụng CNTT cơ bản\n...\nChứng chỉ ứng dụng CNTT nâng cao"
+    ],
+    "category": "ctdt",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Tôi có thể tìm thông tin về chương trình đào tạo cử nhân văn bằng 1 ngành Công nghệ Thông tin khóa 2024 ở đâu?",
+    "ground_truth": "Thông tin về chương trình đào tạo cử nhân văn bằng 1 ngành Công nghệ Thông tin khóa 2024 có thể tìm thấy tại mục CTĐT VB1 Khoá 2024.",
+    "reference_contexts": [
+      "Chương trình đào tạo\nCông nghệ Thông tin\nCử nhân văn bằng 1\nCTĐT VB1 khoá 2019\nCTĐT VB1 Khoá 2020\nCTĐT VB1 Khoá 2022\nCTĐT VB1 Khoá 2024"
+    ],
+    "category": "ctdt",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Trung tâm CITD có những trang mạng xã hội nào?",
+    "ground_truth": "Trung tâm CITD có các trang mạng xã hội Facebook, Instagram, Twitter, Vimeo, Youtube.",
+    "reference_contexts": [
+      "Quy trình, Biểu mẫu cho Sinh viên Trung Tâm Phát Triển Công Nghệ Thông Tin - CITD\nFacebook\nInstagram\nTwitter\nVimeo\nYoutube"
+    ],
+    "category": "ctdt",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Tôi có thể tìm thông tin về lịch học ở đâu?",
+    "ground_truth": "Bạn có thể tìm thông tin về lịch học trong mục 'Đao Tao Cử Nhân'.",
+    "reference_contexts": [
+      "Đao Tao Cử Nhân\nLịch Học\nKế hoạch năm học"
+    ],
+    "category": "ctdt",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Tôi muốn học liên thông đại học ngành Trí tuệ Nhân tạo, vậy trường có những khóa nào và khóa nào đang tuyển sinh?",
+    "ground_truth": "Trường có các chương trình đào tạo liên thông đại học ngành Trí tuệ Nhân tạo gồm AI CTĐT LTĐH Khoá 2019, AI CTĐT LTĐH Khoá 2020, AI CTĐT LTĐH khoá 2022 và AI CTĐT LTĐH Khoá 2024. Dựa vào thông tin hiện có, không thể xác định khóa nào đang tuyển sinh.",
+    "reference_contexts": [
+      "Trí tuệ Nhân tạo\nLiên thông đại học\nAI CTĐT LTĐH Khoá 2019\nAI CTĐT LTĐH Khoá 2020\nAI CTĐT LTĐH khoá 2022\nAI CTĐT LTĐH Khoá 2024"
+    ],
+    "category": "ctdt",
+    "difficulty": "hard"
+  },
+  {
+    "question": "Nếu tôi muốn thi chứng chỉ ứng dụng CNTT nâng cao, tôi cần tìm hiểu những mô đun nào và quy trình đăng ký ở đâu?",
+    "ground_truth": "Để thi chứng chỉ ứng dụng CNTT nâng cao, bạn cần tìm hiểu các mô đun sau: Mô Đun 7: Xử Lý Văn Bản Nâng Cao (IU7), Mô Đun 8: Sử Dụng Bảng Tính Nâng Cao (IU8), Mô Đun 9: Sử Dụng Trình Chiếu Nâng Cao (IU9). Quy trình và biểu mẫu đăng ký có thể tìm thấy trong mục 'Quy trình và biểu mẫu'.",
+    "reference_contexts": [
+      "Chứng chỉ ứng dụng CNTT nâng cao\nMô Đun 7: Xử Lý Văn Bản Nâng Cao (IU7)\nMô Đun 8: Sử Dụng Bảng Tính Nâng Cao (IU8)\nMô Đun 9: Sử Dụng Trình Chiếu Nâng Cao (IU9)\nQuy trình và biểu mẫu\nChứng chỉ ứng dụng CNTT cơ bản\nMô Đun 1: Hiểu Biết Về Công Nghệ Thông Tin (IU1)\nMô Đun 2: Sử Dụng Máy Tính Cơ Bản (IU2)\nMô Đun 3: Xử Lý Văn Bản Cơ Bản (IU3)\nMô Đun 4: Sử Dụng Bảng Tính Cơ Bản (IU4)\nMô Đun 5: Sử Dụng Trình Chiếu Cơ Bản (IU5)\nMô Đun 6: Sử Dụng Internet Cơ Bản (IU6)"
+    ],
+    "category": "ctdt",
+    "difficulty": "hard"
+  },
+  {
+    "question": "Trung tâm CITD có những mạng xã hội nào?",
+    "ground_truth": "Trung tâm CITD có Facebook, Instagram, Twitter, Vimeo, Youtube.",
+    "reference_contexts": [
+      "Trung Tâm Phát Triển Công Nghệ Thông Tin - CITD\nFacebook\nInstagram\nTwitter\nVimeo\nYoutube"
+    ],
+    "category": "ctdt",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Tôi có thể học chứng chỉ ứng dụng CNTT cơ bản ở những module nào?",
+    "ground_truth": "Bạn có thể học chứng chỉ ứng dụng CNTT cơ bản ở các module: Hiểu Biết Về Công Nghệ Thông Tin (IU1), Sử Dụng Máy Tính Cơ Bản (IU2), Xử Lý Văn Bản Cơ Bản (IU3), Sử Dụng Bảng Tính Cơ Bản (IU4), Sử Dụng Trình Chiếu Cơ Bản (IU5), Sử Dụng Internet Cơ Bản (IU6).",
+    "reference_contexts": [
+      "Chứng chỉ ứng dụng CNTT cơ bản\nMô Đun 1: Hiểu Biết Về Công Nghệ Thông Tin (IU1)\nMô Đun 2: Sử Dụng Máy Tính Cơ Bản (IU2)\nMô Đun 3: Xử Lý Văn Bản Cơ Bản (IU3)\nMô Đun 4: Sử Dụng Bảng Tính Cơ Bản (IU4)\nMô Đun 5: Sử Dụng Trình Chiếu Cơ Bản (IU5)\nMô Đun 6: Sử Dụng Internet Cơ Bản (IU6)"
+    ],
+    "category": "ctdt",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Nếu tôi bị mất chứng chỉ UD CNTT và muốn xin cấp lại bản sao thì cần chuẩn bị những giấy tờ gì và nộp ở đâu?",
+    "ground_truth": "Bạn cần tải đơn đề nghị cấp bản sao CC UDCNTT, điền đầy đủ thông tin, ký và nộp kèm bản sao chứng thực căn cước về Phòng Đào tạo Trung tâm Phát triển Công nghệ Thông tin, số 07 -09 đường Nguyễn Bỉnh Khiêm, phường Bến Nghé, quận 1 (tầng 1, tòa E).",
+    "reference_contexts": [
+      "Bước 1:\nHọc viên tải\nđơn đề nghị cấp bản sao CC UDCNTT\n(bấm để tải mẫu đính kèm).\nBước 2:\nHọc viên điền đầy đủ thông tin, ký và nộp kèm bản sao chứng thực căn cước về Phòng Đào tạo Trung tâm Phát triển Công nghệ Thông tin, số 07 -09 đường Nguyễn Bỉnh Khiêm, phường Bến Nghé, quận 1 (tầng 1, tòa E)."
+    ],
+    "category": "ctdt",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Lệ phí cấp bản sao chứng chỉ UD CNTT là bao nhiêu và sau khi nộp hồ sơ thì mất bao lâu tôi sẽ nhận được bản sao?",
+    "ground_truth": "Lệ phí cấp bản sao chứng chỉ là 50.000 đồng/bản. Sau khi nộp đầy đủ hồ sơ, trung tâm sẽ tiến hành trích lục và cấp bản sao cho học viên trong khoảng từ 5 đến 10 ngày làm việc.",
+    "reference_contexts": [
+      "Bước 3:\nSau khi nhận được đầy đủ và đúng mẫu đơn đề nghị cấp bản sao và các giấy tờ kèm theo. Trung tâm sẽ tiến hành trích lục và cấp bản sao cho học viên (từ 5 đến 10 ngày làm việc), sau đó sẽ thông báo cho học viên theo số điện thoại đăng ký trên đơn.\nLệ phí cấp bản sao chứng chỉ: 50.000 đồng/bản (Năm mươi ngàn đồng chẵn trên bản)."
+    ],
+    "category": "ctdt",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Chứng chỉ ứng dụng CNTT nâng cao do đơn vị nào cấp?",
+    "ground_truth": "Chứng chỉ ứng dụng CNTT nâng cao do Trung Tâm Phát Triển Công Nghệ Thông Tin - CITD cấp.",
+    "reference_contexts": [
+      "Chứng chỉ ứng dụng CNTT nâng cao Trung Tâm Phát Triển Công Nghệ Thông Tin - CITD"
+    ],
+    "category": "quy_che",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Thông báo về quy định tổ chức sát hạch kỹ năng CNTT được công bố ngày tháng năm nào?",
+    "ground_truth": "Thông báo về quy định tổ chức sát hạch kỹ năng công nghệ thông tin được công bố ngày 24/05/2020.",
+    "reference_contexts": [
+      "Quy định tổ chức sát hạch kỹ năng công nghệ thông tin tại cơ sở liên kết\n24/05/2020"
+    ],
+    "category": "quy_che",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Trường đại học có vốn đầu tư nước ngoài có được cấp văn bằng Việt Nam không? Và văn bằng này do ai quản lý?",
+    "ground_truth": "Cơ sở giáo dục có vốn đầu tư nước ngoài được phép cấp văn bằng, chứng chỉ của Việt Nam. Việc quản lý văn bằng, chứng chỉ được phân cấp quản lý cho các sở giáo dục và đào tạo, giao quyền tự chủ, tự chịu trách nhiệm cho các cơ sở đào tạo giáo viên, cơ sở giáo dục đại học.",
+    "reference_contexts": [
+      "g) Cơ sở giáo dục có vốn đầu tư nước ngoài cấp văn bằng, chứng chỉ của\nViệt Nam;\n1. Văn bằng, chứng chỉ được quản lý thống nhất, thực hiện phân cấp quản\nlý cho các sở giáo duc va đào tạo, giao quyền tự chu, tự chịu trách nhiệm cho\ncác cơ sở dao tao giáo viên, cơ sở giáo dục đại học theo quy định tại Điều 3 của\nQuy chế này."
+    ],
+    "category": "quy_che",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Bộ Giáo dục và Đào tạo quy định những gì về văn bằng, chứng chỉ và cơ sở giáo dục đại học có trách nhiệm gì trong việc này?",
+    "ground_truth": "Bộ Giáo dục và Đào tạo quy định chi tiết nội dung chính ghi trên văn bằng, phụ lục văn bằng giáo dục đại học; quy định mẫu bằng tốt nghiệp trung học cơ sở, bằng tốt nghiệp trung học phổ thông, bằng tốt nghiệp trung cấp sư phạm, bằng tốt nghiệp cao đẳng sư phạm, chứng chỉ của hệ thống giáo dục quốc dân; quy định nguyên tắc in phôi, quản lý, cấp phát, thu hồi, hủy bỏ văn bằng, chứng chỉ. Cơ sở giáo dục đại học tự chủ và tự chịu trách nhiệm trong việc quản lý, cấp phát văn bằng, chứng chỉ theo quy định của pháp luật và quy định của Bộ trưởng Bộ Giáo dục và Đào tạo.",
+    "reference_contexts": [
+      "1. Bộ Giáo dục và Đào tạo thống nhất quản lý văn bằng, chứng chỉ; quy\nđịnh chỉ tiết nội dung chính ghi trên văn bằng, phụ lục văn bằng giáo dục đại\nhọc; quy định mẫu bằng tốt nghiệp trung học cơ sở, bằng tốt nghiệp trung học\nphô thông, bang tốt nghiệp trung cấp sư phạm, bằng tốt nghiệp cao dang su\nphạm, chứng chỉ của hệ thống giáo dục quốc dân; quy định nguyên tắc in phôi,\nquản lý, cấp phát, thu hồi, hủy bỏ văn bằng, chứng chỉ.\n4. Cơ sở giáo dục đại học, cơ sở đào tạo giáo viên tự chủ và tự chịu trách\nnhiệm trong việc quản lý, cấp phát văn bằng, chứng chỉ theo quy định của pháp\nluật và quy định của Bộ trưởng Bộ Giáo dục và Đào tạo."
+    ],
+    "category": "quy_che",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Tôi muốn in một tài liệu chỉ từ trang 3 đến trang 5, chatbot có thể hướng dẫn tôi cách thực hiện không?",
+    "ground_truth": "Bạn có thể thực hiện in văn bản chọn trang.",
+    "reference_contexts": [
+      "IU03.5.1.4 Biết cách thực hiện in văn bản: in toàn bộ, in chọn trang, in một bản, in\nnhiều bản."
+    ],
+    "category": "quy_che",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Bảng tính là gì vậy?",
+    "ground_truth": "Bạn cần hiểu khái niệm và công dụng của bảng tính.",
+    "reference_contexts": [
+      "IU04.1.1.1 Hiểu khái niệm và công dung của bảng tính."
+    ],
+    "category": "quy_che",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Nếu tôi muốn chuyển từ đào tạo chính quy sang tự học đối với chương trình đại trà, tôi cần nộp đơn ở đâu và sau khi được duyệt thì liên hệ với ai để cập nhật tiến trình?",
+    "ground_truth": "Đối với chương trình đại trà, bạn nộp đơn cho P.DTDH. Sau khi xét duyệt, bạn liên hệ với P.ĐTĐH để cập nhật tiến trình xử lý hồ sơ.",
+    "reference_contexts": [
+      "Nếu có nguyện vọng Chuyển từ hình thức đào tạo chính quy sang đạo tạo tự xạ SV nộp đơn cho DTBHVP. Copp, (theo May ).\n- Dé với Chương trình đại trà, Chương trình chuẩn, Chương trình liên thông đại -\nhọc, Chương trình vặn bằng thự hai; SV nộp đơn chọ P.DTDH,\nTheo đại quá trình Xét duyệt và \"hận thông bo kết quả;\nđiên hệ với ?.ĐTĐH/ựp, CCTĐB gá Cập nhật tiến trình xự lý hồ sơ ya nhận kế:"
+    ],
+    "category": "quy_che",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Tôi muốn chuyển từ đào tạo chính quy sang tự học, vậy sau khi nộp đơn, tôi cần liên hệ TTPTCNTr khi nào và để làm gì?",
+    "ground_truth": "Sau khi chuyển hệ thành công, bạn liên hệ TTPTCNTr để làm thủ tục nhập học.",
+    "reference_contexts": [
+      "Theo đại quá trình Xét duyệt và \"hận thông bo kết quả;\nđiên hệ với ?.ĐTĐH/ựp, CCTĐB gá Cập nhật tiến trình xự lý hồ sơ ya nhận kế:\nqua chuyền hệ,\n4. SV liên hé TTPTCNTr đỂ làm tụ tục nhập hog,"
+    ],
+    "category": "quy_che",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Em muốn thay đổi màu nền của bảng trên trang web thì phải làm thế nào ạ?",
+    "ground_truth": "Bạn có thể thay đổi màu nền của bảng bằng cách sử dụng CSS.",
+    "reference_contexts": [
+      "IU13.3.3.4 Biết cách trang tri bảng: thay đổi màu nền, hình minh hoa, ảnh nền của ô\nvà toàn bang; thêm, loại bỏ dé họa, ảnh nền của bảng.\nIU13.4.1.2 Hiểu cấu trúc của một quy tắc CSS và biết cách áp dụng để chọn và khai\nbáo đặc tính, giá trị. Biết cách tạo, thay đổi quy tắc CSS: màu, nền, phông\nchữ."
+    ],
+    "category": "quy_che",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Làm sao để em chèn một cái ảnh vào trang web của em ạ?",
+    "ground_truth": "Bạn có thể thêm ảnh vào trang web.",
+    "reference_contexts": [
+      "TU13.3.4.1 Biết cách thêm vào, gỡ bỏ một ảnh trên trang web."
+    ],
+    "category": "quy_che",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Nếu trường thay đổi chương trình đào tạo từ xa, trường có nghĩa vụ gì đối với sinh viên đang theo học?",
+    "ground_truth": "Những thay đổi, điều chỉnh liên quan đến chương trình đào tạo từ xa được thực hiện theo quy định hiện hành và công bố trước khi áp dụng, không gây tác động bất lợi cho người học.",
+    "reference_contexts": [
+      "Chương trình ĐTTX phải được công khai đối với người học trước khi tuyên sinh và khi\nbắt đầu khóa học; những thay đổi, điều chỉnh liên quan đến chương trình đào tạo được\nthực hiện theo quy định hiện hành và công bố trước khi áp dụng, không gây tác động\nbất lợi cho người học."
+    ],
+    "category": "quy_che",
+    "difficulty": "hard"
+  },
+  {
+    "question": "Trung tâm Phát triển Công nghệ Thông tin (TTPTCNTT) đóng vai trò gì trong quy trình tuyển sinh đào tạo từ xa?",
+    "ground_truth": "Trung tâm Phát triển Công nghệ Thông tin (TTPTCNTT) có trách nhiệm quảng bá tuyển sinh, thu hồ sơ xét tuyển, phối hợp thông báo kết quả tuyển sinh đến thí sinh.",
+    "reference_contexts": [
+      "Trung tâm Phát triển Công nghệ Thông tin (TTPTCNTT): Là đơn vị triển khai DTTX\ntrình độ đại học, có những trách nhiệm:\n- Quang bá tuyến sinh, thu hồ sơ xét tuyển, phối hợp thông báo kết quả tuyển sinh\nđến thí sinh."
+    ],
+    "category": "quy_che",
+    "difficulty": "hard"
+  },
+  {
+    "question": "Môn học 'Kỹ thuật lập trình Python' có bao nhiêu tín chỉ?",
+    "ground_truth": "Môn 'Kỹ thuật lập trình Python' có 4 tín chỉ.",
+    "reference_contexts": [
+      "STT Mã môn Tên môn TC LT TH\n2. IE221 Kỹ thuật lập trình Python 4 3 1"
+    ],
+    "category": "quy_che",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Môn 'Khóa luận tốt nghiệp' có bao nhiêu tín chỉ lý thuyết?",
+    "ground_truth": "Môn 'Khóa luận tốt nghiệp' có 10 tín chỉ lý thuyết.",
+    "reference_contexts": [
+      "STT Mã môn học Tên môn học TC LT TH\n1. IE505 Khóa luận tốt nghiệp 10 10 0"
+    ],
+    "category": "quy_che",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Làm thế nào để tạo một liên kết đến một phần cụ thể trên cùng một trang web và làm cách nào để tùy chỉnh màu sắc của các liên kết đã truy cập và chưa truy cập?",
+    "ground_truth": "Để tạo liên kết đến một phần cụ thể trên cùng một trang web, bạn cần sử dụng neo (anchor). Bạn có thể thay đổi màu siêu liên kết truy cập (visited), không truy cập (unvisited), hoạt động (active).",
+    "reference_contexts": [
+      "1U13.3.1.5 Biết khái niệm va cách sử dung neo (anchor).\n IU13.3.1.4 Biết cách thay đổi màu siêu liên kết truy cập (visited), không truy cập (unvisited), hoạt động (active)."
+    ],
+    "category": "quy_che",
+    "difficulty": "hard"
   }
 ]
