@@ -1,0 +1,937 @@
+{
+  "aggregate": {
+    "faithfulness": 0.0,
+    "answer_relevancy": 0.0,
+    "context_precision": 0.0,
+    "context_recall": 0.0,
+    "correctness": 0.0
+  },
+  "samples": [
+    {
+      "question": "Khi nào trường tổ chức tuyển sinh hệ đào tạo từ xa?",
+      "ground_truth": "Hằng năm, Trường dự kiến tổ chức nhận hồ sơ xét tuyển hệ đào tạo từ xa và khai giảng 3 đợt cố định: Đợt 1 từ 01/12 đến 15/01 khai giảng dự kiến vào tháng 2 năm sau.",
+      "reference_contexts": [
+        "Hằng năm, Trường dự kiến tổ chức nhận hồ sơ xét tuyển hệ đào tạo từ xa và khai giảng 3 đợt cố định:\n Đợt 1: 01/12 đến 15/01, khai giảng dự kiến vào tháng 2 năm sau"
+      ],
+      "answer": "",
+      "contexts": [],
+      "category": "tuyen_sinh",
+      "difficulty": "easy",
+      "eval_type": "standard",
+      "latency_ms": 0.01,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "correctness": 0.0
+      }
+    },
+    {
+      "question": "Lệ phí xét tuyển hệ đào tạo từ xa UIT là bao nhiêu?",
+      "ground_truth": "Lệ phí xét tuyển là 150.000đ/hồ sơ. Ứng viên chuyển khoản về tài khoản Trung tâm Phát triển Công nghệ Thông tin, số tài khoản 007 100 352 5391 tại Ngân hàng Vietcombank Chi nhánh TP.HCM.",
+      "reference_contexts": [
+        "Lệ phí xét tuyển:\n150.000đ/hồ sơ\nỨng viên chuyển khoản về và chụp lại màn hình:\nTên tài khoản:\nTrung tâm Phát triển Công nghệ Thông tin\nSố tài khoản:\n007 100 352 5391\nTại:\nNgân hàng TMCP Ngoại thương (Vietcombank) Chi nhánh TP.HCM"
+      ],
+      "answer": "",
+      "contexts": [],
+      "category": "tuyen_sinh",
+      "difficulty": "easy",
+      "eval_type": "standard",
+      "latency_ms": 0.0,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "correctness": 0.0
+      }
+    },
+    {
+      "question": "Tốt nghiệp THPT có thể học chương trình nào của UIT hệ từ xa?",
+      "ground_truth": "Chương trình Cử nhân hệ đào tạo từ xa qua mạng của trường phù hợp với tất cả các bạn đã tốt nghiệp THPT, Trung cấp. Nhà trường chỉ xét tuyển dựa trên hồ sơ, không thi tuyển đầu vào.",
+      "reference_contexts": [
+        "Chương trình Cử nhân Hệ đào tào từ xa qua mạng của trường phù hợp với tất cả các bạn đã tốt nghiệp THPT, Trung cấp. Nhà trường chỉ xét tuyển dựa trên hồ sơ, không thi tuyển đầu vào"
+      ],
+      "answer": "",
+      "contexts": [],
+      "category": "tuyen_sinh",
+      "difficulty": "easy",
+      "eval_type": "standard",
+      "latency_ms": 0.0,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "correctness": 0.0
+      }
+    },
+    {
+      "question": "Bảo lưu kết quả trúng tuyển thực hiện trong trường hợp nào và nộp đơn khi nào?",
+      "ground_truth": "Sau khi được xét trúng tuyển vào Trường, do một số hoàn cảnh đặc biệt như được điều động vào các lực lượng vũ trang, thai sản, bệnh tật, tai nạn, hoàn cảnh khó khăn xảy ra đột xuất, thí sinh trúng tuyển có thể xin bảo lưu kết quả. Thí sinh trúng tuyển phải nộp đơn xin bảo lưu chậm nhất 15 ngày kể từ ngày trúng tuyển.",
+      "reference_contexts": [
+        "Điều 14. Bảo lưu kết quả trúng tuyển\nSau khi được xét tring tuyển vào Trường, do một số hoàn cảnh đặc biệt như được điều động vào các lực lượng vũ trang, thai sản, bệnh tật, tai nạn, hoàn cảnh khó khăn xảy ra đột xuất, thí sinh tring tuyến có thé xin bảo lưu kết qua. Thí sinh trúng tuyên phải nộp don xin bảo lưu chậm nhất 15 ngày ké từ ngày trúng tuyển."
+      ],
+      "answer": "",
+      "contexts": [],
+      "category": "tuyen_sinh",
+      "difficulty": "medium",
+      "eval_type": "standard",
+      "latency_ms": 0.0,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "correctness": 0.0
+      }
+    },
+    {
+      "question": "Chương trình liên thông đại học hệ từ xa dành cho đối tượng nào?",
+      "ground_truth": "Chương trình Liên thông đại học (1,5-2 năm) dành cho các bạn đã tốt nghiệp cao đẳng các ngành thuộc lĩnh vực công nghệ thông tin. Xét tuyển căn cứ trên bằng tốt nghiệp cao đẳng và điểm tích lũy tại hệ Cao đẳng.",
+      "reference_contexts": [
+        "Chương trình Liên thông đại học (1,5 2 năm): Dành cho các bạn đã tốt nghiệp cao đẳng các ngành thuộc lĩnh vực công nghệ thông tin. Xét tuyển căn cứ trên bằng tốt nghiệp cao đẳng và điểm tích luỹ tại hệ Cao đẳng."
+      ],
+      "answer": "",
+      "contexts": [],
+      "category": "tuyen_sinh",
+      "difficulty": "easy",
+      "eval_type": "standard",
+      "latency_ms": 0.0,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "correctness": 0.0
+      }
+    },
+    {
+      "question": "Nộp hồ sơ xét tuyển hệ đào tạo từ xa UIT ở đâu?",
+      "ground_truth": "Từ năm 2022, Trung tâm triển khai xét tuyển bằng hình thức nộp hồ sơ online tại trang tuyensinh.citd.vn, nên sinh viên sẽ không nộp lệ phí xét tuyển bằng tiền mặt.",
+      "reference_contexts": [
+        "Từ năm 2022, Trung tâm triển khai xét tuyển bằng hình thức nộp hồ sơ online tại trang\ntuyensinh.citd.vn\n, nên sinh viên sẽ không nộp lệ phí xét tuyển bằng tiền mặt."
+      ],
+      "answer": "",
+      "contexts": [],
+      "category": "tuyen_sinh",
+      "difficulty": "easy",
+      "eval_type": "standard",
+      "latency_ms": 0.0,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "correctness": 0.0
+      }
+    },
+    {
+      "question": "Sinh viên được bảo lưu kết quả học tập tối đa bao nhiêu học kỳ?",
+      "ground_truth": "Thời gian tạm dừng học tập từ 01 đến tối đa 02 học kỳ chính liên tiếp, được tính vào thời gian tối đa hoàn thành khóa học, ngoại trừ trường hợp được điều động vào lực lượng vũ trang.",
+      "reference_contexts": [
+        "Thời gian tạm dừng, bảp lưu kết quả học tập\ntừ 01 đến tối đa 02 học kỳ chính liên tiếp\n, được tính vào thời gian tối đa hoàn thành khóa học ngoại\ntrừ trường hợp thực hiện nghĩa vụ quân sự.",
+        "Thời gian tạm dừng học tập từ một đến tối đa hai học kỳ chính liên tiếp, được tính vào thời gian tối đa hoàn thành khóa học quy định tại Điều 10 của quy chế này, ngoại trừ trường hợp được điều động vào lực lượng vũ trang."
+      ],
+      "answer": "",
+      "contexts": [],
+      "category": "hoc_vu",
+      "difficulty": "easy",
+      "eval_type": "standard",
+      "latency_ms": 0.0,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "correctness": 0.0
+      }
+    },
+    {
+      "question": "Quy định học lại và học cải thiện điểm về thời gian đăng ký như thế nào?",
+      "ground_truth": "Sinh viên muốn đăng ký học lại hoặc học cải thiện một môn học phải đăng ký ở học kỳ cách ít nhất một học kỳ đã học môn học đó. Ví dụ: học môn ở HK1 thì phải đợi đến HK3 mới được đăng ký học lại hoặc cải thiện môn này.",
+      "reference_contexts": [
+        "Quy định về thời gian: SV muốn đăng ký học lại/ học cải thiện một môn học phải đăng ký ở học kỳ cách ít nhất một học kỳ đã học môn học đó.\nVí dụ: SV học môn Giải tích ở HK1 (2025 2026) thì phải đợi đến HK3 (2025 2026) mới được đăng ký học lại/ học cải thiện môn này."
+      ],
+      "answer": "",
+      "contexts": [],
+      "category": "hoc_vu",
+      "difficulty": "medium",
+      "eval_type": "standard",
+      "latency_ms": 0.0,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "correctness": 0.0
+      }
+    },
+    {
+      "question": "Quy trình hoãn thi khi không thể tham dự kỳ thi đúng tiến độ?",
+      "ground_truth": "Trường hợp vì lý do cá nhân không thể tham dự kỳ thi đúng tiến độ, sinh viên phải đăng ký hoãn thi bằng đơn tại Phòng Đào tạo Trung tâm theo các mốc thời gian được thông báo. Sinh viên tải mẫu đơn xin hoãn thi, điền đầy đủ thông tin, ký xác nhận, sau đó gửi bản scan đơn và giấy tờ liên quan qua email phongdaotao.citd@uit.edu.vn với tiêu đề MSSV_ĐƠN XIN HOÃN THI.",
+      "reference_contexts": [
+        "QUY TRÌNH HOÃN THI\nTrường hợp vì lý do cá nhân, sinh viên không thể tham dự kỳ thi đúng tiến độ, sinh viên phải đăng ký hoãn thi bằng đơn tại Phòng Đào tạo Trung tâm theo các mốc thời gian được thông báo.\nCác bước thực hiện:\nBước 1:\nSinh viên tải\nmẫu đơn xin hoãn thi\n, điền đầy đủ thông tin, ký xác nhận.\nBước 2:\nSinh viên sử dụng email sinh viên (mssv@ms.uit.edu.vn), đính kèm bản scan đơn và các giấy tờ liên quan gửi về Phòng đào tạo CITD qua email phongdaotao.citd@uit.edu.vn."
+      ],
+      "answer": "",
+      "contexts": [],
+      "category": "hoc_vu",
+      "difficulty": "medium",
+      "eval_type": "standard",
+      "latency_ms": 0.0,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "correctness": 0.0
+      }
+    },
+    {
+      "question": "Quy trình phúc khảo điểm thi như thế nào?",
+      "ground_truth": "Sinh viên kiểm tra điểm và liên hệ Giảng viên qua email khi có thắc mắc. Nếu Giảng viên chưa phản hồi, sinh viên làm đơn phúc khảo theo mẫu, điền đầy đủ thông tin và đóng lệ phí phúc khảo 20.000đ/môn, sau đó gửi bản scan đơn phúc khảo và biên lai qua email sinh viên (mssv@ms.uit.edu.vn) đến phongdaotao.citd@uit.edu.vn.",
+      "reference_contexts": [
+        "HƯỚNG DẪN SINH VIÊN PHÚC KHẢO ĐIỂM\nBước 1:\nSinh viên kiểm tra điểm và liên hệ Giảng viên qua kênh email khi có thắc mắc, thiếu sót trong quá trình chấm điểm, nhập điểm. Trong trường hợp Giảng viên chưa phản hồi, sinh viên thực hiện từ bước số 2.\nBước 2\n: Sinh viên làm đơn phúc khảo theo\nMẫu đơn phúc khảo\n, điền đầy đủ thông tin và đóng lệ phí phúc khảo (20.000đ/môn)"
+      ],
+      "answer": "",
+      "contexts": [],
+      "category": "hoc_vu",
+      "difficulty": "easy",
+      "eval_type": "standard",
+      "latency_ms": 0.0,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "correctness": 0.0
+      }
+    },
+    {
+      "question": "Thủ tục thôi học dành cho sinh viên hệ đào tạo từ xa như thế nào?",
+      "ground_truth": "Sinh viên tải đơn và điền đầy đủ thông tin, chữ ký, sau đó sử dụng email sinh viên (mssv@ms.uit.edu.vn) đính kèm bản scan đơn gửi về Phòng đào tạo CITD qua email phongdaotao.citd@uit.edu.vn với tiêu đề MSSV_ĐƠN XIN THÔI HỌC. Lưu ý scan đơn bằng công cụ như Scanner hoặc CamScanner, không chụp ảnh bằng điện thoại.",
+      "reference_contexts": [
+        "Hướng dẫn thủ tục thôi học dành cho sinh viên\nĐối tượng áp dụng:\nSinh viên hệ đào tạo từ xa có nguyện vọng thôi học tại trường.\nBước 1:\nSinh viên\ntải đơn và điền đầy đủ thông tin, chữ ký\nBước 2:\nSịnh viên sử dụng email sinh viên (mssv@ms.uit.edu.vn), đính kèm bản scan đơn gửi về Phòng đào tạo CITD qua email phongdaotao.citd@uit.edu.vn. Tiêu đề email: MSSV_ĐƠN XIN THÔI HỌC."
+      ],
+      "answer": "",
+      "contexts": [],
+      "category": "hoc_vu",
+      "difficulty": "easy",
+      "eval_type": "standard",
+      "latency_ms": 0.0,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "correctness": 0.0
+      }
+    },
+    {
+      "question": "Nhận thẻ sinh viên hệ đào tạo từ xa ở đâu và giờ nào?",
+      "ground_truth": "Sinh viên đến Trung tâm Phát triển Công nghệ Thông tin, số 07-09 Nguyễn Bỉnh Khiêm, phường Sài Gòn, TP. Hồ Chí Minh (Tầng 1, Toà E, Trường Cán bộ Quản lý Giáo dục) vào giờ hành chính từ thứ 2 đến thứ 6, sáng từ 8g30-11g30, chiều từ 14g00-17g00.",
+      "reference_contexts": [
+        "Hướng dẫn sinh viên nhận Thẻ sinh viên\nĐối với sinh viên nhận trực tiếp hoặc nhờ người thân/bạn bè nhận giúp\nBước 1:\nSinh viên đến Trung tâm Phát triển Công nghệ Thông tin, số 07-09 Nguyễn Bỉnh Khiêm, phường Sài Gòn, TP. Hồ Chí Minh (Tầng 1, Toà E, Trường Cán bộ Quản lý Giáo dục) vào\ngiờ hành chính\n(thứ 2 đến thứ 6, sáng từ 8g30-11g30, chiều từ 14g00-17g00)."
+      ],
+      "answer": "",
+      "contexts": [],
+      "category": "hoc_vu",
+      "difficulty": "easy",
+      "eval_type": "standard",
+      "latency_ms": 0.0,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "correctness": 0.0
+      }
+    },
+    {
+      "question": "Quy trình in lại thẻ sinh viên bị mất hoặc hư hỏng?",
+      "ground_truth": "Sinh viên điền thông tin vào đường dẫn https://link.uit.edu.vn/CapLaiTheSV_HDTTX, sau đó nộp đơn đề nghị cấp lại thẻ sinh viên và đóng lệ phí tiền mặt 100.000 đồng tại Trung tâm Phát triển Công nghệ Thông tin, số 07-09 Nguyễn Bỉnh Khiêm.",
+      "reference_contexts": [
+        "HƯỚNG DẪN SINH VIÊN IN LẠI THẺ SINH VIÊN\nĐối tượng áp dụng:\nSinh viên hệ đào tạo từ xa đã được cấp thẻ sinh viên nhưng thẻ bị hư hỏng, bị mất thẻ, sinh viên hệ chính quy chuyển qua hệ đào tạo từ xa.\nBước 1:\nSinh viên điền các thông tin vào đường dẫn sau:\nhttps://link.uit.edu.vn/CapLaiTheSV_HDTTX\nBước 2:\nSinh viên nộp\nđơn đề nghị cấp lại thẻ sinh viên\nvà đóng lệ phí\ntiền mặt\n100.000 đồng tại Trung tâm Phát triển Công nghệ Thông tin"
+      ],
+      "answer": "",
+      "contexts": [],
+      "category": "hoc_vu",
+      "difficulty": "easy",
+      "eval_type": "standard",
+      "latency_ms": 0.0,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "correctness": 0.0
+      }
+    },
+    {
+      "question": "Cách đăng ký giấy xác nhận sinh viên hệ đào tạo từ xa?",
+      "ground_truth": "Sinh viên hệ Đào tạo Từ xa có thể đề nghị Trường cấp giấy xác nhận sinh viên theo hướng dẫn. Sinh viên phải đảm bảo đã tạo hồ sơ sinh viên trực tuyến và đóng học phí đầy đủ tại student.uit.edu.vn.",
+      "reference_contexts": [
+        "HƯỚNG DẪN SINH VIÊN ĐĂNG KÝ GIẤY XÁC NHẬN SINH VIÊN Chỉ áp dụng cho sinh viên hệ Đào tạo Từ xa\nSinh viên hệ Đào tạo Từ xa có thể đề nghị Trường cấp giấy xác nhận dành cho sinh viên (giấy xác nhận sinh viên, giấy giới thiệu sinh viên,) theo hướng dẫn sau:\nBước 1:\nSinh viên phải đảm bảo đã\ntạo hồ sơ sinh viên trực tuyến\nđóng học phí đầy đủ\ntại\nstudent.uit.edu.vn/sinhvien/thongtin"
+      ],
+      "answer": "",
+      "contexts": [],
+      "category": "hoc_vu",
+      "difficulty": "medium",
+      "eval_type": "standard",
+      "latency_ms": 0.0,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "correctness": 0.0
+      }
+    },
+    {
+      "question": "Lịch học và hình thức học hệ đào tạo từ xa UIT như thế nào?",
+      "ground_truth": "Chương trình học hoàn toàn trực tuyến vào buổi tối (từ 18g15 đến 21g30) các ngày trong tuần. Cuối tuần nếu có lớp sẽ học theo lịch của giảng viên (hiếm khi). Thi cuối kỳ tập trung tại Trường vào thứ 7 và chủ nhật.",
+      "reference_contexts": [
+        "Thời gian học, lịch học, lịch thi của hệ từ xa?\nChương trình học hoàn toàn trực tuyến vào buổi tối (từ 18g15 21g30) các ngày trong tuần, riêng cuối tuần nếu có lớp sẽ học theo lịch của giảng viên (hiếm khi).\nThi cuối kỳ tập trung tại Trường (không thi giữa kỳ trực tiếp). Nhà trường luôn sắp xếp thi cuối kỳ trong thứ 7 và chủ nh"
+      ],
+      "answer": "",
+      "contexts": [],
+      "category": "hoc_vu",
+      "difficulty": "easy",
+      "eval_type": "standard",
+      "latency_ms": 0.0,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "correctness": 0.0
+      }
+    },
+    {
+      "question": "Quy trình gia hạn học phí cho sinh viên gặp khó khăn kinh tế?",
+      "ground_truth": "Sinh viên phải đảm bảo đã tạo hồ sơ sinh viên trực tuyến tại student.uit.edu.vn, sau đó thực hiện nộp 50% học phí theo thông báo của Trung tâm, rồi tải đơn xin gia hạn học phí, điền thông tin và gửi về Phòng Đào tạo để được xét duyệt.",
+      "reference_contexts": [
+        "HƯỚNG DẪN SINH VIÊN GIA HẠN HỌC PHÍ\nSinh viên vì lý do kinh tế gia đình chưa đáp ứng được việc đóng học phí cho Nhà trường, có thể đề nghị Trường gia hạn học phí theo hướng dẫn sau:\nBước 1:\nSinh viên phải đảm bảo đã tạo hồ sơ sinh viên trực tuyến tại\nstudent.uit.edu.vn/sinhvien/thongtin\nBước 2:\nSinh viên thực hiện\nnộp 50% học phí\ntheo thông báo của Trung tâm"
+      ],
+      "answer": "",
+      "contexts": [],
+      "category": "hoc_phi",
+      "difficulty": "medium",
+      "eval_type": "standard",
+      "latency_ms": 0.0,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "correctness": 0.0
+      }
+    },
+    {
+      "question": "Cách nhận hóa đơn sau khi đóng học phí hệ đào tạo từ xa?",
+      "ground_truth": "Sau khi đóng học phí qua chuyển khoản hoặc nộp tại ngân hàng, sinh viên chụp lại biên lai. Sinh viên truy cập link https://link.uit.edu.vn/BienLaiHocPhi_DTTX, khai đầy đủ thông tin và làm theo hướng dẫn. Email sinh viên cung cấp bắt buộc phải là email sinh viên có dạng mssv@ms.uit.edu.vn.",
+      "reference_contexts": [
+        "HƯỚNG DẪN SINH VIÊN NHẬN HÓA ĐƠN ĐÓNG HỌC PHÍ\nBước 1:\nSau khi đóng học phí qua hình thức chuyển khoản hoặc nộp tiền tại ngân hàng, sinh viên chụp lại biên lai hoặc hình ảnh chuyển khoản.\nBước 2:\n1. Với trường hợp sinh viên lấy hóa đơn cho bản thân:\nSinh viên truy cập link\nhttps://link.uit.edu.vn/BienLaiHocPhi_DTTX\n, khai đầy đủ thông tin và làm theo hướng dẫn. (Lưu ý, email sinh viên cung cấp bắt buộc phải là email sinh viên có dạng mssv@ms.uit.edu.vn)"
+      ],
+      "answer": "",
+      "contexts": [],
+      "category": "hoc_phi",
+      "difficulty": "easy",
+      "eval_type": "standard",
+      "latency_ms": 0.0,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "correctness": 0.0
+      }
+    },
+    {
+      "question": "Những trường hợp nào được rút học phí?",
+      "ground_truth": "Các đối tượng được rút học phí gồm: tân sinh viên đã có quyết định cho thôi học và được phép rút lại học phí; sinh viên đóng học phí nhập học quá thời hạn nhập học và không còn theo học tại trường; ứng viên đóng lệ phí xét tuyển hoặc lệ phí thi chứng chỉ bị dư, bị nhầm.",
+      "reference_contexts": [
+        "QUY TRÌNH RÚT HỌC PHÍ\nĐối tượng áp dụng:\nTân sinh viên đã có quyết định cho thôi học và cho phép rút lại học phí\nSinh viên đóng học phí nhập học quá thời hạn nhập học và không còn theo học tại trường\nỨng viên đóng lệ phí xét tuyển, lệ phí thi chứng chỉ bị dư, bị nhầm"
+      ],
+      "answer": "",
+      "contexts": [],
+      "category": "hoc_phi",
+      "difficulty": "medium",
+      "eval_type": "standard",
+      "latency_ms": 0.0,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "correctness": 0.0
+      }
+    },
+    {
+      "question": "Lệ phí phúc khảo điểm thi là bao nhiêu?",
+      "ground_truth": "Lệ phí phúc khảo là 20.000 đồng mỗi môn.",
+      "reference_contexts": [
+        "Sinh viên làm đơn phúc khảo theo\nMẫu đơn phúc khảo\n, điền đầy đủ thông tin và đóng lệ phí phúc khảo (20.000đ/môn)"
+      ],
+      "answer": "",
+      "contexts": [],
+      "category": "hoc_phi",
+      "difficulty": "easy",
+      "eval_type": "standard",
+      "latency_ms": 0.0,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "correctness": 0.0
+      }
+    },
+    {
+      "question": "Cách chuyển khoản lệ phí xét tuyển hệ đào tạo từ xa UIT?",
+      "ground_truth": "Ứng viên chuyển khoản về Trung tâm Phát triển Công nghệ Thông tin, số tài khoản 007 100 352 5391 tại Ngân hàng TMCP Ngoại thương (Vietcombank) Chi nhánh TP.HCM, sau đó chụp lại màn hình chuyển khoản để xác nhận.",
+      "reference_contexts": [
+        "Ứng viên chuyển khoản về và chụp lại màn hình:\nTên tài khoản:\nTrung tâm Phát triển Công nghệ Thông tin\nSố tài khoản:\n007 100 352 5391\nTại:\nNgân hàng TMCP Ngoại thương (Vietcombank) Chi nhánh TP.HCM"
+      ],
+      "answer": "",
+      "contexts": [],
+      "category": "hoc_phi",
+      "difficulty": "easy",
+      "eval_type": "standard",
+      "latency_ms": 0.0,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "correctness": 0.0
+      }
+    },
+    {
+      "question": "Số tín chỉ tốt nghiệp chương trình văn bằng 1 ngành CNTT hệ đào tạo từ xa là bao nhiêu?",
+      "ground_truth": "Chương trình văn bằng 1 ngành Công nghệ Thông tin hệ đào tạo từ xa có số tín chỉ tích lũy để tốt nghiệp là 128 tín chỉ.",
+      "reference_contexts": [
+        "Chương trình văn bằng 1 có số tín chỉ tích luỹ để tốt nghiệp là 128 tín chỉ."
+      ],
+      "answer": "",
+      "contexts": [],
+      "category": "ctdt",
+      "difficulty": "easy",
+      "eval_type": "standard",
+      "latency_ms": 0.0,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "correctness": 0.0
+      }
+    },
+    {
+      "question": "Số tín chỉ tốt nghiệp chương trình văn bằng 2 ngành Trí tuệ Nhân tạo hệ đào tạo từ xa là bao nhiêu?",
+      "ground_truth": "Chương trình văn bằng 2 ngành Trí tuệ Nhân tạo hệ đào tạo từ xa có số tín chỉ tích lũy để tốt nghiệp là 79 tín chỉ.",
+      "reference_contexts": [
+        "Tín chỉ tích lũy ngành Trí tuệ Nhân tạo hệ đào tạo từ xa năm 2026:\nChương trình văn bằng 1 có số tín chỉ tích luỹ để tốt nghiệp là 128 tín chỉ.\nChương trình văn bằng 2 có số tín chỉ tích luỹ để tốt nghiệp là 79 tín chỉ."
+      ],
+      "answer": "",
+      "contexts": [],
+      "category": "ctdt",
+      "difficulty": "easy",
+      "eval_type": "standard",
+      "latency_ms": 0.0,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "correctness": 0.0
+      }
+    },
+    {
+      "question": "Số tín chỉ liên thông đại học ngành CNTT từ ngành đúng và ngành gần là bao nhiêu?",
+      "ground_truth": "Chương trình liên thông đại học ngành CNTT hệ từ xa có số tín chỉ tích lũy để tốt nghiệp là 52 tín chỉ cho liên thông từ ngành đúng và 72 tín chỉ cho liên thông từ ngành gần.",
+      "reference_contexts": [
+        "Chương trình liên thông đại học có số tín chỉ tích luỹ để tốt nghiệp là 52 tín chỉ cho liên thông từ ngành đúng và 72 cho liên thông từ ngành gần."
+      ],
+      "answer": "",
+      "contexts": [],
+      "category": "ctdt",
+      "difficulty": "medium",
+      "eval_type": "standard",
+      "latency_ms": 0.0,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "correctness": 0.0
+      }
+    },
+    {
+      "question": "Thời gian đào tạo chương trình văn bằng 1 hệ đào tạo từ xa là bao nhiêu năm?",
+      "ground_truth": "Đào tạo trình độ đại học được thực hiện từ 3 đến 5 năm đối với chương trình văn bằng thứ nhất; từ 2 năm đến 2,5 năm học đối với chương trình văn bằng thứ hai; từ 1,5 năm đến 2 năm học đối với chương trình liên thông đại học.",
+      "reference_contexts": [
+        "Điều 10. Khóa học\na) Đào tạo trình độ đại học được thực hiện từ 3 đến 5 năm đối với chương trình văn bằng thứ nhất; từ 2 năm đến 2,5 năm học đối với chương trình văn bằng thứ hai; từ 1,5 năm đến 2 năm học đối với chương trình liên thông đại học."
+      ],
+      "answer": "",
+      "contexts": [],
+      "category": "ctdt",
+      "difficulty": "easy",
+      "eval_type": "standard",
+      "latency_ms": 0.0,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "correctness": 0.0
+      }
+    },
+    {
+      "question": "Ngành Trí tuệ Nhân tạo hệ từ xa có chia hướng chuyên ngành không?",
+      "ground_truth": "Ngành Trí tuệ Nhân tạo hệ từ xa của UIT hiện không chia thành nhiều hướng chuyên ngành trong CTĐT. Đây là một chương trình thống nhất, khác với CNTT hệ từ xa nơi CTĐT công bố rõ 02 hướng chuyên ngành.",
+      "reference_contexts": [
+        "Định hướng chuyên ngành của ngành Trí tuệ nhân tạo hệ từ xa\nNgành Trí tuệ nhân tạo hệ từ xa của UIT hiện không thấy chia thành nhiều hướng chuyên ngành trong CTĐT public. Có thể xem đây là một chương trình thống nhất. Khác với CNTT hệ từ xa, nơi CTĐT công bố rõ 02 hướng chuyên ngành."
+      ],
+      "answer": "",
+      "contexts": [],
+      "category": "ctdt",
+      "difficulty": "medium",
+      "eval_type": "standard",
+      "latency_ms": 0.0,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "correctness": 0.0
+      }
+    },
+    {
+      "question": "Bằng cử nhân hệ đào tạo từ xa UIT có ghi hình thức đào tạo trên bằng không?",
+      "ground_truth": "Không. Nội dung ghi trên bằng tuân thủ Thông tư số 27/2019/TT-BGDĐT — hình thức đào tạo không thể hiện trên bằng mà chỉ thể hiện trên bảng điểm. Áp dụng cho các khóa trúng tuyển từ năm 2020 trở đi.",
+      "reference_contexts": [
+        "Nội dung ghi trên bằng tuân thủ đúng Thông tư số 27/2019/TTBGDĐT (Không thể hiện hình thức đào tạo trên bằng, thể hiện trên bảng điểm). Áp dụng cho các khóa trúng tuyển từ năm 2020 trở đi."
+      ],
+      "answer": "",
+      "contexts": [],
+      "category": "ctdt",
+      "difficulty": "medium",
+      "eval_type": "standard",
+      "latency_ms": 0.0,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "correctness": 0.0
+      }
+    },
+    {
+      "question": "Hình thức đào tạo từ xa (DTTX) được định nghĩa như thế nào theo quy chế?",
+      "ground_truth": "Hình thức DTTX là hình thức đào tạo có 50% tổng khối lượng của chương trình đào tạo được thực hiện bằng phương pháp dạy học từ xa.",
+      "reference_contexts": [
+        "Điều 2. Giải thích từ ngữ\n1. Hình thức DTTX là hình thức đào tạo có 50% tổng khối lượng của"
+      ],
+      "answer": "",
+      "contexts": [],
+      "category": "quy_che",
+      "difficulty": "hard",
+      "eval_type": "standard",
+      "latency_ms": 0.0,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "correctness": 0.0
+      }
+    },
+    {
+      "question": "Số tín chỉ được công nhận từ cơ sở đào tạo khác tối đa là bao nhiêu phần trăm?",
+      "ground_truth": "Số tín chỉ được công nhận kết quả học tập để chuyển đổi, miễn trừ tích lũy từ các cơ sở đào tạo khác ngoài Trường ĐHCNTT không được vượt quá 50% tổng số tín chỉ của chương trình DTTX.",
+      "reference_contexts": [
+        "Điều 20. Công nhận kết quả học tập\nSố tin chỉ được công nhận kết quả học tập để chuyển đổi, miễn trừ tích lũy từ các cơ sở đào tạo khác ngoài Trường ĐHCNTT không được vượt quá 50% tông số tín chỉ của chương trình DTTX."
+      ],
+      "answer": "",
+      "contexts": [],
+      "category": "quy_che",
+      "difficulty": "hard",
+      "eval_type": "standard",
+      "latency_ms": 0.0,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "correctness": 0.0
+      }
+    },
+    {
+      "question": "Vi phạm thi hộ lần đầu bị xử lý như thế nào?",
+      "ground_truth": "Sinh viên bị đình chỉ học tập 1 học kỳ chính nếu vi phạm lần đầu trong việc đi thi hộ hoặc nhờ người thi hộ.",
+      "reference_contexts": [
+        "2. Đình chỉ học tập:\n- Sinh viên bị đình chỉ học tập 1 học ky chính nếu vi phạm lần đầu trong việc di thi\nhộ hoặc nhờ người thi hộ."
+      ],
+      "answer": "",
+      "contexts": [],
+      "category": "quy_che",
+      "difficulty": "medium",
+      "eval_type": "standard",
+      "latency_ms": 0.0,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "correctness": 0.0
+      }
+    },
+    {
+      "question": "Sinh viên bị buộc thôi học trong những trường hợp nào?",
+      "ground_truth": "Sinh viên bị buộc thôi học và xóa tên khỏi danh sách sinh viên nếu đã bị cảnh báo học vụ 2 lần liên tiếp nhưng tiếp tục vi phạm mức cảnh báo học vụ, hoặc vi phạm nghiêm trọng các hành vi sinh viên không được làm.",
+      "reference_contexts": [
+        "3. Buộc thôi học: Sinh viên bị buộc thôi học và xóa tên khỏi danh sách sinh viên nếu rơi\nvào một trong những trường hợp sau đây:\n- _ Đã bị cảnh báo học vụ 2 lần liên tiếp nhưng tiếp tục vi phạm mức cảnh báo học vụ"
+      ],
+      "answer": "",
+      "contexts": [],
+      "category": "quy_che",
+      "difficulty": "medium",
+      "eval_type": "standard",
+      "latency_ms": 0.0,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "correctness": 0.0
+      }
+    },
+    {
+      "question": "Xếp loại tốt nghiệp bị giảm 1 bậc khi nào dù kết quả học tập đạt xuất sắc?",
+      "ground_truth": "Đối với sinh viên có kết quả học tập toàn khóa đạt Xuất sắc, loại tốt nghiệp sẽ giảm xuống 1 bậc nếu: có thời gian học tập tại Trường vượt quá 02 học kỳ so với thời gian thiết kế chương trình; trong thời gian học đã bị kỷ luật mức cảnh cáo trở lên; hoặc có số tín chỉ học lại vượt quá 5% tổng số tín chỉ toàn khóa.",
+      "reference_contexts": [
+        "2. Xếp loại tốt nghiệp được xác định dựa trên DTBCTL theo bảng xếp loại quy định tại\nKhoản 4, Điều 19 của Quy chế này. Riêng đối với những sinh viên có kết quả học tập\ntoàn khóa đạt \"Xuất sắc\", loại tốt nghiệp sẽ giảm xuống 1 bậc nếu rơi vào các trường\nhợp sau:\n- C6 thời gian học tập tại Trường vượt quá 02 học kỳ so với thời gian thiết kế\nchương trình đào tạo.\n- _ Trong thời gian học, đã bị ky luật mức cảnh cáo trở lên.\n- _ Có số tín chỉ học lại vượt quá 5% tổng số tín chỉ toàn khóa."
+      ],
+      "answer": "",
+      "contexts": [],
+      "category": "quy_che",
+      "difficulty": "hard",
+      "eval_type": "standard",
+      "latency_ms": 0.0,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "correctness": 0.0
+      }
+    },
+    {
+      "question": "Quy trình nộp hồ sơ xét tốt nghiệp như thế nào?",
+      "ground_truth": "Phòng Đào tạo Trung tâm cập nhật danh sách sinh viên dự kiến đủ điều kiện xét tại website https://www.citd.vn. Sinh viên chuẩn bị hồ sơ xét tốt nghiệp theo mẫu đính kèm bao gồm đơn xin xét tốt nghiệp và các hồ sơ kèm theo. Sinh viên có thể nộp qua bưu điện hoặc nộp trực tiếp tại Trung tâm.",
+      "reference_contexts": [
+        "Hướng dẫn Sinh viên nộp hồ sơ xét tốt nghiệp\nCác bước thực hiện\nBước 1:\nPhòng Đào tạo Trung tâm cập nhật danh sách sinh viên dự kiến đủ điều kiện xét tại website\nhttps://www.citd.vn/chuyen-muc/dao-tao/thong-bao-hoc-vu/.\nBước 2:\nSinh viên chuẩn bị hồ sơ xét tốt nghiệp theo mẫu đính kèm bao gồm:\n Đơn xin xét tốt nghiệp và các hồ sơ kèm theo đơn\nBước 3:\nSinh viên\ncó thể nộp qua bưu điện hoặc nộp trực tiếp\ntại Trung tâm Phát triển Công nghệ Th"
+      ],
+      "answer": "",
+      "contexts": [],
+      "category": "hoc_vu",
+      "difficulty": "easy",
+      "eval_type": "standard",
+      "latency_ms": 0.0,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "correctness": 0.0
+      }
+    },
+    {
+      "question": "Quy trình chuyển đổi tín chỉ cho sinh viên từ hệ chính quy sang hệ đào tạo từ xa?",
+      "ground_truth": "Sinh viên xem thông báo vào học kỳ nhập học của Phòng Đào tạo Trung tâm và làm theo hướng dẫn. Đối với sinh viên chuyển từ hệ chính quy sang hệ từ xa: tải Mẫu 1 xin chuyển điểm theo quyết định và Bảng điểm chuyển, điền đầy đủ thông tin và gửi mail về email phongdaotao.citd@uit.edu.vn sử dụng email sinh viên mssv@ms.uit.edu.vn.",
+      "reference_contexts": [
+        "Hướng dẫn chuyển đổi tín chỉ và công nhận kết quả học tập\nSinh viên xem thông báo vào học kỳ nhập học của Phòng Đào tạo Trung tâm và làm theo hướng dẫn.\nĐối với sinh viên chuyển từ hệ chính quy sang hệ từ xa:\nBước 1:\nSV tải\nMẫu 1 xin chuyển điểm theo quyết định\nBẢNG ĐIỂM CHUYỂN\n. Sau đó điền đầy đủ các thông tin và gửi mail các mẫu trên về email phongdaotao.citd@uit.edu.vn (Sinh viên cần sử dụng email do Trung tâm cấp để liên hệ, có dạng mssv@ms.uit.edu.vn)"
+      ],
+      "answer": "",
+      "contexts": [],
+      "category": "hoc_vu",
+      "difficulty": "medium",
+      "eval_type": "standard",
+      "latency_ms": 0.0,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "correctness": 0.0
+      }
+    },
+    {
+      "question": "CITD là gì và có chức năng gì?",
+      "ground_truth": "CITD là Trung tâm Phát triển Công nghệ Thông tin, hoạt động về Khoa học Công nghệ và Đào tạo trực thuộc Trường Đại học Công nghệ Thông tin, Đại học Quốc gia TP.HCM. Trung tâm được giao nhiệm vụ đào tạo Cử nhân Đại học hình thức đào tạo từ xa ngành Trí tuệ Nhân tạo và ngành Công nghệ Thông tin, hoạt động khoa học công nghệ, và tổ chức thi cấp chứng chỉ ứng dụng CNTT.",
+      "reference_contexts": [
+        "Là Trung tâm hoạt động về Khoa học Công nghệ và Đào tạo trực thuộc Trường Đại học Công nghệ Thông tin, Đại học Quốc gia Thành phố Hồ Chí Minh. Được Nhà trường giao nhiệm vụ triển khai đào tạo nguồn nhân lực Công nghệ Thông tin qua các chương trình:\n1. Đào tạo Cử nhân Đại học hình thức đào tạo từ xa ngành Trí tuệ Nhân tạo và ngành Công nghệ Thông tin\n2. Hoạt động khoa học công nghệ, chuyển giao khoa học công nghệ\n3. Tổ chức hoạt động thi, cấp chứng chỉ ứng dụng công nghệ thông tin cơ bản và nâng"
+      ],
+      "answer": "",
+      "contexts": [],
+      "category": "tuyen_sinh",
+      "difficulty": "easy",
+      "eval_type": "standard",
+      "latency_ms": 0.0,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "correctness": 0.0
+      }
+    },
+    {
+      "question": "Sinh viên hệ đào tạo từ xa phải mang gì khi ra vào trường?",
+      "ground_truth": "Sinh viên UIT hệ đào tạo từ xa khi ra vào Trường phải đeo thẻ sinh viên khi đến trường, học tập và sinh hoạt trong khuôn viên trường. Sinh viên không đeo thẻ có thể bị từ chối vào cổng.",
+      "reference_contexts": [
+        "Sinh viên UIT hệ đào tạo từ xa khi ra vào Trường cần chú ý:\n1. Đeo thẻ sinh viên khi đến trường, học tập và sinh hoạt trong khuôn viên trường.\n2. Sinh viên không đeo thẻ"
+      ],
+      "answer": "",
+      "contexts": [],
+      "category": "hoc_vu",
+      "difficulty": "easy",
+      "eval_type": "standard",
+      "latency_ms": 0.0,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "correctness": 0.0
+      }
+    },
+    {
+      "question": "Khi nào trường tổ chức tuyển sinh hệ đào tạo từ xa?",
+      "ground_truth": "Hằng năm, Trường dự kiến tổ chức nhận hồ sơ xét tuyển hệ đào tạo từ xa và khai giảng 3 đợt cố định: Đợt 1 từ 01/12 đến 15/01 khai giảng dự kiến vào tháng 2 năm sau.",
+      "reference_contexts": [
+        "Hằng năm, Trường dự kiến tổ chức nhận hồ sơ xét tuyển hệ đào tạo từ xa và khai giảng 3 đợt cố định:\n Đợt 1: 01/12 đến 15/01, khai giảng dự kiến vào tháng 2 năm sau"
+      ],
+      "answer": "",
+      "contexts": [],
+      "category": "tuyen_sinh",
+      "difficulty": "easy",
+      "eval_type": "noise",
+      "latency_ms": 0.0,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "correctness": 0.0
+      }
+    },
+    {
+      "question": "Lệ phí xét tuyển hệ đào tạo từ xa UIT là bao nhiêu?",
+      "ground_truth": "Lệ phí xét tuyển là 150.000đ/hồ sơ. Ứng viên chuyển khoản về tài khoản Trung tâm Phát triển Công nghệ Thông tin, số tài khoản 007 100 352 5391 tại Ngân hàng Vietcombank Chi nhánh TP.HCM.",
+      "reference_contexts": [
+        "Lệ phí xét tuyển:\n150.000đ/hồ sơ\nỨng viên chuyển khoản về và chụp lại màn hình:\nTên tài khoản: Trung tâm Phát triển Công nghệ Thông tin\nSố tài khoản: 007 100 352 5391\nTại: Ngân hàng TMCP Ngoại thương (Vietcombank) Chi nhánh TP.HCM"
+      ],
+      "answer": "",
+      "contexts": [],
+      "category": "tuyen_sinh",
+      "difficulty": "easy",
+      "eval_type": "noise",
+      "latency_ms": 0.0,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "correctness": 0.0
+      }
+    },
+    {
+      "question": "Chương trình liên thông đại học hệ từ xa dành cho đối tượng nào?",
+      "ground_truth": "Chương trình Liên thông đại học (1,5-2 năm) dành cho các bạn đã tốt nghiệp cao đẳng các ngành thuộc lĩnh vực công nghệ thông tin. Xét tuyển căn cứ trên bằng tốt nghiệp cao đẳng và điểm tích lũy tại hệ Cao đẳng.",
+      "reference_contexts": [
+        "Chương trình Liên thông đại học (1,5 2 năm): Dành cho các bạn đã tốt nghiệp cao đẳng các ngành thuộc lĩnh vực công nghệ thông tin. Xét tuyển căn cứ trên bằng tốt nghiệp cao đẳng và điểm tích luỹ tại hệ Cao đẳng."
+      ],
+      "answer": "",
+      "contexts": [],
+      "category": "tuyen_sinh",
+      "difficulty": "easy",
+      "eval_type": "noise",
+      "latency_ms": 0.0,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "correctness": 0.0
+      }
+    },
+    {
+      "question": "Bảo lưu kết quả trúng tuyển thực hiện trong trường hợp nào và nộp đơn khi nào?",
+      "ground_truth": "Sau khi được xét trúng tuyển vào Trường, do một số hoàn cảnh đặc biệt như được điều động vào các lực lượng vũ trang, thai sản, bệnh tật, tai nạn, hoàn cảnh khó khăn xảy ra đột xuất, thí sinh trúng tuyển có thể xin bảo lưu kết quả. Thí sinh trúng tuyển phải nộp đơn xin bảo lưu chậm nhất 15 ngày kể từ ngày trúng tuyển.",
+      "reference_contexts": [
+        "Điều 14. Bảo lưu kết quả trúng tuyển\nSau khi được xét tring tuyển vào Trường, do một số hoàn cảnh đặc biệt như được điều động vào các lực lượng vũ trang, thai sản, bệnh tật, tai nạn, hoàn cảnh khó khăn xảy ra đột xuất, thí sinh tring tuyến có thé xin bảo lưu kết qua. Thí sinh trúng tuyên phải nộp don xin bảo lưu chậm nhất 15 ngày ké từ ngày trúng tuyển."
+      ],
+      "answer": "",
+      "contexts": [],
+      "category": "tuyen_sinh",
+      "difficulty": "medium",
+      "eval_type": "noise",
+      "latency_ms": 0.0,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "correctness": 0.0
+      }
+    },
+    {
+      "question": "Sinh viên hệ từ xa có thể học theo hình thức nào?",
+      "ground_truth": "Sinh viên hệ đào tạo từ xa học chủ yếu qua mạng internet, tham gia lớp học trực tuyến theo lịch, và có thể xem lại bài giảng đã được ghi hình. Sinh viên cần tham dự đầy đủ các buổi học và hoàn thành bài tập theo yêu cầu của giảng viên.",
+      "reference_contexts": [
+        "Hệ đào tạo từ xa qua mạng: Sinh viên học trực tuyến qua hệ thống LMS, tham gia các buổi học theo lịch định kỳ, xem lại video bài giảng và hoàn thành bài tập trực tuyến."
+      ],
+      "answer": "",
+      "contexts": [],
+      "category": "hoc_vu",
+      "difficulty": "easy",
+      "eval_type": "noise",
+      "latency_ms": 0.0,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "correctness": 0.0
+      }
+    },
+    {
+      "question": "Cách nấu phở bò ngon tại nhà như thế nào?",
+      "ground_truth": "__REJECT__",
+      "reference_contexts": [],
+      "answer": "",
+      "contexts": [],
+      "category": "out_of_domain",
+      "difficulty": "easy",
+      "eval_type": "negative",
+      "latency_ms": 0.0,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "correctness": 0.0
+      }
+    },
+    {
+      "question": "Thời tiết Hà Nội hôm nay như thế nào, có nên mang ô không?",
+      "ground_truth": "__REJECT__",
+      "reference_contexts": [],
+      "answer": "",
+      "contexts": [],
+      "category": "out_of_domain",
+      "difficulty": "easy",
+      "eval_type": "negative",
+      "latency_ms": 0.0,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "correctness": 0.0
+      }
+    },
+    {
+      "question": "Đội tuyển bóng đá Việt Nam sẽ đá với đội nào ở vòng tiếp theo?",
+      "ground_truth": "__REJECT__",
+      "reference_contexts": [],
+      "answer": "",
+      "contexts": [],
+      "category": "out_of_domain",
+      "difficulty": "easy",
+      "eval_type": "negative",
+      "latency_ms": 0.0,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "correctness": 0.0
+      }
+    },
+    {
+      "question": "Giá vàng SJC hôm nay là bao nhiêu tiền một lượng?",
+      "ground_truth": "__REJECT__",
+      "reference_contexts": [],
+      "answer": "",
+      "contexts": [],
+      "category": "out_of_domain",
+      "difficulty": "easy",
+      "eval_type": "negative",
+      "latency_ms": 0.0,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "correctness": 0.0
+      }
+    },
+    {
+      "question": "Làm thế nào để cài đặt hệ điều hành Windows 11 trên máy tính cá nhân?",
+      "ground_truth": "__REJECT__",
+      "reference_contexts": [],
+      "answer": "",
+      "contexts": [],
+      "category": "out_of_domain",
+      "difficulty": "medium",
+      "eval_type": "negative",
+      "latency_ms": 0.0,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "correctness": 0.0
+      }
+    },
+    {
+      "question": "ChatGPT là gì và có thể dùng nó để viết luận văn tốt nghiệp không?",
+      "ground_truth": "__REJECT__",
+      "reference_contexts": [],
+      "answer": "",
+      "contexts": [],
+      "category": "out_of_domain",
+      "difficulty": "medium",
+      "eval_type": "negative",
+      "latency_ms": 0.0,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "correctness": 0.0
+      }
+    }
+  ],
+  "judge_model": "gemini-2.0-flash",
+  "latency": {
+    "p50_ms": 0.0,
+    "p90_ms": 0.0,
+    "p99_ms": 0.01,
+    "avg_ms": 0.0,
+    "min_ms": 0.0,
+    "max_ms": 0.01,
+    "per_category_avg_ms": {
+      "ctdt": 0.0,
+      "hoc_phi": 0.0,
+      "hoc_vu": 0.0,
+      "out_of_domain": 0.0,
+      "quy_che": 0.0,
+      "tuyen_sinh": 0.0
+    }
+  }
+}

@@ -1,7 +1,7 @@
 ---
 title: "Đánh giá hệ thống RAG Chatbot UIT"
 description: "Xây dựng pipeline đánh giá định lượng hệ thống RAG dùng RAGAS metrics + tạo bộ test dataset"
-status: pending
+status: in-progress
 priority: P1
 effort: 6h
 issue:
@@ -20,9 +20,9 @@ Hệ thống hiện chỉ có đánh giá định tính (manual). Plan này xây
 
 | # | Phase | Status | Effort | Link |
 |---|-------|--------|--------|------|
-| 1 | Tạo evaluation dataset | Pending | 2h | [phase-01](./phase-01-create-eval-dataset.md) |
-| 2 | Setup RAGAS pipeline | Pending | 2h | [phase-02](./phase-02-setup-ragas-pipeline.md) |
-| 3 | Chạy evaluation & báo cáo | Pending | 2h | [phase-03](./phase-03-run-evaluation-report.md) |
+| 1 | Tạo evaluation dataset | ✅ Completed | 2h | [phase-01](./phase-01-create-eval-dataset.md) |
+| 2 | Setup RAGAS pipeline | ✅ Completed | 2h | [phase-02](./phase-02-setup-ragas-pipeline.md) |
+| 3 | Chạy evaluation & báo cáo | 🔄 In Progress | 2h | [phase-03](./phase-03-run-evaluation-report.md) |
 
 ## Dependencies
 

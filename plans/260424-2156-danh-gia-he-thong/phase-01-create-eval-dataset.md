@@ -2,7 +2,7 @@
 
 ## Overview
 - **Priority**: P1
-- **Status**: Pending
+- **Status**: Completed
 - **Effort**: 2h
 
 Tạo bộ 30 câu hỏi ground truth bao phủ toàn bộ domain UIT đào tạo từ xa. Dataset dùng format RAGAS: `question`, `ground_truth`, `reference_contexts`.
@@ -67,11 +67,11 @@ Tạo bộ 30 câu hỏi ground truth bao phủ toàn bộ domain UIT đào tạ
 
 ## Todo List
 
-- [ ] Tạo `tests/evaluation/` directory
-- [ ] Đọc tài liệu gốc để xác định ground truth
-- [ ] Viết 30 câu hỏi với đầy đủ trường
-- [ ] Validate JSON format
-- [ ] Cross-check reference_contexts với Qdrant data
+- [x] Tạo `tests/evaluation/` directory
+- [x] Đọc tài liệu gốc để xác định ground truth
+- [x] Viết 30 câu hỏi với đầy đủ trường
+- [x] Validate JSON format
+- [x] Cross-check reference_contexts với Qdrant data
 
 ## Success Criteria
 

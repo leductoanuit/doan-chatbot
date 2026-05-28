@@ -68,12 +68,11 @@ def run_rag_pipeline(questions: list[dict]) -> list[dict]:
     for item in tqdm(questions, desc="Running RAG queries"):
         t0 = time.perf_counter()
         try:
-            # Call retriever directly to get full chunk content (not 150-char preview)
-            expanded_q = pipeline._expand_query(item["question"])
-            raw_results = retriever.hybrid_search(expanded_q, k=10, reranker=reranker)
-            contexts = [r["content"] for r in raw_results]
-
             result = pipeline.query(item["question"], top_k=10)
+            # Extract contexts from sources returned by pipeline
+            contexts = [r["content"] for r in retriever.hybrid_search(
+                item["question"], k=10, reranker=reranker
+            )]
             latency_ms = (time.perf_counter() - t0) * 1000
             samples.append({
                 "question": item["question"],

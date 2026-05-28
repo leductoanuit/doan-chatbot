@@ -2,7 +2,7 @@
 
 ## Overview
 - **Priority**: P1
-- **Status**: Pending
+- **Status**: In Progress (scripts ready, awaiting full run)
 - **Effort**: 2h
 - **Blocked by**: Phase 02
 
@@ -95,7 +95,7 @@ Chạy full evaluation 30 câu, phân tích kết quả, tạo báo cáo markdow
 ## Todo List
 
 - [ ] Chạy `run-evaluation.py` full 30 câu
-- [ ] Tạo `generate-eval-report.py`
+- [x] Tạo `generate-eval-report.py`
 - [ ] Phân tích kết quả theo category
 - [ ] Identify câu hỏi score thấp và nguyên nhân
 - [ ] Viết markdown summary

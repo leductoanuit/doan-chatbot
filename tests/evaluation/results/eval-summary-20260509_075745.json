@@ -1,0 +1,118 @@
+{
+  "timestamp": "2026-05-09T07:57:45.167438",
+  "total_questions": 46,
+  "metrics": {
+    "faithfulness": 0.0,
+    "answer_relevancy": 0.0,
+    "context_precision": 0.0,
+    "context_recall": 0.0,
+    "correctness": 0.0
+  },
+  "by_category": {
+    "ctdt": {
+      "faithfulness": 0.0,
+      "answer_relevancy": 0.0,
+      "context_precision": 0.0,
+      "context_recall": 0.0
+    },
+    "hoc_phi": {
+      "faithfulness": 0.0,
+      "answer_relevancy": 0.0,
+      "context_precision": 0.0,
+      "context_recall": 0.0
+    },
+    "hoc_vu": {
+      "faithfulness": 0.0,
+      "answer_relevancy": 0.0,
+      "context_precision": 0.0,
+      "context_recall": 0.0
+    },
+    "out_of_domain": {
+      "faithfulness": 0.0,
+      "answer_relevancy": 0.0,
+      "context_precision": 0.0,
+      "context_recall": 0.0
+    },
+    "quy_che": {
+      "faithfulness": 0.0,
+      "answer_relevancy": 0.0,
+      "context_precision": 0.0,
+      "context_recall": 0.0
+    },
+    "tuyen_sinh": {
+      "faithfulness": 0.0,
+      "answer_relevancy": 0.0,
+      "context_precision": 0.0,
+      "context_recall": 0.0
+    }
+  },
+  "by_difficulty": {
+    "easy": {
+      "faithfulness": 0.0,
+      "answer_relevancy": 0.0,
+      "context_precision": 0.0,
+      "context_recall": 0.0
+    },
+    "hard": {
+      "faithfulness": 0.0,
+      "answer_relevancy": 0.0,
+      "context_precision": 0.0,
+      "context_recall": 0.0
+    },
+    "medium": {
+      "faithfulness": 0.0,
+      "answer_relevancy": 0.0,
+      "context_precision": 0.0,
+      "context_recall": 0.0
+    }
+  },
+  "worst_context_recall": [
+    {
+      "question": "Khi nào trường tổ chức tuyển sinh hệ đào tạo từ xa?",
+      "category": "tuyen_sinh",
+      "context_recall": 0.0,
+      "faithfulness": 0.0
+    },
+    {
+      "question": "Lệ phí xét tuyển hệ đào tạo từ xa UIT là bao nhiêu?",
+      "category": "tuyen_sinh",
+      "context_recall": 0.0,
+      "faithfulness": 0.0
+    },
+    {
+      "question": "Tốt nghiệp THPT có thể học chương trình nào của UIT hệ từ xa?",
+      "category": "tuyen_sinh",
+      "context_recall": 0.0,
+      "faithfulness": 0.0
+    },
+    {
+      "question": "Bảo lưu kết quả trúng tuyển thực hiện trong trường hợp nào và nộp đơn khi nào?",
+      "category": "tuyen_sinh",
+      "context_recall": 0.0,
+      "faithfulness": 0.0
+    },
+    {
+      "question": "Chương trình liên thông đại học hệ từ xa dành cho đối tượng nào?",
+      "category": "tuyen_sinh",
+      "context_recall": 0.0,
+      "faithfulness": 0.0
+    }
+  ],
+  "latency": {
+    "p50_ms": 0.0,
+    "p90_ms": 0.0,
+    "p99_ms": 0.01,
+    "avg_ms": 0.0,
+    "min_ms": 0.0,
+    "max_ms": 0.01,
+    "per_category_avg_ms": {
+      "ctdt": 0.0,
+      "hoc_phi": 0.0,
+      "hoc_vu": 0.0,
+      "out_of_domain": 0.0,
+      "quy_che": 0.0,
+      "tuyen_sinh": 0.0
+    }
+  },
+  "judge_model": "gemini-2.0-flash"
+}

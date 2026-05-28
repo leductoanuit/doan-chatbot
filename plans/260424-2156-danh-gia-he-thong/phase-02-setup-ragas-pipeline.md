@@ -2,7 +2,7 @@
 
 ## Overview
 - **Priority**: P1
-- **Status**: Pending
+- **Status**: Completed
 - **Effort**: 2h
 - **Blocked by**: Phase 01
 
@@ -99,11 +99,11 @@ run-evaluation.py
 
 ## Todo List
 
-- [ ] Add `ragas`, `langchain-google-genai` vào `requirements.txt`
-- [ ] Tạo `tests/evaluation/ragas-evaluator.py`
-- [ ] Tạo `tests/evaluation/run-evaluation.py`
-- [ ] Test chạy thử 3-5 câu trước khi chạy full 30 câu
-- [ ] Verify output format JSON hợp lệ
+- [x] Add `ragas`, `langchain-google-genai` vào `requirements.txt`
+- [x] Tạo `tests/evaluation/ragas-evaluator.py`
+- [x] Tạo `tests/evaluation/run-evaluation.py`
+- [x] Test chạy thử 3-5 câu trước khi chạy full 30 câu
+- [x] Verify output format JSON hợp lệ
 
 ## Success Criteria
 

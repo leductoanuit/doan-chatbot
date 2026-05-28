@@ -188,12 +188,28 @@ A: System prompt định nghĩa:
 
 **Q: Bạn đánh giá chất lượng chatbot như thế nào?**
 
-A: Hiện tại đánh giá định tính qua:
+A: Kết hợp đánh giá định tính và định lượng:
+
+**Định tính:**
 - Kiểm tra manual các câu hỏi điển hình (tuyển sinh, học vụ, CTĐT).
 - Kiểm tra score retrieval — chunk đúng có score ≥ 0.55.
 - So sánh nguồn trích dẫn với tài liệu gốc.
 
-Chưa có đánh giá định lượng (RAGAS, MRR, NDCG) — đây là hướng cải thiện trong tương lai.
+**Định lượng:**
+- **RAGAS-equivalent pipeline** (LLM-as-judge với Gemini): Đánh giá 35 QA pairs với 4 metrics:
+  - **Faithfulness** — Câu trả lời chỉ sử dụng thông tin từ contexts (0–1)
+  - **Answer Relevancy** — Câu trả lời có trả lời được câu hỏi (0–1)
+  - **Context Precision** — Tỷ lệ contexts được lấy ra là relevant (0–1)
+  - **Context Recall** — Contexts có đủ thông tin để tạo ra ground truth (0–1)
+  
+**Chạy đánh giá:**
+```bash
+python tests/evaluation/run-evaluation.py              # Full evaluation
+python tests/evaluation/run-evaluation.py --sample 5   # Quick test with 5 questions
+python tests/evaluation/run-evaluation.py --output results/  # Custom output dir
+```
+
+Output: Markdown report và JSON scores trong `tests/evaluation/results/`
 
 ---
 
@@ -211,7 +227,7 @@ A:
 **Q: Nếu có thêm thời gian, bạn sẽ cải thiện điều gì?**
 
 A:
-1. **Đánh giá định lượng**: implement RAGAS pipeline để đo Faithfulness, Answer Relevancy, Context Precision.
+1. ~~**Đánh giá định lượng**~~: ✅ Đã implement — RAGAS-equivalent pipeline dùng LLM-as-judge (Gemini) đo Faithfulness, Answer Relevancy, Context Precision, Context Recall.
 2. ~~**Re-ranking**~~: ✅ Đã implement — BAAI/bge-reranker-v2-m3 re-rank top 30 → top 5 trước khi gửi Gemini.
 3. **Chunking thông minh hơn**: chunk theo điều khoản (semantic chunking) thay vì theo trang.
 4. **Update pipeline tự động**: khi có tài liệu mới → tự động embed và upsert vào Qdrant.

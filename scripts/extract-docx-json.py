@@ -27,18 +27,45 @@ def clean_text(text: str) -> str:
     return "\n".join(lines).strip()
 
 
-def extract_docx(docx_path: Path) -> list[dict]:
-    """Extract text from DOCX, chunk by ~2000 chars per paragraph group."""
-    doc = Document(str(docx_path))
-    # Collect all paragraphs with text
-    paragraphs = [p.text.strip() for p in doc.paragraphs if p.text.strip()]
+def _extract_table_rows(table) -> list[str]:
+    """Extract table rows, deduplicating merged cells."""
+    rows = []
+    for row in table.rows:
+        seen_tcs: set = set()
+        cells = []
+        for cell in row.cells:
+            tc_id = id(cell._tc)
+            if tc_id not in seen_tcs:
+                seen_tcs.add(tc_id)
+                text = cell.text.strip()
+                if text:
+                    cells.append(text)
+        if cells:
+            rows.append(" | ".join(cells))
+    return rows
 
-    # Also extract text from tables
-    for table in doc.tables:
-        for row in table.rows:
-            row_text = " | ".join(cell.text.strip() for cell in row.cells if cell.text.strip())
-            if row_text:
-                paragraphs.append(row_text)
+
+def extract_docx(docx_path: Path) -> list[dict]:
+    """Extract text from DOCX preserving paragraph+table order, chunk by ~2000 chars."""
+    from docx.oxml.ns import qn
+    doc = Document(str(docx_path))
+
+    # Walk body elements in document order to preserve paragraph/table interleaving
+    paragraphs = []
+    for child in doc.element.body:
+        tag = child.tag.split("}")[-1] if "}" in child.tag else child.tag
+        if tag == "p":
+            text = child.text_content() if hasattr(child, "text_content") else ""
+            # Use python-docx Paragraph API for clean text
+            from docx.text.paragraph import Paragraph
+            para = Paragraph(child, doc)
+            text = para.text.strip()
+            if text:
+                paragraphs.append(text)
+        elif tag == "tbl":
+            from docx.table import Table
+            table = Table(child, doc)
+            paragraphs.extend(_extract_table_rows(table))
 
     if not paragraphs:
         return []
