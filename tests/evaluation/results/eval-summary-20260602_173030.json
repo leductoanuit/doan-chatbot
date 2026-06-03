@@ -1,0 +1,111 @@
+{
+  "timestamp": "2026-06-02T17:30:30.750248",
+  "total_questions": 50,
+  "metrics": {
+    "faithfulness": 0.73,
+    "answer_relevancy": 0.73,
+    "context_precision": 0.94,
+    "context_recall": 0.92,
+    "correctness": 0.58
+  },
+  "by_category": {
+    "ctdt": {
+      "faithfulness": 0.8333,
+      "answer_relevancy": 0.6667,
+      "context_precision": 1.0,
+      "context_recall": 1.0
+    },
+    "hoc_phi": {
+      "faithfulness": 0.4,
+      "answer_relevancy": 0.2,
+      "context_precision": 1.0,
+      "context_recall": 1.0
+    },
+    "hoc_vu": {
+      "faithfulness": 0.7857,
+      "answer_relevancy": 0.8571,
+      "context_precision": 1.0,
+      "context_recall": 0.9286
+    },
+    "quy_che": {
+      "faithfulness": 0.8,
+      "answer_relevancy": 0.9,
+      "context_precision": 1.0,
+      "context_recall": 0.6
+    },
+    "tuyen_sinh": {
+      "faithfulness": 0.725,
+      "answer_relevancy": 0.75,
+      "context_precision": 0.85,
+      "context_recall": 0.95
+    }
+  },
+  "by_difficulty": {
+    "easy": {
+      "faithfulness": 0.74,
+      "answer_relevancy": 0.76,
+      "context_precision": 0.92,
+      "context_recall": 0.92
+    },
+    "hard": {
+      "faithfulness": 0.8,
+      "answer_relevancy": 0.8,
+      "context_precision": 0.8,
+      "context_recall": 0.6
+    },
+    "medium": {
+      "faithfulness": 0.7,
+      "answer_relevancy": 0.675,
+      "context_precision": 1.0,
+      "context_recall": 1.0
+    }
+  },
+  "worst_context_recall": [
+    {
+      "question": "Khi nào trường tổ chức tuyển sinh hệ đào tạo từ xa?",
+      "category": "tuyen_sinh",
+      "context_recall": 1.0,
+      "faithfulness": 1.0
+    },
+    {
+      "question": "Lệ phí xét tuyển hệ đào tạo từ xa UIT là bao nhiêu?",
+      "category": "tuyen_sinh",
+      "context_recall": 1.0,
+      "faithfulness": 1.0
+    },
+    {
+      "question": "Tốt nghiệp THPT có thể học chương trình nào của UIT hệ từ xa?",
+      "category": "tuyen_sinh",
+      "context_recall": 1.0,
+      "faithfulness": 0.0
+    },
+    {
+      "question": "Bảo lưu kết quả trúng tuyển thực hiện trong trường hợp nào và nộp đơn khi nào?",
+      "category": "tuyen_sinh",
+      "context_recall": 1.0,
+      "faithfulness": 0.0
+    },
+    {
+      "question": "Chương trình liên thông đại học hệ từ xa dành cho đối tượng nào?",
+      "category": "tuyen_sinh",
+      "context_recall": 1.0,
+      "faithfulness": 1.0
+    }
+  ],
+  "latency": {
+    "p50_ms": 416597.64,
+    "p90_ms": 445490.83,
+    "p99_ms": 495101.94,
+    "avg_ms": 403730.17,
+    "min_ms": 149211.52,
+    "max_ms": 495101.94,
+    "per_category_avg_ms": {
+      "ctdt": 440452.68,
+      "hoc_phi": 386599.48,
+      "hoc_vu": 369079.39,
+      "quy_che": 434455.62,
+      "tuyen_sinh": 413570.27
+    }
+  },
+  "judge_model": "gemini-2.5-flash"
+}

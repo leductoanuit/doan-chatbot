@@ -26,7 +26,7 @@ logger = logging.getLogger(__name__)
 DOCS_PATH = Path(__file__).parent.parent.parent / "data/processed/all_documents_final.json"
 DATASET_PATH = Path(__file__).parent / "eval-dataset.json"
 
-GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.0-flash")
+GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
 
 # Map system_type + title keywords → eval category
 CATEGORY_MAP = {

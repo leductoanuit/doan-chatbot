@@ -12,7 +12,7 @@ from google.genai import types
 load_dotenv()
 logger = logging.getLogger(__name__)
 
-_JUDGE_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.0-flash")
+_JUDGE_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
 _RETRY_DELAY = 2
 
 

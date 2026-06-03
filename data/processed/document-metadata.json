@@ -59,16 +59,6 @@
     "document_type": "quyet_dinh",
     "system_type": "dao_tao"
   },
-  "790-qd-dhcntt_28-9-22_quy_che_dao_tao.pdf": {
-    "doc_id": "790-qd-dhcntt_28-9-22_quy_che_dao_tao",
-    "source_file": "790-qd-dhcntt_28-9-22_quy_che_dao_tao.pdf",
-    "title": "Quyết định – 790 qd dhcntt 28 9 22 quy che dao tao",
-    "document_number": null,
-    "issue_date": "2022-09-28",
-    "issuing_body": "Trường ĐH Công nghệ Thông tin",
-    "document_type": "quyet_dinh",
-    "system_type": "dao_tao"
-  },
   "CTĐT ngành Trí tuệ Nhân tạo – Hình thức đào tạo từ xa (Áp dụng từ khoá 2024).docx": {
     "doc_id": "ctđt-ngành-trí-tuệ-nhân-tạo-hình-thức-đào-tạo-từ-xa-áp-dụng-từ-khoá-2024",
     "source_file": "CTĐT ngành Trí tuệ Nhân tạo – Hình thức đào tạo từ xa (Áp dụng từ khoá 2024).docx",
@@ -139,26 +129,6 @@
     "document_type": "huong_dan",
     "system_type": "dao_tao"
   },
-  "citd_quy_trinh_bieu_mau_chung_chi.json": {
-    "doc_id": "citd_quy_trinh_bieu_mau_chung_chi",
-    "source_file": "citd_quy_trinh_bieu_mau_chung_chi.json",
-    "title": "Hướng dẫn – citd quy trinh bieu mau chung chi",
-    "document_number": null,
-    "issue_date": null,
-    "issuing_body": "Trường ĐH Công nghệ Thông tin",
-    "document_type": "huong_dan",
-    "system_type": "chung_chi"
-  },
-  "citd_quy_trinh_bieu_mau_detail.json": {
-    "doc_id": "citd_quy_trinh_bieu_mau_detail",
-    "source_file": "citd_quy_trinh_bieu_mau_detail.json",
-    "title": "Hướng dẫn – citd quy trinh bieu mau detail",
-    "document_number": null,
-    "issue_date": null,
-    "issuing_body": "Trường ĐH Công nghệ Thông tin",
-    "document_type": "huong_dan",
-    "system_type": "dao_tao"
-  },
   "Cử nhân CNTT VB1.docx": {
     "doc_id": "cu_nhan_cntt_vb1",
     "source_file": "Cử nhân CNTT VB1.docx",
@@ -177,6 +147,46 @@
     "issue_date": "2024-03-19",
     "issuing_body": "CITD – Trường ĐH Công nghệ Thông tin",
     "document_type": "chuong_trinh_dao_tao",
+    "system_type": "dao_tao"
+  },
+  "citd_quy_trinh_bieu_mau_chung_chi_cleaned.json": {
+    "doc_id": "citd_quy_trinh_bieu_mau_chung_chi_cleaned",
+    "source_file": "citd_quy_trinh_bieu_mau_chung_chi_cleaned.json",
+    "title": "Hướng dẫn – citd quy trinh bieu mau chung chi",
+    "document_number": null,
+    "issue_date": null,
+    "issuing_body": "Trường ĐH Công nghệ Thông tin",
+    "document_type": "huong_dan",
+    "system_type": "chung_chi"
+  },
+  "citd_quy_trinh_bieu_mau_detail_cleaned.json": {
+    "doc_id": "citd_quy_trinh_bieu_mau_detail_cleaned",
+    "source_file": "citd_quy_trinh_bieu_mau_detail_cleaned.json",
+    "title": "Hướng dẫn – citd quy trinh bieu mau detail",
+    "document_number": null,
+    "issue_date": null,
+    "issuing_body": "Trường ĐH Công nghệ Thông tin",
+    "document_type": "huong_dan",
+    "system_type": "dao_tao"
+  },
+  "citd_quy_trinh_bieu_mau_chung_chi.json": {
+    "doc_id": "citd_quy_trinh_bieu_mau_chung_chi",
+    "source_file": "citd_quy_trinh_bieu_mau_chung_chi.json",
+    "title": "Hướng dẫn – citd quy trinh bieu mau chung chi",
+    "document_number": null,
+    "issue_date": null,
+    "issuing_body": "Trường ĐH Công nghệ Thông tin",
+    "document_type": "huong_dan",
+    "system_type": "chung_chi"
+  },
+  "citd_quy_trinh_bieu_mau_detail.json": {
+    "doc_id": "citd_quy_trinh_bieu_mau_detail",
+    "source_file": "citd_quy_trinh_bieu_mau_detail.json",
+    "title": "Hướng dẫn – citd quy trinh bieu mau detail",
+    "document_number": null,
+    "issue_date": null,
+    "issuing_body": "Trường ĐH Công nghệ Thông tin",
+    "document_type": "huong_dan",
     "system_type": "dao_tao"
   }
 }

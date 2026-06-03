@@ -58,7 +58,7 @@ class LLMClient:
         if not api_key:
             raise ValueError("GEMINI_API_KEY not set in environment")
         self.client = genai.Client(api_key=api_key)
-        self.model_name = model_name or os.getenv("GEMINI_MODEL", "gemini-2.0-flash")
+        self.model_name = model_name or os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
         self.system_prompt = system_prompt
 
     def generate(

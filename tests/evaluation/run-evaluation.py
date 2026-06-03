@@ -37,15 +37,17 @@ ROBUSTNESS_DATASET_PATH = Path(__file__).parent / "eval-dataset-robustness.json"
 RESULTS_DIR = Path(__file__).parent / "results"
 
 
-def load_dataset(sample: int = 0, include_robustness: bool = False) -> list[dict]:
+def load_dataset(sample: int = 0, offset: int = 0, include_robustness: bool = False) -> list[dict]:
     with open(DATASET_PATH) as f:
         data = json.load(f)
     if include_robustness and ROBUSTNESS_DATASET_PATH.exists():
         with open(ROBUSTNESS_DATASET_PATH) as f:
             data += json.load(f)
         logger.info("Merged robustness dataset (%d total questions)", len(data))
+    if offset:
+        data = data[offset:]
     if sample and sample < len(data):
-        logger.info("Using sample of %d questions (out of %d)", sample, len(data))
+        logger.info("Using sample of %d questions (offset=%d)", sample, offset)
         return data[:sample]
     return data
 
@@ -117,6 +119,7 @@ def save_results(eval_result: dict, output_dir: Path) -> Path:
 def main():
     parser = argparse.ArgumentParser(description="Evaluate RAG chatbot quality")
     parser.add_argument("--sample", type=int, default=0, help="Use N questions (0 = all)")
+    parser.add_argument("--offset", type=int, default=0, help="Skip first N questions")
     parser.add_argument("--output", default=str(RESULTS_DIR), help="Output directory")
     parser.add_argument("--skip-rag", action="store_true", help="Load existing RAG outputs (debug)")
     parser.add_argument("--robustness", action="store_true", help="Include robustness dataset")
@@ -125,7 +128,7 @@ def main():
     output_dir = Path(args.output)
 
     # Step 1: Load dataset
-    questions = load_dataset(sample=args.sample, include_robustness=args.robustness)
+    questions = load_dataset(sample=args.sample, offset=args.offset, include_robustness=args.robustness)
     logger.info("Loaded %d questions from dataset", len(questions))
 
     # Step 2: Run RAG pipeline (or load cached results)

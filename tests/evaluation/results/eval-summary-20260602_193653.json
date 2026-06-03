@@ -1,0 +1,104 @@
+{
+  "timestamp": "2026-06-02T19:36:53.045012",
+  "total_questions": 50,
+  "metrics": {
+    "faithfulness": 0.73,
+    "answer_relevancy": 0.76,
+    "context_precision": 0.752,
+    "context_recall": 0.87,
+    "correctness": 0.59
+  },
+  "by_category": {
+    "ctdt": {
+      "faithfulness": 0.7857,
+      "answer_relevancy": 0.7857,
+      "context_precision": 0.7571,
+      "context_recall": 0.8214
+    },
+    "hoc_phi": {
+      "faithfulness": 0.6,
+      "answer_relevancy": 0.75,
+      "context_precision": 0.9,
+      "context_recall": 1.0
+    },
+    "hoc_vu": {
+      "faithfulness": 0.8182,
+      "answer_relevancy": 0.8182,
+      "context_precision": 0.5455,
+      "context_recall": 0.9091
+    },
+    "quy_che": {
+      "faithfulness": 0.7,
+      "answer_relevancy": 0.7,
+      "context_precision": 0.8,
+      "context_recall": 0.8
+    }
+  },
+  "by_difficulty": {
+    "easy": {
+      "faithfulness": 0.7593,
+      "answer_relevancy": 0.7963,
+      "context_precision": 0.8,
+      "context_recall": 0.7963
+    },
+    "hard": {
+      "faithfulness": 0.7778,
+      "answer_relevancy": 0.6667,
+      "context_precision": 0.5556,
+      "context_recall": 1.0
+    },
+    "medium": {
+      "faithfulness": 0.6429,
+      "answer_relevancy": 0.75,
+      "context_precision": 0.7857,
+      "context_recall": 0.9286
+    }
+  },
+  "worst_context_recall": [
+    {
+      "question": "Tôi có thể tìm thông tin về lịch học ở đâu?",
+      "category": "ctdt",
+      "context_recall": 0.5,
+      "faithfulness": 0.0
+    },
+    {
+      "question": "Sau khi tốt nghiệp cử nhân Công nghệ Thông tin, em có thể làm những công việc gì liên quan đến dữ liệu và thông tin, và em có thể làm việc ở đâu?",
+      "category": "hoc_vu",
+      "context_recall": 1.0,
+      "faithfulness": 1.0
+    },
+    {
+      "question": "Chương trình Cử nhân Công nghệ Thông tin này kéo dài bao lâu, và sau khi tốt nghiệp, bằng của em sẽ được gọi là gì bằng cả tiếng Việt và tiếng Anh?",
+      "category": "hoc_vu",
+      "context_recall": 1.0,
+      "faithfulness": 1.0
+    },
+    {
+      "question": "Mình có thể đến địa điểm nào để nhận thẻ sinh viên trực tiếp và thời gian làm việc ở đó là khi nào?",
+      "category": "hoc_vu",
+      "context_recall": 1.0,
+      "faithfulness": 0.0
+    },
+    {
+      "question": "Khi đến nhận thẻ sinh viên, mình cần làm gì và có thể nhận giúp bạn bè không?",
+      "category": "hoc_vu",
+      "context_recall": 1.0,
+      "faithfulness": 1.0
+    }
+  ],
+  "latency": {
+    "p50_ms": 130062.01,
+    "p90_ms": 152206.81,
+    "p99_ms": 166905.44,
+    "avg_ms": 130551.06,
+    "min_ms": 94021.67,
+    "max_ms": 166905.44,
+    "per_category_avg_ms": {
+      "ctdt": 117619.36,
+      "hoc_phi": 120783.18,
+      "hoc_vu": 145566.63,
+      "quy_che": 138121.14
+    }
+  },
+  "judge_model": "gemini-2.5-flash"
+}
