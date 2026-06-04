@@ -1,0 +1,36 @@
+# Outline template (từ Bao_Cao_Do_An_Chatbot_2105.docx)
+
+- TÓM TẮT NỘI DUNG ĐỀ TÀI
+- Chương 1. GIỚI THIỆU ĐỀ TÀI
+  - 1.1 Lý do chọn đề tài
+  - 1.2 Mục tiêu của đề tài
+  - 1.3 Phát biểu bài toán
+  - 1.4 Đối tượng và phạm vi nghiên cứu (1.4.1 Đối tượng, 1.4.2 Phạm vi)
+  - 1.5 Ý nghĩa đề tài
+  - 1.6 Cấu trúc của báo cáo
+- Chương 2. TỔNG QUAN NGHIÊN CỨU
+  - 2.1 Tổng quan bài toán hỏi đáp
+  - 2.2 Các nghiên cứu liên quan (2.2.1 Thế giới, 2.2.2 Trong nước)
+  - 2.3 Khoảng trống nghiên cứu và ý tưởng đề xuất
+- Chương 3. PHƯƠNG PHÁP XÂY DỰNG VÀ TRIỂN KHAI
+  - 3.1 Quy trình thực hiện
+  - 3.2 Kiến trúc hệ thống và môi trường triển khai  ← [HÌNH KIẾN TRÚC]
+  - 3.3 Xây dựng bộ dữ liệu (3.3.1 Tập dữ liệu, 3.3.2 CSDL vector)
+  - 3.4 Xây dựng hệ thống RAG (3.4.1 Tiền xử lý truy vấn, 3.4.2 Truy xuất, 3.4.3 Sàng lọc, 3.4.4 Tổng hợp)
+  - 3.5 Lựa chọn và cấu hình mô hình
+  - 3.6 Thiết kế prompt engineering (các kỹ thuật con — thay bằng 6 kỹ thuật thực tế của hệ)
+- Chương 4. THỰC NGHIỆM VÀ ĐÁNH GIÁ
+  - 4.1 Tập kiểm thử (4.1.1 Xây dựng, 4.1.2 Kiểm tra xác thực)
+  - 4.2 Các phương pháp đánh giá (4.2.1 Truy xuất, 4.2.2 Tạo sinh, 4.2.3 Tổng hợp)
+  - 4.3 Kết quả đánh giá (template: so sánh giữa các mô hình → thay bằng kết quả các run)
+  - 4.4 Đánh giá độ phản hồi của hệ thống (latency)
+- Chương 5. CÀI ĐẶT CHƯƠNG TRÌNH MINH HỌA
+  - 5.1 Các công nghệ sử dụng
+  - 5.2 Thiết kế API
+  - 5.3 Mô tả giao diện của hệ thống  ← [HÌNH GIAO DIỆN]
+  - 5.4 Các tính năng của hệ thống (5 mục con — map sang tính năng thực tế)
+  - 5.5 Nhận xét
+- Chương 6. KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN
+  - 6.1 Kết luận
+  - 6.2 Hạn chế
+  - 6.3 Hướng phát triển

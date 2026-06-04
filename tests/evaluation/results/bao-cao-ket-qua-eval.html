@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Báo Cáo Kết Quả Đánh Giá RAG Chatbot UIT</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.7;
+      color: #2c3e50;
+      background: #f5f7fa;
+      padding: 40px 20px;
+    }
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+      padding: 50px 60px;
+    }
+    h1 {
+      font-size: 26px;
+      color: #1a252f;
+      border-bottom: 3px solid #3498db;
+      padding-bottom: 12px;
+      margin-bottom: 20px;
+    }
+    h2 {
+      font-size: 20px;
+      color: #2980b9;
+      margin: 32px 0 12px;
+      padding-left: 10px;
+      border-left: 4px solid #3498db;
+    }
+    h3 {
+      font-size: 16px;
+      color: #2c3e50;
+      margin: 20px 0 8px;
+    }
+    p { margin: 8px 0; }
+    hr {
+      border: none;
+      border-top: 1px solid #ecf0f1;
+      margin: 28px 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 13px;
+    }
+    thead tr { background: #2980b9; color: #fff; }
+    th, td {
+      padding: 10px 14px;
+      text-align: left;
+      border: 1px solid #dde;
+    }
+    tbody tr:nth-child(even) { background: #f4f8fb; }
+    tbody tr:hover { background: #e8f4fd; }
+    blockquote {
+      background: #fff8e1;
+      border-left: 4px solid #f39c12;
+      padding: 10px 16px;
+      margin: 12px 0;
+      border-radius: 4px;
+      color: #7f6000;
+    }
+    code {
+      background: #ecf0f1;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: monospace;
+      font-size: 12px;
+      color: #c0392b;
+    }
+    strong { color: #1a252f; }
+    ul, ol {
+      margin: 8px 0 8px 24px;
+    }
+    li { margin: 4px 0; }
+    .footer {
+      margin-top: 40px;
+      padding-top: 16px;
+      border-top: 1px solid #ecf0f1;
+      font-size: 12px;
+      color: #95a5a6;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Báo Cáo Kết Quả Đánh Giá RAG Chatbot UIT</h1>
+
+<p><strong>Ngày tạo:</strong> 2026-06-04  </p>
+<p><strong>Số câu hỏi:</strong> 50 câu/lần chạy  </p>
+
+<hr>
+
+<h2>Tổng Quan 2 Lần Chạy</h2>
+
+<table>
+<thead><tr><th></th><th>Lần 1 (17:43)</th><th>Lần 2 (19:36)</th></tr></thead><tbody>
+<tr><td><strong>Thời điểm</strong></td><td>2026-06-02 17:43:29</td><td>2026-06-02 19:36:53</td></tr>
+<tr><td><strong>Judge model</strong></td><td>gemini-2.0-flash-001</td><td>gemini-2.5-flash</td></tr>
+<tr><td><strong>Tổng câu hỏi</strong></td><td>50</td><td>50</td></tr>
+<tr><td><strong>Trạng thái</strong></td><td>❌ Thất bại (toàn 0.0)</td><td>✅ Thành công</td></tr>
+</tbody></table>
+
+<blockquote><strong>Lần 1 bị lỗi</strong> — toàn bộ metrics trả về 0.0, không có dữ liệu hợp lệ. Phân tích chỉ dựa trên <strong>Lần 2</strong>.</blockquote>
+
+<hr>
+
+<h2>Kết Quả Lần 2 — Metrics Tổng Thể</h2>
+
+<table>
+<thead><tr><th>Metric</th><th>Điểm</th><th>Đánh giá</th></tr></thead><tbody>
+<tr><td><strong>Faithfulness</strong></td><td>0.730</td><td>🟡 Trung bình</td></tr>
+<tr><td><strong>Answer Relevancy</strong></td><td>0.760</td><td>🟡 Trung bình</td></tr>
+<tr><td><strong>Context Precision</strong></td><td>0.752</td><td>🟡 Trung bình</td></tr>
+<tr><td><strong>Context Recall</strong></td><td>0.870</td><td>🟢 Tốt</td></tr>
+<tr><td><strong>Correctness</strong></td><td>0.590</td><td>🔴 Cần cải thiện</td></tr>
+</tbody></table>
+
+<p><strong>Điểm trung bình tổng hợp:</strong> <code>0.740</code></p>
+
+<hr>
+
+<h2>Phân Tích Theo Danh Mục</h2>
+
+<table>
+<thead><tr><th>Danh mục</th><th>Faithfulness</th><th>Answer Relevancy</th><th>Context Precision</th><th>Context Recall</th></tr></thead><tbody>
+<tr><td><strong>ctdt</strong> (Chương trình đào tạo)</td><td>0.786</td><td>0.786</td><td>0.757</td><td>0.821</td></tr>
+<tr><td><strong>hoc_phi</strong> (Học phí)</td><td>0.600</td><td>0.750</td><td>0.900</td><td><strong>1.000</strong></td></tr>
+<tr><td><strong>hoc_vu</strong> (Học vụ)</td><td><strong>0.818</strong></td><td><strong>0.818</strong></td><td>0.546</td><td>0.909</td></tr>
+<tr><td><strong>quy_che</strong> (Quy chế)</td><td>0.700</td><td>0.700</td><td>0.800</td><td>0.800</td></tr>
+<tr><td><strong>tuyen_sinh</strong> (Tuyển sinh)</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td></tr>
+</tbody></table>
+
+<blockquote><strong>tuyen_sinh</strong> không có dữ liệu trong Lần 2 — có thể bị lỗi hoặc không có câu hỏi.</blockquote>
+
+<p><strong>Nhận xét:</strong></p>
+<ul>
+<li><code>hoc_vu</code> đạt faithfulness & relevancy cao nhất (0.818) nhưng context_precision thấp nhất (0.546)</li>
+<li><code>hoc_phi</code> có context_recall hoàn hảo (1.0) nhưng faithfulness thấp (0.600)</li>
+<li><code>ctdt</code> và <code>quy_che</code> ổn định ở mức trung bình</li>
+</ul>
+
+<hr>
+
+<h2>Phân Tích Theo Độ Khó</h2>
+
+<table>
+<thead><tr><th>Độ khó</th><th>Faithfulness</th><th>Answer Relevancy</th><th>Context Precision</th><th>Context Recall</th></tr></thead><tbody>
+<tr><td><strong>easy</strong></td><td>0.759</td><td>0.796</td><td>0.800</td><td>0.796</td></tr>
+<tr><td><strong>medium</strong></td><td>0.643</td><td>0.750</td><td>0.786</td><td>0.929</td></tr>
+<tr><td><strong>hard</strong></td><td><strong>0.778</strong></td><td>0.667</td><td>0.556</td><td><strong>1.000</strong></td></tr>
+</tbody></table>
+
+<p><strong>Nhận xét:</strong></p>
+<ul>
+<li>Câu hỏi <strong>hard</strong> có context_recall cao nhất (1.0) nhưng context_precision thấp (0.556) → retrieval tìm đủ nhưng kém chính xác</li>
+<li>Câu hỏi <strong>medium</strong> có faithfulness thấp nhất (0.643)</li>
+<li>Câu hỏi <strong>easy</strong> cân bằng nhất</li>
+</ul>
+
+<hr>
+
+<h2>Latency (Thời Gian Phản Hồi)</h2>
+
+<table>
+<thead><tr><th>Metric</th><th>Lần 1 (thất bại)</th><th>Lần 2 (thành công)</th></tr></thead><tbody>
+<tr><td><strong>P50</strong></td><td>411,910 ms (~6.9 phút)</td><td>130,062 ms (~2.2 phút)</td></tr>
+<tr><td><strong>P90</strong></td><td>443,539 ms (~7.4 phút)</td><td>152,207 ms (~2.5 phút)</td></tr>
+<tr><td><strong>P99</strong></td><td>521,465 ms (~8.7 phút)</td><td>166,905 ms (~2.8 phút)</td></tr>
+<tr><td><strong>Avg</strong></td><td>403,381 ms (~6.7 phút)</td><td>130,551 ms (~2.2 phút)</td></tr>
+<tr><td><strong>Min</strong></td><td>275,760 ms</td><td>94,022 ms</td></tr>
+<tr><td><strong>Max</strong></td><td>521,465 ms</td><td>166,905 ms</td></tr>
+</tbody></table>
+
+<p><strong>Latency theo danh mục (Lần 2):</strong></p>
+
+<table>
+<thead><tr><th>Danh mục</th><th>Avg (ms)</th><th>Avg (giây)</th></tr></thead><tbody>
+<tr><td>ctdt</td><td>117,619</td><td>~117s</td></tr>
+<tr><td>hoc_phi</td><td>120,783</td><td>~121s</td></tr>
+<tr><td>hoc_vu</td><td>145,567</td><td>~146s</td></tr>
+<tr><td>quy_che</td><td>138,121</td><td>~138s</td></tr>
+</tbody></table>
+
+<blockquote>Lần 2 nhanh hơn <strong>~3x</strong> so với Lần 1 — do đổi judge model sang <code>gemini-2.5-flash</code>.  </blockquote>
+<blockquote>Latency vẫn cao (~2 phút/câu) — cần xem xét tối ưu nếu dùng thực tế.</blockquote>
+
+<hr>
+
+<h2>Câu Hỏi Kém Nhất (Worst Context Recall — Lần 2)</h2>
+
+<table>
+<thead><tr><th>Câu hỏi</th><th>Danh mục</th><th>Context Recall</th><th>Faithfulness</th></tr></thead><tbody>
+<tr><td>Tôi có thể tìm thông tin về lịch học ở đâu?</td><td>ctdt</td><td>0.5</td><td>0.0</td></tr>
+<tr><td>Mình có thể đến địa điểm nào để nhận thẻ sinh viên...</td><td>hoc_vu</td><td>1.0</td><td>0.0</td></tr>
+</tbody></table>
+
+<blockquote><strong>Vấn đề:</strong> Một số câu có context_recall tốt nhưng faithfulness = 0 → chatbot trả lời không bám sát vào tài liệu được retrieve.</blockquote>
+
+<hr>
+
+<h2>Tóm Tắt & Khuyến Nghị</h2>
+
+<h3>Điểm mạnh</h3>
+<ul>
+<li><strong>Context Recall</strong> tốt (0.87) → hệ thống retrieve đúng tài liệu liên quan</li>
+<li><strong>hoc_phi</strong> category ổn định nhất</li>
+<li>Latency Lần 2 cải thiện đáng kể so với Lần 1</li>
+</ul>
+
+<h3>Điểm yếu</h3>
+<ul>
+<li><strong>Correctness</strong> thấp nhất (0.59) → câu trả lời chưa đúng về mặt nội dung</li>
+<li><strong>Faithfulness</strong> trung bình (0.73) → vẫn có trường hợp hallucination</li>
+<li><strong>Context Precision</strong> trung bình (0.752) → retrieve còn nhiễu, kéo vào context không liên quan</li>
+<li><strong>tuyen_sinh</strong> không có kết quả → cần điều tra lỗi</li>
+</ul>
+
+<h3>Khuyến nghị</h3>
+<ol>
+<li><strong>Tăng Correctness</strong>: Cải thiện prompt hướng dẫn model trả lời chính xác hơn</li>
+<li><strong>Giảm hallucination</strong>: Thêm instruction "chỉ trả lời dựa trên context được cung cấp"</li>
+<li><strong>Cải thiện Context Precision</strong>: Điều chỉnh chunking strategy hoặc reranker</li>
+<li><strong>Điều tra tuyen_sinh</strong>: Tìm hiểu tại sao category này không có kết quả Lần 2</li>
+<li><strong>Giảm latency</strong>: Xem xét streaming hoặc caching cho production</li>
+</ol>
+
+<hr>
+
+<p>*Báo cáo được tạo từ: <code>eval-summary-20260602_174329.json</code> & <code>eval-summary-20260602_193653.json</code>*</p>
+
+    <div class="footer">
+      Được tạo tự động từ eval-summary JSON files · UIT RAG Chatbot Evaluation
+    </div>
+  </div>
+</body>
+</html>
