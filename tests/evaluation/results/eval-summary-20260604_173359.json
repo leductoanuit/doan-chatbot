@@ -11,15 +11,15 @@
     "negative_rejection": 1.0
   },
   "retrieval_rank_metrics": {
-    "map_at_10": 0.322,
-    "mrr": 0.3182,
-    "hit_at_10": 0.3636,
+    "map_at_10": 0.3903,
+    "mrr": 0.4091,
+    "hit_at_10": 0.4545,
     "k": 10,
     "by_category": {
       "hoc_vu": {
-        "map_at_k": 0.0,
-        "mrr": 0.0,
-        "hit_at_k": 0.0
+        "map_at_k": 1.0,
+        "mrr": 1.0,
+        "hit_at_k": 1.0
       },
       "out_of_domain": {
         "map_at_k": 0.0,
@@ -27,7 +27,7 @@
         "hit_at_k": 0.0
       },
       "tuyen_sinh": {
-        "map_at_k": 0.8854,
+        "map_at_k": 0.8234,
         "mrr": 0.875,
         "hit_at_k": 1.0
       }

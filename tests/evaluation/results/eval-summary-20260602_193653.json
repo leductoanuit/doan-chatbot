@@ -102,30 +102,30 @@
   },
   "judge_model": "gemini-2.5-flash",
   "retrieval_rank_metrics": {
-    "map_at_10": 0.4737,
-    "mrr": 0.5055,
-    "hit_at_10": 0.62,
+    "map_at_10": 0.9034,
+    "mrr": 0.99,
+    "hit_at_10": 1.0,
     "k": 10,
     "by_category": {
       "ctdt": {
-        "map_at_k": 0.3378,
-        "mrr": 0.3643,
-        "hit_at_k": 0.4286
+        "map_at_k": 0.9268,
+        "mrr": 0.9643,
+        "hit_at_k": 1.0
       },
       "hoc_phi": {
-        "map_at_k": 0.7952,
-        "mrr": 0.9,
-        "hit_at_k": 0.9
+        "map_at_k": 0.8177,
+        "mrr": 1.0,
+        "hit_at_k": 1.0
       },
       "hoc_vu": {
-        "map_at_k": 0.4062,
-        "mrr": 0.4251,
-        "hit_at_k": 0.6364
+        "map_at_k": 0.8993,
+        "mrr": 1.0,
+        "hit_at_k": 1.0
       },
       "quy_che": {
-        "map_at_k": 0.4358,
-        "mrr": 0.4333,
-        "hit_at_k": 0.6
+        "map_at_k": 0.9417,
+        "mrr": 1.0,
+        "hit_at_k": 1.0
       }
     }
   }

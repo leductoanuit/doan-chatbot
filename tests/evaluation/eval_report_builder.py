@@ -18,8 +18,12 @@ def _token_set(text: str) -> set:
     return set(text.lower().split())
 
 
-def _is_relevant(chunk_text: str, reference_contexts: list[str], threshold: float = 0.3) -> bool:
-    """True if chunk shares >= threshold token overlap (F1) with any reference context."""
+def _is_relevant(chunk_text: str, reference_contexts: list[str], recall_threshold: float = 0.4) -> bool:
+    """True if chunk contains >= recall_threshold of reference tokens.
+
+    Uses recall-only (not F1) because retrieved chunks are much longer than
+    reference summaries — F1 would penalise large chunks unfairly.
+    """
     chunk_tokens = _token_set(chunk_text)
     if not chunk_tokens:
         return False
@@ -27,11 +31,8 @@ def _is_relevant(chunk_text: str, reference_contexts: list[str], threshold: floa
         ref_tokens = _token_set(ref)
         if not ref_tokens:
             continue
-        intersection = chunk_tokens & ref_tokens
-        precision = len(intersection) / len(chunk_tokens)
-        recall = len(intersection) / len(ref_tokens)
-        f1 = 2 * precision * recall / (precision + recall) if (precision + recall) > 0 else 0.0
-        if f1 >= threshold:
+        recall = len(chunk_tokens & ref_tokens) / len(ref_tokens)
+        if recall >= recall_threshold:
             return True
     return False
 
@@ -39,8 +40,8 @@ def _is_relevant(chunk_text: str, reference_contexts: list[str], threshold: floa
 def compute_retrieval_rank_metrics(samples: list[dict], k: int = 10) -> dict:
     """Compute MAP@K, MRR, Hit@K for all samples using token-overlap relevance judgment.
 
-    Each retrieved chunk is marked relevant if its token F1 overlap with any
-    reference_context exceeds 0.3. Returns aggregate scores and per-category breakdown.
+    Each retrieved chunk is marked relevant if it contains >= 40% of reference
+    context tokens (recall-based, not F1). Returns aggregate scores and per-category breakdown.
     """
     list_retrieved: list[list[str]] = []
     list_relevant: list[set] = []

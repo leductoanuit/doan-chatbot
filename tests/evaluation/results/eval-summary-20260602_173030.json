@@ -109,35 +109,35 @@
   },
   "judge_model": "gemini-2.5-flash",
   "retrieval_rank_metrics": {
-    "map_at_10": 0.6959,
-    "mrr": 0.7287,
-    "hit_at_10": 0.8,
+    "map_at_10": 0.9264,
+    "mrr": 0.99,
+    "hit_at_10": 1.0,
     "k": 10,
     "by_category": {
       "ctdt": {
-        "map_at_k": 0.2833,
-        "mrr": 0.2833,
-        "hit_at_k": 0.5
+        "map_at_k": 0.988,
+        "mrr": 1.0,
+        "hit_at_k": 1.0
       },
       "hoc_phi": {
-        "map_at_k": 0.7333,
-        "mrr": 0.8,
-        "hit_at_k": 0.8
+        "map_at_k": 0.9631,
+        "mrr": 1.0,
+        "hit_at_k": 1.0
       },
       "hoc_vu": {
-        "map_at_k": 0.7992,
-        "mrr": 0.8651,
-        "hit_at_k": 0.9286
+        "map_at_k": 0.9009,
+        "mrr": 1.0,
+        "hit_at_k": 1.0
       },
       "quy_che": {
-        "map_at_k": 0.5625,
-        "mrr": 0.6,
-        "hit_at_k": 0.6
+        "map_at_k": 0.8976,
+        "mrr": 1.0,
+        "hit_at_k": 1.0
       },
       "tuyen_sinh": {
-        "map_at_k": 0.7713,
-        "mrr": 0.7812,
-        "hit_at_k": 0.85
+        "map_at_k": 0.9239,
+        "mrr": 0.975,
+        "hit_at_k": 1.0
       }
     }
   }
