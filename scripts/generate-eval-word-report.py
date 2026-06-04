@@ -222,6 +222,66 @@ def add_latency_table(doc: Document, latency: dict, title: str):
     doc.add_paragraph()
 
 
+def add_rank_metrics_table(doc: Document, rr: dict, title: str):
+    if not rr:
+        return
+    doc.add_paragraph(title).runs[0].bold = True
+
+    k = rr.get("k", 10)
+    rows_data = [
+        (f"MAP@{k}", rr.get(f"map_at_{k}", 0)),
+        ("MRR", rr.get("mrr", 0)),
+        (f"Hit@{k}", rr.get(f"hit_at_{k}", 0)),
+    ]
+
+    table = doc.add_table(rows=1, cols=3)
+    table.style = "Table Grid"
+    hdr = table.rows[0].cells
+    for cell, text in zip(hdr, ["Metric", "Điểm", "Đánh giá"]):
+        cell.text = text
+        cell.paragraphs[0].runs[0].bold = True
+        set_cell_bg(cell, "375623")
+        cell.paragraphs[0].runs[0].font.color.rgb = RGBColor(0xFF, 0xFF, 0xFF)
+
+    for label, score in rows_data:
+        row = table.add_row().cells
+        row[0].text = label
+        row[1].text = f"{score:.4f}"
+        row[1].paragraphs[0].alignment = WD_ALIGN_PARAGRAPH.CENTER
+        row[2].text = "Tốt" if score >= 0.75 else ("Khá" if score >= 0.55 else "Cần cải thiện")
+        row[2].paragraphs[0].alignment = WD_ALIGN_PARAGRAPH.CENTER
+        for cell in row:
+            set_cell_bg(cell, score_color(score))
+            set_cell_border(cell)
+
+    # Per-category rank metrics
+    by_cat = rr.get("by_category", {})
+    if by_cat:
+        doc.add_paragraph()
+        p = doc.add_paragraph(f"Retrieval Rank Metrics theo danh mục (k={k}):")
+        p.runs[0].bold = True
+        cat_table = doc.add_table(rows=1, cols=4)
+        cat_table.style = "Table Grid"
+        hdr2 = cat_table.rows[0].cells
+        for cell, text in zip(hdr2, ["Danh mục", f"MAP@{k}", "MRR", f"Hit@{k}"]):
+            cell.text = text
+            cell.paragraphs[0].runs[0].bold = True
+            set_cell_bg(cell, "375623")
+            cell.paragraphs[0].runs[0].font.color.rgb = RGBColor(0xFF, 0xFF, 0xFF)
+        for cat_key, cat_data in by_cat.items():
+            row = cat_table.add_row().cells
+            row[0].text = CATEGORY_LABELS.get(cat_key, cat_key)
+            set_cell_border(row[0])
+            for i, mk in [("map_at_k", 1), ("mrr", 2), ("hit_at_k", 3)]:
+                score = cat_data.get(i, 0)
+                row[mk].text = f"{score:.4f}"
+                row[mk].paragraphs[0].alignment = WD_ALIGN_PARAGRAPH.CENTER
+                set_cell_bg(row[mk], score_color(score))
+                set_cell_border(row[mk])
+
+    doc.add_paragraph()
+
+
 def compute_combined(s1: dict, s2: dict) -> dict:
     """Average metrics from two equal-sized batches."""
     combined = {}
@@ -296,12 +356,14 @@ def main():
 
     add_heading(doc, "3.1 Batch 1 – Câu 1 đến 50", 2)
     add_metrics_table(doc, s1["metrics"], "Metric tổng thể:")
+    add_rank_metrics_table(doc, s1.get("retrieval_rank_metrics", {}), "Retrieval Rank Metrics (Auepora):")
     add_category_table(doc, s1["by_category"], "Theo danh mục:")
     add_difficulty_table(doc, s1["by_difficulty"], "Theo độ khó:")
     add_latency_table(doc, s1["latency"], "Thời gian phản hồi:")
 
     add_heading(doc, "3.2 Batch 2 – Câu 51 đến 100", 2)
     add_metrics_table(doc, s2["metrics"], "Metric tổng thể:")
+    add_rank_metrics_table(doc, s2.get("retrieval_rank_metrics", {}), "Retrieval Rank Metrics (Auepora):")
     add_category_table(doc, s2["by_category"], "Theo danh mục:")
     add_difficulty_table(doc, s2["by_difficulty"], "Theo độ khó:")
     add_latency_table(doc, s2["latency"], "Thời gian phản hồi:")
@@ -333,6 +395,43 @@ def main():
         set_cell_bg(row[3], "C6EFCE" if diff >= 0 else "FFC7CE")
         for cell in row:
             set_cell_border(cell)
+
+    doc.add_paragraph()
+
+    # Rank metrics comparison
+    rr1 = s1.get("retrieval_rank_metrics", {})
+    rr2 = s2.get("retrieval_rank_metrics", {})
+    if rr1 and rr2:
+        k = rr1.get("k", 10)
+        doc.add_paragraph("4.2 So sánh Retrieval Rank Metrics:").runs[0].bold = True
+        rank_table = doc.add_table(rows=1, cols=4)
+        rank_table.style = "Table Grid"
+        hdr2 = rank_table.rows[0].cells
+        for cell, text in zip(hdr2, ["Metric", "Batch 1", "Batch 2", "Chênh lệch"]):
+            cell.text = text
+            cell.paragraphs[0].runs[0].bold = True
+            set_cell_bg(cell, "375623")
+            cell.paragraphs[0].runs[0].font.color.rgb = RGBColor(0xFF, 0xFF, 0xFF)
+        rank_rows = [
+            (f"MAP@{k}", f"map_at_{k}"),
+            ("MRR", "mrr"),
+            (f"Hit@{k}", f"hit_at_{k}"),
+        ]
+        for label, key in rank_rows:
+            v1 = rr1.get(key, 0)
+            v2 = rr2.get(key, 0)
+            diff = v2 - v1
+            row = rank_table.add_row().cells
+            row[0].text = label
+            row[1].text = f"{v1:.4f}"
+            row[1].paragraphs[0].alignment = WD_ALIGN_PARAGRAPH.CENTER
+            row[2].text = f"{v2:.4f}"
+            row[2].paragraphs[0].alignment = WD_ALIGN_PARAGRAPH.CENTER
+            row[3].text = f"{'+' if diff >= 0 else ''}{diff:.4f}"
+            row[3].paragraphs[0].alignment = WD_ALIGN_PARAGRAPH.CENTER
+            set_cell_bg(row[3], "C6EFCE" if diff >= 0 else "FFC7CE")
+            for cell in row:
+                set_cell_border(cell)
 
     doc.add_paragraph()
 
