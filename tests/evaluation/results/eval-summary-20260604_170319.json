@@ -1,0 +1,102 @@
+{
+  "timestamp": "2026-06-04T17:03:19.019710",
+  "total_questions": 11,
+  "metrics": {
+    "faithfulness": 0.7273,
+    "answer_relevancy": 0.9091,
+    "context_precision": 0.9091,
+    "context_recall": 0.8182,
+    "correctness": 0.6818
+  },
+  "retrieval_rank_metrics": {
+    "map_at_10": 0.8402,
+    "mrr": 0.8636,
+    "hit_at_10": 0.9091,
+    "k": 10,
+    "by_category": {
+      "hoc_vu": {
+        "map_at_k": 0.94,
+        "mrr": 1.0,
+        "hit_at_k": 1.0
+      },
+      "tuyen_sinh": {
+        "map_at_k": 0.7569,
+        "mrr": 0.75,
+        "hit_at_k": 0.8333
+      }
+    }
+  },
+  "by_category": {
+    "hoc_vu": {
+      "faithfulness": 0.8,
+      "answer_relevancy": 0.8,
+      "context_precision": 1.0,
+      "context_recall": 1.0
+    },
+    "tuyen_sinh": {
+      "faithfulness": 0.6667,
+      "answer_relevancy": 1.0,
+      "context_precision": 0.8333,
+      "context_recall": 0.6667
+    }
+  },
+  "by_difficulty": {
+    "easy": {
+      "faithfulness": 0.625,
+      "answer_relevancy": 0.875,
+      "context_precision": 0.875,
+      "context_recall": 0.75
+    },
+    "medium": {
+      "faithfulness": 1.0,
+      "answer_relevancy": 1.0,
+      "context_precision": 1.0,
+      "context_recall": 1.0
+    }
+  },
+  "worst_context_recall": [
+    {
+      "question": "Khi nào trường tổ chức tuyển sinh hệ đào tạo từ xa?",
+      "category": "tuyen_sinh",
+      "context_recall": 1.0,
+      "faithfulness": 1.0
+    },
+    {
+      "question": "Lệ phí xét tuyển hệ đào tạo từ xa UIT là bao nhiêu?",
+      "category": "tuyen_sinh",
+      "context_recall": 0.0,
+      "faithfulness": 1.0
+    },
+    {
+      "question": "Tốt nghiệp THPT có thể học chương trình nào của UIT hệ từ xa?",
+      "category": "tuyen_sinh",
+      "context_recall": 1.0,
+      "faithfulness": 0.0
+    },
+    {
+      "question": "Bảo lưu kết quả trúng tuyển thực hiện trong trường hợp nào và nộp đơn khi nào?",
+      "category": "tuyen_sinh",
+      "context_recall": 1.0,
+      "faithfulness": 1.0
+    },
+    {
+      "question": "Chương trình liên thông đại học hệ từ xa dành cho đối tượng nào?",
+      "category": "tuyen_sinh",
+      "context_recall": 1.0,
+      "faithfulness": 1.0
+    }
+  ],
+  "latency": {
+    "p50_ms": 158991.19,
+    "p90_ms": 185370.24,
+    "p99_ms": 215856.14,
+    "avg_ms": 162993.84,
+    "min_ms": 134783.91,
+    "max_ms": 215856.14,
+    "per_category_avg_ms": {
+      "hoc_vu": 156236.72,
+      "tuyen_sinh": 168624.77
+    }
+  },
+  "judge_model": "gemini-2.5-flash"
+}
