@@ -1,0 +1,111 @@
+{
+  "timestamp": "2026-06-04T17:33:59.867739",
+  "total_questions": 11,
+  "metrics": {
+    "faithfulness": 0.8,
+    "answer_relevancy": 1.0,
+    "context_precision": 1.0,
+    "context_recall": 1.0,
+    "correctness": 0.5,
+    "noise_robustness": 0.8,
+    "negative_rejection": 1.0
+  },
+  "retrieval_rank_metrics": {
+    "map_at_10": 0.322,
+    "mrr": 0.3182,
+    "hit_at_10": 0.3636,
+    "k": 10,
+    "by_category": {
+      "hoc_vu": {
+        "map_at_k": 0.0,
+        "mrr": 0.0,
+        "hit_at_k": 0.0
+      },
+      "out_of_domain": {
+        "map_at_k": 0.0,
+        "mrr": 0.0,
+        "hit_at_k": 0.0
+      },
+      "tuyen_sinh": {
+        "map_at_k": 0.8854,
+        "mrr": 0.875,
+        "hit_at_k": 1.0
+      }
+    }
+  },
+  "by_category": {
+    "hoc_vu": {
+      "faithfulness": 1.0,
+      "answer_relevancy": 1.0,
+      "context_precision": 1.0,
+      "context_recall": 1.0
+    },
+    "out_of_domain": {},
+    "tuyen_sinh": {
+      "faithfulness": 0.75,
+      "answer_relevancy": 1.0,
+      "context_precision": 1.0,
+      "context_recall": 1.0
+    }
+  },
+  "by_difficulty": {
+    "easy": {
+      "faithfulness": 1.0,
+      "answer_relevancy": 1.0,
+      "context_precision": 1.0,
+      "context_recall": 1.0
+    },
+    "medium": {
+      "faithfulness": 0.0,
+      "answer_relevancy": 1.0,
+      "context_precision": 1.0,
+      "context_recall": 1.0
+    }
+  },
+  "worst_context_recall": [
+    {
+      "question": "Khi nào trường tổ chức tuyển sinh hệ đào tạo từ xa?",
+      "category": "tuyen_sinh",
+      "context_recall": 1.0,
+      "faithfulness": 1.0
+    },
+    {
+      "question": "Lệ phí xét tuyển hệ đào tạo từ xa UIT là bao nhiêu?",
+      "category": "tuyen_sinh",
+      "context_recall": 1.0,
+      "faithfulness": 1.0
+    },
+    {
+      "question": "Chương trình liên thông đại học hệ từ xa dành cho đối tượng nào?",
+      "category": "tuyen_sinh",
+      "context_recall": 1.0,
+      "faithfulness": 1.0
+    },
+    {
+      "question": "Bảo lưu kết quả trúng tuyển thực hiện trong trường hợp nào và nộp đơn khi nào?",
+      "category": "tuyen_sinh",
+      "context_recall": 1.0,
+      "faithfulness": 0.0
+    },
+    {
+      "question": "Sinh viên hệ từ xa có thể học theo hình thức nào?",
+      "category": "hoc_vu",
+      "context_recall": 1.0,
+      "faithfulness": 1.0
+    }
+  ],
+  "latency": {
+    "p50_ms": 155592.64,
+    "p90_ms": 162700.59,
+    "p99_ms": 163302.68,
+    "avg_ms": 156149.01,
+    "min_ms": 147997.29,
+    "max_ms": 163302.68,
+    "per_category_avg_ms": {
+      "hoc_vu": 156947.3,
+      "out_of_domain": 158336.41,
+      "tuyen_sinh": 152668.35
+    }
+  },
+  "judge_model": "gemini-2.5-flash"
+}

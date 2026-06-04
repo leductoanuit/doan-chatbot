@@ -17,6 +17,7 @@ OUTPUT_PATH = RESULTS_DIR / "bao-cao-ket-qua-eval.docx"
 
 BATCH1_SUMMARY = RESULTS_DIR / "eval-summary-20260602_173030.json"
 BATCH2_SUMMARY = RESULTS_DIR / "eval-summary-20260602_193653.json"
+ROBUSTNESS_SUMMARY = RESULTS_DIR / "eval-summary-20260604_173359.json"
 
 METRIC_LABELS = {
     "faithfulness": "Độ trung thực (Faithfulness)",
@@ -24,6 +25,12 @@ METRIC_LABELS = {
     "context_precision": "Độ chính xác ngữ cảnh (Context Precision)",
     "context_recall": "Độ bao phủ ngữ cảnh (Context Recall)",
     "correctness": "Độ đúng đắn (Correctness)",
+}
+
+ROBUSTNESS_METRIC_LABELS = {
+    **METRIC_LABELS,
+    "noise_robustness": "Độ bền với nhiễu (Noise Robustness)",
+    "negative_rejection": "Từ chối câu ngoài domain (Negative Rejection)",
 }
 
 CATEGORY_LABELS = {
@@ -295,6 +302,8 @@ def main():
         s1 = json.load(f)
     with open(BATCH2_SUMMARY, encoding="utf-8") as f:
         s2 = json.load(f)
+    with open(ROBUSTNESS_SUMMARY, encoding="utf-8") as f:
+        sr = json.load(f)
 
     doc = Document()
 
@@ -435,8 +444,52 @@ def main():
 
     doc.add_paragraph()
 
-    # 5. Nhận xét
-    add_heading(doc, "5. NHẬN XÉT VÀ ĐỀ XUẤT", 1)
+    # 5. Robustness evaluation
+    add_heading(doc, "5. ĐÁNH GIÁ ROBUSTNESS (11 CÂU)", 1)
+    p = doc.add_paragraph("Tập robustness gồm 5 câu noise (nhiễu) + 6 câu negative (ngoài domain). "
+                          "Đánh giá thêm 2 metric: Noise Robustness và Negative Rejection.")
+    p.runs[0].italic = True
+    doc.add_paragraph()
+
+    doc.add_paragraph("5.1 Metric tổng thể:").runs[0].bold = True
+    table_r = doc.add_table(rows=1, cols=3)
+    table_r.style = "Table Grid"
+    hdr_r = table_r.rows[0].cells
+    for cell, text in zip(hdr_r, ["Metric", "Điểm", "Đánh giá"]):
+        cell.text = text
+        cell.paragraphs[0].runs[0].bold = True
+        set_cell_bg(cell, "7030A0")
+        cell.paragraphs[0].runs[0].font.color.rgb = RGBColor(0xFF, 0xFF, 0xFF)
+    for key, label in ROBUSTNESS_METRIC_LABELS.items():
+        score = sr["metrics"].get(key)
+        if score is None:
+            continue
+        row = table_r.add_row().cells
+        row[0].text = label
+        row[1].text = f"{score:.4f}"
+        row[1].paragraphs[0].alignment = WD_ALIGN_PARAGRAPH.CENTER
+        row[2].text = "Tốt" if score >= 0.75 else ("Khá" if score >= 0.55 else "Cần cải thiện")
+        row[2].paragraphs[0].alignment = WD_ALIGN_PARAGRAPH.CENTER
+        for cell in row:
+            set_cell_bg(cell, score_color(score))
+            set_cell_border(cell)
+    doc.add_paragraph()
+
+    add_rank_metrics_table(doc, sr.get("retrieval_rank_metrics", {}), "5.2 Retrieval Rank Metrics (Robustness):")
+
+    doc.add_paragraph("5.3 Nhận xét:").runs[0].bold = True
+    rob_notes = [
+        "Negative Rejection = 1.0 — hệ thống từ chối 100% câu hỏi ngoài domain (nấu phở, thời tiết, giá vàng...).",
+        "Noise Robustness = 0.8 — xử lý tốt câu hỏi nhiễu, chỉ 1/5 câu bị ảnh hưởng.",
+        "Retrieval rank thấp (MAP=0.32) do câu out_of_domain không có context liên quan — đây là kết quả mong đợi.",
+    ]
+    for note in rob_notes:
+        doc.add_paragraph(note, style="List Bullet")
+
+    doc.add_paragraph()
+
+    # 6. Nhận xét
+    add_heading(doc, "6. NHẬN XÉT VÀ ĐỀ XUẤT", 1)
 
     doc.add_paragraph("5.1 Điểm mạnh:").runs[0].bold = True
     strengths = [
