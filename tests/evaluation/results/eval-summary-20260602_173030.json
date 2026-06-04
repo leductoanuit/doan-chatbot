@@ -107,5 +107,38 @@
       "tuyen_sinh": 413570.27
     }
   },
-  "judge_model": "gemini-2.5-flash"
+  "judge_model": "gemini-2.5-flash",
+  "retrieval_rank_metrics": {
+    "map_at_10": 0.6959,
+    "mrr": 0.7287,
+    "hit_at_10": 0.8,
+    "k": 10,
+    "by_category": {
+      "ctdt": {
+        "map_at_k": 0.2833,
+        "mrr": 0.2833,
+        "hit_at_k": 0.5
+      },
+      "hoc_phi": {
+        "map_at_k": 0.7333,
+        "mrr": 0.8,
+        "hit_at_k": 0.8
+      },
+      "hoc_vu": {
+        "map_at_k": 0.7992,
+        "mrr": 0.8651,
+        "hit_at_k": 0.9286
+      },
+      "quy_che": {
+        "map_at_k": 0.5625,
+        "mrr": 0.6,
+        "hit_at_k": 0.6
+      },
+      "tuyen_sinh": {
+        "map_at_k": 0.7713,
+        "mrr": 0.7812,
+        "hit_at_k": 0.85
+      }
+    }
+  }
 }

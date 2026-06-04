@@ -174,6 +174,15 @@ def main():
     for cat, scores in report["by_category"].items():
         avg = sum(scores.values()) / len(scores) if scores else 0
         print(f"  {cat:20s}: avg={avg:.3f}")
+
+    rr = report.get("retrieval_rank_metrics", {})
+    if rr:
+        k = rr.get("k", 10)
+        print(f"\nRetrieval Rank Metrics (k={k}):")
+        print(f"  MAP@{k}  : {rr.get(f'map_at_{k}', 0):.4f}")
+        print(f"  MRR     : {rr.get('mrr', 0):.4f}")
+        print(f"  Hit@{k}  : {rr.get(f'hit_at_{k}', 0):.4f}")
+
     print(f"\nRaw results  : {raw_path}")
     print(f"Summary      : {summary_path}")
     print("="*60)

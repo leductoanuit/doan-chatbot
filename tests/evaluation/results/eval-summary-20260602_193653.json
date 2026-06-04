@@ -100,5 +100,33 @@
       "quy_che": 138121.14
     }
   },
-  "judge_model": "gemini-2.5-flash"
+  "judge_model": "gemini-2.5-flash",
+  "retrieval_rank_metrics": {
+    "map_at_10": 0.4737,
+    "mrr": 0.5055,
+    "hit_at_10": 0.62,
+    "k": 10,
+    "by_category": {
+      "ctdt": {
+        "map_at_k": 0.3378,
+        "mrr": 0.3643,
+        "hit_at_k": 0.4286
+      },
+      "hoc_phi": {
+        "map_at_k": 0.7952,
+        "mrr": 0.9,
+        "hit_at_k": 0.9
+      },
+      "hoc_vu": {
+        "map_at_k": 0.4062,
+        "mrr": 0.4251,
+        "hit_at_k": 0.6364
+      },
+      "quy_che": {
+        "map_at_k": 0.4358,
+        "mrr": 0.4333,
+        "hit_at_k": 0.6
+      }
+    }
+  }
 }

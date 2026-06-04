@@ -1,8 +1,95 @@
 """Helper functions for building eval summary reports and computing latency stats."""
 
+import importlib.util
 import statistics
 from datetime import datetime
 from pathlib import Path
+
+# Load retrieval-metrics module (hyphen in filename requires importlib)
+_spec = importlib.util.spec_from_file_location(
+    "retrieval_metrics", Path(__file__).parent / "retrieval-metrics.py"
+)
+_ret_mod = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(_ret_mod)
+
+
+def _token_set(text: str) -> set:
+    """Lowercase word tokens from text."""
+    return set(text.lower().split())
+
+
+def _is_relevant(chunk_text: str, reference_contexts: list[str], threshold: float = 0.3) -> bool:
+    """True if chunk shares >= threshold token overlap (F1) with any reference context."""
+    chunk_tokens = _token_set(chunk_text)
+    if not chunk_tokens:
+        return False
+    for ref in reference_contexts:
+        ref_tokens = _token_set(ref)
+        if not ref_tokens:
+            continue
+        intersection = chunk_tokens & ref_tokens
+        precision = len(intersection) / len(chunk_tokens)
+        recall = len(intersection) / len(ref_tokens)
+        f1 = 2 * precision * recall / (precision + recall) if (precision + recall) > 0 else 0.0
+        if f1 >= threshold:
+            return True
+    return False
+
+
+def compute_retrieval_rank_metrics(samples: list[dict], k: int = 10) -> dict:
+    """Compute MAP@K, MRR, Hit@K for all samples using token-overlap relevance judgment.
+
+    Each retrieved chunk is marked relevant if its token F1 overlap with any
+    reference_context exceeds 0.3. Returns aggregate scores and per-category breakdown.
+    """
+    list_retrieved: list[list[str]] = []
+    list_relevant: list[set] = []
+    hit_scores: list[float] = []
+    mrr_scores: list[float] = []
+
+    for s in samples:
+        contexts: list[str] = s.get("contexts", [])
+        refs: list[str] = s.get("reference_contexts", [])
+
+        # Build ordered list of chunk IDs (index strings) for rank metrics
+        retrieved_ids = [str(i) for i in range(len(contexts))]
+        relevant_ids = {
+            str(i) for i, c in enumerate(contexts)
+            if _is_relevant(c, refs)
+        }
+
+        list_retrieved.append(retrieved_ids)
+        list_relevant.append(relevant_ids)
+        hit_scores.append(_ret_mod.hit_at_k(retrieved_ids, relevant_ids, k))
+        mrr_scores.append(_ret_mod.mrr(retrieved_ids, relevant_ids))
+
+    map_score = _ret_mod.map_at_k(list_retrieved, list_relevant, k)
+    mrr_avg = round(sum(mrr_scores) / len(mrr_scores), 4) if mrr_scores else 0.0
+    hit_avg = round(sum(hit_scores) / len(hit_scores), 4) if hit_scores else 0.0
+
+    # Per-category breakdown
+    categories = sorted(set(s.get("category", "") for s in samples))
+    by_category: dict = {}
+    for cat in categories:
+        cat_samples = [s for s in samples if s.get("category") == cat]
+        cat_indices = [i for i, s in enumerate(samples) if s.get("category") == cat]
+        if not cat_samples:
+            continue
+        cat_retrieved = [list_retrieved[i] for i in cat_indices]
+        cat_relevant = [list_relevant[i] for i in cat_indices]
+        by_category[cat] = {
+            "map_at_k": round(_ret_mod.map_at_k(cat_retrieved, cat_relevant, k), 4),
+            "mrr": round(sum(_ret_mod.mrr(r, rel) for r, rel in zip(cat_retrieved, cat_relevant)) / len(cat_samples), 4),
+            "hit_at_k": round(sum(_ret_mod.hit_at_k(r, rel, k) for r, rel in zip(cat_retrieved, cat_relevant)) / len(cat_samples), 4),
+        }
+
+    return {
+        f"map_at_{k}": round(map_score, 4),
+        "mrr": mrr_avg,
+        f"hit_at_{k}": hit_avg,
+        "k": k,
+        "by_category": by_category,
+    }
 
 
 def compute_latency_stats(samples: list[dict]) -> dict:
@@ -64,10 +151,13 @@ def build_report(eval_result: dict) -> dict:
         if s["scores"].get("context_recall") is not None
     ]
 
+    rank_metrics = compute_retrieval_rank_metrics(samples)
+
     return {
         "timestamp": datetime.now().isoformat(),
         "total_questions": len(samples),
         "metrics": eval_result["aggregate"],
+        "retrieval_rank_metrics": rank_metrics,
         "by_category": by_category,
         "by_difficulty": by_difficulty,
         "worst_context_recall": worst_recall,
