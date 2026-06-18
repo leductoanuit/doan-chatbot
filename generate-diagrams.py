@@ -188,7 +188,7 @@ def fig_35():
 
     steps = [
         (1.2, 1.6, "Văn bản\nthô", BLUE),
-        (3.0, 1.6, "Chunking\n(512 từ,\noverlap 64)", GREEN),
+        (3.0, 1.6, "Chunking\n(512 từ,\noverlap 12.5%)", GREEN),
         (5.0, 1.6, "BGE-M3\nEmbedding\n(1024-dim)", ORANGE),
         (7.0, 1.6, "Qdrant\nIndexing\n(cosine)", "#7C3AED"),
         (9.0, 1.6, "Collection\ndocuments", RED),
