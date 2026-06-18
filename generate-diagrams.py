@@ -136,8 +136,8 @@ def fig_33():
 
 # ── Hình 3.4: Pipeline thu thập và xử lý dữ liệu ────────────────────────────
 def fig_34():
-    fig, ax = plt.subplots(figsize=(11, 4.5))
-    ax.set_xlim(0, 11); ax.set_ylim(0, 4.5); ax.axis("off")
+    fig, ax = plt.subplots(figsize=(11, 5.0))
+    ax.set_xlim(0, 11); ax.set_ylim(0, 5.0); ax.axis("off")
 
     # Sources
     sources = [
@@ -172,11 +172,11 @@ def fig_34():
     box(ax, 9.5, 2.5, 1.5, 0.8, "Kho văn bản\nJSON/DB", "#16A34A", fontsize=8)
     arrow(ax, 7.5+0.75, 2.5, 9.5-0.75, 2.5)
 
-    ax.text(0.2, 4.3, "Nguồn", fontsize=8, color=GRAY, style="italic")
-    ax.text(2.5, 4.3, "Trích xuất", fontsize=8, color=GRAY, style="italic")
-    ax.text(5.1, 4.3, "Làm sạch", fontsize=8, color=GRAY, style="italic")
-    ax.text(7.1, 4.3, "Metadata", fontsize=8, color=GRAY, style="italic")
-    ax.text(9.1, 4.3, "Lưu trữ", fontsize=8, color=GRAY, style="italic")
+    ax.text(0.2, 4.6, "Nguồn", fontsize=8, color=GRAY, style="italic")
+    ax.text(2.5, 4.6, "Trích xuất", fontsize=8, color=GRAY, style="italic")
+    ax.text(5.1, 4.6, "Làm sạch", fontsize=8, color=GRAY, style="italic")
+    ax.text(7.1, 4.6, "Metadata", fontsize=8, color=GRAY, style="italic")
+    ax.text(9.1, 4.6, "Lưu trữ", fontsize=8, color=GRAY, style="italic")
 
     ax.set_title("Hình 3.4: Pipeline thu thập và xử lý dữ liệu", fontsize=11, fontweight="bold", pad=8)
     return save(fig, "h34_pipeline_data.png")
