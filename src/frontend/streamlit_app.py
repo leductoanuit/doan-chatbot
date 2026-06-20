@@ -14,32 +14,32 @@ from dotenv import load_dotenv
 
 def _fix_markdown_table(text: str) -> str:
     """Fix single-line markdown tables — LLM sometimes concatenates all rows on one line."""
-    # Also handle literal \\n sequences the LLM might emit
     text = text.replace("\\n", "\n")
 
-    def split_table_line(line: str) -> str:
+    def split_table_line(line: str, prev_line: str = "") -> str:
         if not line.startswith("|") or len(line) < 120:
             return line
 
-        # Strategy: find all table rows using regex
-        # A row is: starts with |, ends with |, contains at least one cell
-        # Try to extract complete rows by finding | ... | patterns
-        # that contain the same number of columns as the header
+        # Prefer column count from the previous header line (when separator starts this line)
+        num_cols = 0
+        if prev_line.startswith("|"):
+            num_cols = prev_line.count("|") - 1
 
-        # Count columns using the separator row (| --- | --- |) as anchor
-        sep_idx = line.find('| ---')
-        if sep_idx < 0:
-            sep_idx = line.find('|---')
-        if sep_idx < 0:
-            return line
-        header = line[:sep_idx]
-        num_cols = header.count('|') - 1
+        # Fallback: find separator inside this line to count columns
+        if num_cols < 2:
+            sep_idx = line.find('| ---')
+            if sep_idx < 0:
+                sep_idx = line.find('|---')
+            if sep_idx < 0:
+                sep_idx = line.find('| :--')
+            if sep_idx < 0:
+                return line
+            header = line[:sep_idx]
+            num_cols = header.count('|') - 1
+
         if num_cols < 2:
             return line
 
-        # Extract all rows: each row has exactly num_cols cells
-        # Pattern: | cell | cell | ... | (num_cols cells)
-        cell = r'[^|]*'
         row_pattern = r'\|' + (r'[^|]+\|' * num_cols)
         rows = re.findall(row_pattern, line)
         if len(rows) <= 1:
@@ -47,7 +47,11 @@ def _fix_markdown_table(text: str) -> str:
         return "\n".join(rows)
 
     lines = text.split("\n")
-    return "\n".join(split_table_line(ln) for ln in lines)
+    result = []
+    for i, line in enumerate(lines):
+        prev = lines[i - 1] if i > 0 else ""
+        result.append(split_table_line(line, prev))
+    return "\n".join(result)
 
 load_dotenv()
 
@@ -159,6 +163,7 @@ if prompt:
                     question=prompt,
                     history=st.session_state.messages[:-1],
                     top_k=5,
+                    use_multi_query=True,
                 )
                 answer = _fix_markdown_table(result["answer"])
                 sources = result.get("sources", [])
